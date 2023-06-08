@@ -27,8 +27,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pvnk1u.github.io/images/Spaceship.PNG">
 <meta property="og:image" content="https://pvnk1u.github.io/images/SpaceX.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/OpacityAndZIndex.PNG">
 <meta property="article:published_time" content="2023-06-05T07:28:39.000Z">
-<meta property="article:modified_time" content="2023-06-08T14:56:01.339Z">
+<meta property="article:modified_time" content="2023-06-08T15:24:53.389Z">
 <meta property="article:author" content="pvnk1u">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="css">
@@ -277,7 +278,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8D"><span class="toc-number">1.</span> <span class="toc-text">定位</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">绝对定位的应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8D%E4%B8%8Ez-index%EF%BC%9A%E5%A0%86%E5%8F%A0%E5%86%85%E5%AE%B9%E7%9A%84%E9%99%B7%E9%98%B1"><span class="toc-number">1.2.</span> <span class="toc-text">定位与z-index：堆叠内容的陷阱</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8D"><span class="toc-number">1.</span> <span class="toc-text">定位</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">绝对定位的应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8D%E4%B8%8Ez-index%EF%BC%9A%E5%A0%86%E5%8F%A0%E5%86%85%E5%AE%B9%E7%9A%84%E9%99%B7%E9%98%B1"><span class="toc-number">1.2.</span> <span class="toc-text">定位与z-index：堆叠内容的陷阱</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B0%B4%E5%B9%B3%E5%B8%83%E5%B1%80"><span class="toc-number">2.</span> <span class="toc-text">水平布局</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -328,10 +329,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.2k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.7k(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 7(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 9(分)</span>
 	
 
       </div>
@@ -394,6 +395,15 @@
 
 <p><strong>无论图片多大，标题区始终都会位于距离底边及左、右两边4em的地方，而且会在标题折行的情况下自动调整高度，从而适应不同的屏幕大小。</strong></p>
 <h2 id="定位与z-index：堆叠内容的陷阱"><a href="#定位与z-index：堆叠内容的陷阱" class="headerlink" title="定位与z-index：堆叠内容的陷阱"></a>定位与z-index：堆叠内容的陷阱</h2><p>要用好定位，还有一个重点技术必须掌握，那就是z-index，也就是堆叠元素的次序。基本原理：<strong>静态定位（static）以外的元素会根据它们在代码树中的深度依次叠放，就像打扑克牌一样，后发的牌会压在先发的牌上面。它们的次序可以通过z-index来调整。</strong></p>
+<p>设置了z-index的元素，只要值是正值，就会出现在没有设置z-index的元素上方。尚未设置z-inde的元素在z-index值为负的元素上方。</p>
+<p>除了z-index，还有其他影响元素堆叠次序的因素。这里也有一个概念，叫堆叠上下文。就像一盒扑克牌，每张牌本身也是一个上下文（牌盒），而牌只能相对于当前的牌盒排定次序。有一个根堆叠上下文，所有z-index不是auto的定位元素都会在这个上下文中排序。随着其他上下文的建立，就会出现堆叠层级。</p>
+<p>堆叠上下文是由特定属性和值创建的。比如，任何设定了position: absolute及值不是auto的z-index属性的元素，都会创建一个自己后代元素的堆叠上下文。</p>
+<p>在一个堆叠上下文内部，无论z-index值多大或多小，都不会影响其他堆叠上下文，毕竟不能相对于别的堆叠上下文重新排序。</p>
+<p>如下图所示：</p>
+<p><img src="https://pvnk1u.github.io/images/OpacityAndZIndex.PNG" alt="OpacityAndZIndex"></p>
+<p><strong>容器A、B、C和D都是绝对定位的，其中C是B的子元素。容器C和D设置了z-index，但由于容器B的opacity值小于1，所以它又创建了一个新的独立的堆叠上下文。于是，就算C的z-index的值再大，它也不会跑到D的上方。</strong></p>
+<p><strong>设置小于1的opacity值也可以创建新的堆叠上下文。opacity小于1的元素需要独立渲染（包括它的所有后代元素），然后再放到页面上。这样就可以保证在把它们放到页面上时，原有的元素不会与半透明的元素发生交错。后面会有这个例子及其他类似的例子，比如transform和filter属性，也会触发创建新的堆叠上下文。</strong></p>
+<h1 id="水平布局"><a href="#水平布局" class="headerlink" title="水平布局"></a>水平布局</h1><p>通常，页面会随内容增加沿垂直方向扩展。后来添加的任何块容器（div、article、h1-h6等等）都会垂直堆放起来，因为<strong>块级元素的宽度是自动计算的</strong>。<strong>因此，在需要给内容块设置明确宽度，并让它们水平排列时，就会出现问题。</strong></p>
 
       
     </div>

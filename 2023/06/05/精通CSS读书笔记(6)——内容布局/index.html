@@ -44,8 +44,10 @@
 <meta property="og:image" content="https://pvnk1u.github.io/images/flexboxnav.PNG">
 <meta property="og:image" content="https://pvnk1u.github.io/images/justify-content.PNG">
 <meta property="og:image" content="https://pvnk1u.github.io/images/flexbox-auto.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flexbox-min-height.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/align-items.PNG">
 <meta property="article:published_time" content="2023-06-05T07:28:39.000Z">
-<meta property="article:modified_time" content="2023-06-14T15:08:34.160Z">
+<meta property="article:modified_time" content="2023-06-14T15:38:30.446Z">
 <meta property="article:author" content="pvnk1u">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="css">
@@ -345,10 +347,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 8k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 8.3k(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 31(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 32(分)</span>
 	
 
       </div>
@@ -545,6 +547,13 @@
 <ol>
 <li>辅轴对齐</li>
 </ol>
+<p>   前面通过Flexbox轻松解决了水平布局的问题。实际上，Flexbox还支持对另一轴向的控制。如果增加Flex容器自身或其中一项的高度，会发现控制另一轴向属性的默认值会产生下图这种有趣的效果。</p>
+   <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">ul</span>&#123;</span><br><span class="line">	<span class="attribute">min-height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>   <img src="https://pvnk1u.github.io/images/flexbox-min-height.PNG" alt="flexbox-min-height"></p>
+<p>   如图所示，默认情况下，Flex子项会沿辅轴方向填满Flex容器。好像这些子项被拉高了。实际上，控制辅轴对齐的属性align-items，其默认值是stretch（拉伸）。也就是说，子项默认拉伸，以填满可用空间。其他的关键字还有flex-start、center和flex-end，效果分别如下图所示。这3个关键字都会把子项收缩成原有大小，然后再沿辅轴进行上、中、下对齐。</p>
+<p>   <img src="https://pvnk1u.github.io/images/align-items.PNG" alt="align-items"></p>
+<p>   最后，<strong>还可以使用baseline关键字，将子项中文本的基线与容器基线对齐，效果与行内块的默认行为类似。如果子项大小不一，而又希望它们在辅轴上虽然位置不同，但本身对齐，那么就可以采用这种方法。</strong></p>
 
       
     </div>

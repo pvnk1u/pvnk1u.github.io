@@ -50,7 +50,7 @@
 <meta property="og:image" content="https://pvnk1u.github.io/images/align-some-item.PNG">
 <meta property="og:image" content="https://pvnk1u.github.io/images/flexbox-multi-center.PNG">
 <meta property="article:published_time" content="2023-06-05T07:28:39.000Z">
-<meta property="article:modified_time" content="2023-06-19T15:46:45.236Z">
+<meta property="article:modified_time" content="2023-06-21T15:02:10.390Z">
 <meta property="article:author" content="pvnk1u">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="css">
@@ -350,10 +350,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 8.8k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 9.3k(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 34(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 36(分)</span>
 	
 
       </div>
@@ -584,7 +584,27 @@
 <p><img src="https://pvnk1u.github.io/images/flexbox-multi-center.PNG" alt="flexbox-multi-center"></p>
 </li>
 </ol>
-<h2 id="可伸缩的尺寸"><a href="#可伸缩的尺寸" class="headerlink" title="可伸缩的尺寸"></a>可伸缩的尺寸</h2>
+<h2 id="可伸缩的尺寸"><a href="#可伸缩的尺寸" class="headerlink" title="可伸缩的尺寸"></a>可伸缩的尺寸</h2><p>Flexbox支持对元素大小的灵活控制。这一点是实现精确内容布局的关键。</p>
+<ol>
+<li><p>相关属性</p>
+<p>Flex的意思是“可伸缩”，这体现在以下3个容器中：flex-basis、flex-grow和flex-shrink。这3个属性应用给每个可伸缩项，而不是容器。</p>
+<ul>
+<li><p>flex-basis</p>
+<p>控制项目在主轴方向上、经过修正之前的“首选”大小（width或height）。可以是长度值（如18em）、百分比（相对于容器的主轴而言），也可以是关键字auto（默认值）。</p>
+<p>关键字auto的意思好像是把width或height设置为自动，但实际上并不是那么回事。这里auto值的意思是这个项目可以从对应的属性（width或height）那里获得主尺寸——如果设置了相应属性的话。如果没有设置主尺寸，那么该项目就根据其内容确定大小，有点类似浮动元素或行内块。</p>
+<p>也可以设置content值，意思也是根据项目内容确定大小，但是会忽略通过width或height设置的主轴尺寸（与auto不同了）。注意，content关键字是后来才加入Flexbox的，支持程度可能不一致。</p>
+</li>
+<li><p>flex-grow</p>
+<p>一个弹性系数。在通过flex-basis为每一项设置了首选大小之后，如果还有剩余空间，该系数表示该怎么处理。其值是一个数值，表示剩余空间的一个比值。这个比值的默认值是0，表示从flex-basis取得尺寸后就不再扩展。</p>
+</li>
+<li><p>flex-shrink</p>
+<p>也是一个弹性系数，与flex-grow类似，但作用相反。换句话说，如果空间不够，该项如何收缩？增加了flex-shrink这个因素之后，计算过程更加复杂了。默认值是1，表示如果空间不够，所有项都会以自己的首选尺寸为基准等比例收缩。</p>
+</li>
+</ul>
+</li>
+<li></li>
+</ol>
+
       
     </div>
     <div class="article-footer">

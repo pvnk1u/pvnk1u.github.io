@@ -53,8 +53,9 @@
 <meta property="og:image" content="https://pvnk1u.github.io/images/flex-property-example1.PNG">
 <meta property="og:image" content="https://pvnk1u.github.io/images/flex-property-example2.PNG">
 <meta property="og:image" content="https://pvnk1u.github.io/images/flex-property-example3.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-algo.PNG">
 <meta property="article:published_time" content="2023-06-05T07:28:39.000Z">
-<meta property="article:modified_time" content="2023-06-24T14:58:05.611Z">
+<meta property="article:modified_time" content="2023-06-26T15:56:01.148Z">
 <meta property="article:author" content="pvnk1u">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="css">
@@ -354,10 +355,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 10.3k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 10.5k(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 40(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 41(分)</span>
 	
 
       </div>
@@ -633,6 +634,9 @@
 <p>此例中的两项最终恰好平分秋色。如果希望各项能够按比例占据整个空间而不考虑各自内容，那么还有更合适的Flexbox技术，后面会介绍。</p>
 </li>
 <li><p>纯粹按伸缩系数计算大小</p>
+<p>在上一节用到的“简化版Flexbox布局算法”的第一个步骤中，是根据内容宽度来确定项目宽度的，因为flex-basis的值是默认的auto，而且也没有给项目设定明确的宽度。假如第一步中flex-basis的值是0，那在这一步就不会给项目分配空间了。这种情况下，容器内部的全部空间都会留到第二步再分配，就是根据伸缩系数切分，然后将最终尺寸指定给具体的项目。</p>
+<p>在下图中，两个项目的flex-basis值为0，flex-grow的值为1。这意味着容器的全部空间要分为两部分，从而每个项目恰好占据可分配空间的一半。这个效果很接近使用百分比计算的布局，但好在无论有多少项目，Flexbox都会自动伸缩以适应整个宽度。</p>
+<p><img src="https://pvnk1u.github.io/images/flex-algo.PNG" alt="flex-algo"></p>
 </li>
 <li><p>收缩项目</p>
 </li>

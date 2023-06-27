@@ -56,8 +56,9 @@
 <meta property="og:image" content="https://pvnk1u.github.io/images/flex-algo.PNG">
 <meta property="og:image" content="https://pvnk1u.github.io/images/flex-navbar-five.PNG">
 <meta property="og:image" content="https://pvnk1u.github.io/images/flex-shrink1.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-shrink.PNG">
 <meta property="article:published_time" content="2023-06-05T07:28:39.000Z">
-<meta property="article:modified_time" content="2023-06-26T16:13:29.001Z">
+<meta property="article:modified_time" content="2023-06-27T15:44:48.188Z">
 <meta property="article:author" content="pvnk1u">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="css">
@@ -357,10 +358,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 11k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 11.4k(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 43(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 45(分)</span>
 	
 
       </div>
@@ -655,10 +656,20 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span><span class="selector-pseudo">:first</span>-child&#123;</span><br><span class="line">	<span class="attribute">flex</span>: <span class="number">1</span> <span class="number">1</span> <span class="number">800px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span><span class="selector-pseudo">:last-child</span>&#123;</span><br><span class="line">	<span class="attribute">flex</span>: <span class="number">1</span> <span class="number">1</span> <span class="number">500px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://pvnk1u.github.io/images/flex-shrink1.PNG" alt="flex-shrink1"></p>
-<p>加在一起的首选宽度（1300像素）超出了容器宽度300像素。而且两个项目的flex-shrink值都是1。</p>
+<p>加在一起的首选宽度（1300像素）超出了容器宽度300像素。而且两个项目的flex-shrink值都是1。看起来似乎此时两个项目会分别收缩150像素，以便适应容器宽度。然而事实并非如此。它们会根据自己flex-shrink系数和flex-basis的值来按比例收缩。具体来说，每个项目先用自己的flex-shrink乘以自己的flex-basis，然后再用乘积除以每一项的flex-shrink与flex-basis的乘积之和，最后再拿得到的比例系数去乘以超出的宽度（负空间），从而得到该项目要收缩的空间数量。</p>
+<p>将以上几个步骤简化一下表达：首选尺寸大的项目比首选尺寸小的项目收缩的更多（相对于flex-shrink系数而言）。因此就算这里两个项目的flex-shrink系数都是1，它们收缩的量也是不一样的。以下是求第一个项目要收缩的量的过程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((800* 1) / ((800 * 1) + (500 * 1 )) ) * 300 = 184.6</span><br></pre></td></tr></table></figure>
+
+<p>第一项要收缩184.6像素。用同一个公式计算第二项的收缩量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((500 * 1) / ((800 * 1) + (500 * 1))) * 300 = 115.4</span><br></pre></td></tr></table></figure>
+
+<p>第二项要收缩115.4像素。两者相加，正好是为适应容器宽度而必须减少的300像素：</p>
+<p><img src="https://pvnk1u.github.io/images/flex-shrink.PNG" alt="flex-shrink"></p>
 </li>
 </ol>
-<h2 id="Flexbox布局"><a href="#Flexbox布局" class="headerlink" title="Flexbox布局"></a>Flexbox布局</h2>
+<h2 id="Flexbox布局"><a href="#Flexbox布局" class="headerlink" title="Flexbox布局"></a>Flexbox布局</h2><p>前面导航条和作者元数据的例子只涉及一行内容。与行内块和浮动类似，Flexbox也支持让内容排布到多行（列），但具有更强的可控性。</p>
+<p>这次设计一组标签，表示星球的种类。这些标签是包含链接的一个无序列表，跟导航条例子中类似。但这里的列表项目要多出好几倍，因此不可能让它们都挤在一行中。这里会给标签设置统一的背景颜色，并使用前面评注气泡中用到的伪元素技术，给它们应用实际标签的外观。</p>
+
       
     </div>
     <div class="article-footer">

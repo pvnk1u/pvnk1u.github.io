@@ -6,7 +6,7 @@
   <link href="http://pvnk1u.github.io/atom.xml" rel="self"/>
   
   <link href="http://pvnk1u.github.io/"/>
-  <updated>2023-07-01T16:12:48.339Z</updated>
+  <updated>2023-07-02T03:29:18.940Z</updated>
   <id>http://pvnk1u.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://pvnk1u.github.io/2023/07/01/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(7)%E2%80%94%E2%80%94%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80%E4%B8%8E%E7%BD%91%E6%A0%BC/"/>
     <id>http://pvnk1u.github.io/2023/07/01/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(7)%E2%80%94%E2%80%94%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80%E4%B8%8E%E7%BD%91%E6%A0%BC/</id>
     <published>2023-07-01T07:28:39.000Z</published>
-    <updated>2023-07-01T16:12:48.339Z</updated>
+    <updated>2023-07-02T03:29:18.940Z</updated>
     
-    <content type="html"><![CDATA[<p>本章介绍布局的系统性方法。上一章探讨的是个别页面组件的布局方式。了解页面布局最好先从个别组件开始。但与此同时，会发现总体结构中有重复出现的模式。本章主要讨论如何以可重用的方式实现这些结构，也就是能够盛放内容的容器。</p><p>创建容器的时候，一般都需要一个包含预置尺寸和比例的网格系统。首先会介绍相对传统的创建网格系统的方法，然后演进到使用Flexbox。后半章还会涉及到面向未来的CSS Grid Layout规范。</p><h1 id="布局规划"><a href="#布局规划" class="headerlink" title="布局规划"></a>布局规划</h1>]]></content>
+    <content type="html"><![CDATA[<p>本章介绍布局的系统性方法。上一章探讨的是个别页面组件的布局方式。了解页面布局最好先从个别组件开始。但与此同时，会发现总体结构中有重复出现的模式。本章主要讨论如何以可重用的方式实现这些结构，也就是能够盛放内容的容器。</p><p>创建容器的时候，一般都需要一个包含预置尺寸和比例的网格系统。首先会介绍相对传统的创建网格系统的方法，然后演进到使用Flexbox。后半章还会涉及到面向未来的CSS Grid Layout规范。</p><h1 id="布局规划"><a href="#布局规划" class="headerlink" title="布局规划"></a>布局规划</h1><p>在把设计方案转换成模板时，很多时候想都不想，就开始写HTML和写CSS。这样写着写着，很快就会发现没有了任何回旋余地。如果能在事前稍微作一番规划，将来很可能就避免了大量的无用功。规划阶段的关键就在于从设计方案中找出重复的模式，并识别出一些本质的东西。</p><h2 id="网格"><a href="#网格" class="headerlink" title="网格"></a>网格</h2><p>说到一个网站的整体布局，经常会想到网格系统。网格系统是设计师在切分布局时作为参照的一组行和列。行和列之间的空白叫作空距。网格系统是页面布局常用的参考系。</p><h3 id="布局辅助类"><a href="#布局辅助类" class="headerlink" title="布局辅助类"></a>布局辅助类</h3><p>类名用于为布局添加样式。对于简单的网站，几个类名就够用了。比如，用于控制两栏博客布局的类名大概这样就可以了：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.main-content</span>&#123;&#125;</span><br><span class="line"><span class="selector-class">.secondary-content</span>&#123;&#125;</span><br></pre></td></tr></table></figure><p>随着网站的复杂度提高，会发现一些规律：由于某些部分从属于特定的内容层级，类名无法清晰地传达其意图。这时候类名重用就成了一个问题。为了让样式可以重用，很多人尝试“可视化”的命名方式，比如：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.column</span>&#123; <span class="comment">/* 一般列的样式 */</span>&#125;</span><br><span class="line"><span class="selector-class">.column-half</span>&#123;<span class="comment">/* 占行宽的一半 */</span>&#125;</span><br><span class="line"><span class="selector-class">.row</span>&#123;<span class="comment">/*一般行的样式 */</span>&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     
       

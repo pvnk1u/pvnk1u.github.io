@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>JS高级程序设计读书笔记(10)——BOM | Yolo</title>
+  <meta name="description" content="虽然 ECMAScript 把浏览器对象模型（BOM，Browser Object Model）描述为 JavaScript 的核心，但 实际上 BOM 是使用 JavaScript 开发 Web 应用程序的核心。BOM 提供了与网页无关的浏览器功能对象。 多年来，BOM 是在缺乏规范的背景下发展起来的，因此既充满乐趣又问题多多。毕竟，浏览器开发商 都按照自己的意愿来为它添砖加瓦。最终，浏览器实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS高级程序设计读书笔记(10)——BOM">
+<meta property="og:url" content="http://pvnk1u.github.io/2023/04/16/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(10)%E2%80%94%E2%80%94BOM/index.html">
+<meta property="og:site_name" content="YOLO">
+<meta property="og:description" content="虽然 ECMAScript 把浏览器对象模型（BOM，Browser Object Model）描述为 JavaScript 的核心，但 实际上 BOM 是使用 JavaScript 开发 Web 应用程序的核心。BOM 提供了与网页无关的浏览器功能对象。 多年来，BOM 是在缺乏规范的背景下发展起来的，因此既充满乐趣又问题多多。毕竟，浏览器开发商 都按照自己的意愿来为它添砖加瓦。最终，浏览器实现">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-15T21:26:39.000Z">
+<meta property="article:modified_time" content="2023-11-27T15:34:23.878Z">
+<meta property="article:author" content="pvnk1u">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://pvnk1u.github.io/2023/04/16/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(10)%E2%80%94%E2%80%94BOM/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YOLO" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-white" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/pvnk1u" target="_blank">
+          <img class="img-circle img-rotate" src="/images/dog.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Yolo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/css/">css</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/">html</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/css/">css</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/javascript/">javascript</a><span class="category-list-count">14</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/html/">html</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81%E4%B8%8E%E8%AE%BE%E8%AE%A1/" class="title">UdemyHtmlCss学习笔记——代码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-21T07:32:39.000Z" itemprop="datePublished">2023-11-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/01/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(7)%E2%80%94%E2%80%94%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80%E4%B8%8E%E7%BD%91%E6%A0%BC/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-01T07:28:39.000Z" itemprop="datePublished">2023-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-05T07:28:39.000Z" itemprop="datePublished">2023-06-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/04/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(5)%E2%80%94%E2%80%94%E6%BC%82%E4%BA%AE%E7%9A%84%E7%9B%92%E5%AD%90/" class="title">精通CSS读书笔记(5)——漂亮的盒子</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-04T01:28:39.000Z" itemprop="datePublished">2023-06-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/03/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(4)%E2%80%94%E2%80%94%E7%BD%91%E9%A1%B5%E6%8E%92%E7%89%88/" class="title">精通CSS读书笔记(4)——网页排版</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-03T01:28:39.000Z" itemprop="datePublished">2023-06-03</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#window%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">window对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Global%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">1.1.</span> <span class="toc-text">Global作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E5%85%B3%E7%B3%BB"><span class="toc-number">1.2.</span> <span class="toc-text">窗口关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E4%BD%8D%E7%BD%AE%E4%B8%8E%E5%83%8F%E7%B4%A0%E6%AF%94"><span class="toc-number">1.3.</span> <span class="toc-text">窗口位置与像素比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.4.</span> <span class="toc-text">窗口大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">1.5.</span> <span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="toc-number">1.6.</span> <span class="toc-text">系统对话框</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#location%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.</span> <span class="toc-text">location对象</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-JS高级程序设计读书笔记(10)——BOM" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS高级程序设计读书笔记(10)——BOM
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/04/16/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(10)%E2%80%94%E2%80%94BOM/" class="article-date">
+	  <time datetime="2023-04-15T21:26:39.000Z" itemprop="datePublished">2023-04-16</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/web/">web</a>►<a class="article-category-link" href="/categories/web/javascript/">javascript</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>, <a class="article-tag-link-link" href="/tags/web/" rel="tag">web</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/04/16/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(10)%E2%80%94%E2%80%94BOM/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.8k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>虽然 <code>ECMAScript</code> 把浏览器对象模型（<code>BOM</code>，<code>Browser Object Model</code>）描述为 <code>JavaScript</code> 的核心，但 实际上 <code>BOM</code> 是使用 <code>JavaScript</code> 开发 <code>Web</code> 应用程序的核心。<code>BOM</code> 提供了与网页无关的浏览器功能对象。 多年来，<code>BOM</code> 是在缺乏规范的背景下发展起来的，因此既充满乐趣又问题多多。毕竟，浏览器开发商 都按照自己的意愿来为它添砖加瓦。最终，浏览器实现之间共通的部分成为了事实标准，为 <code>Web</code> 开发 提供了浏览器间互操作的基础。<code>HTML5</code> 规范中有一部分涵盖了 <code>BOM</code> 的主要内容，因为 <code>W3C</code> 希望将 <code>JavaScript</code> 在浏览器中最基础的部分标准化。</p>
+<h1 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h1><p><code>BOM</code> 的核心是 <code>window</code> 对象，表示浏览器的实例。<code>window</code> 对象在浏览器中有两重身份，一个是 <code>ECMAScript</code> 中的 <code>Global</code> 对象，另一个就是浏览器窗口的 <code>JavaScript</code> 接口。这意味着网页中定义的所有 对象、变量和函数都以 <code>window</code>作为其 <code>Global</code>对象，都可以访问其上定义的 <code>parseInt()</code>等全局方法。</p>
+<h2 id="Global作用域"><a href="#Global作用域" class="headerlink" title="Global作用域"></a>Global作用域</h2><p>因为 <code>window</code> 对象被复用为 <code>ECMAScript</code>的 <code>Global</code> 对象，所以通过 <code>var</code> 声明的所有全局变量和函数都会变成 <code>window</code> 对象的属性和方法。比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">29</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="title function_">sayAge</span> = (<span class="params"></span>) =&gt; <span class="title function_">alert</span>(<span class="variable language_">this</span>.<span class="property">age</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_">alert</span>(<span class="variable language_">window</span>.<span class="property">age</span>); <span class="comment">// 29</span></span><br><span class="line"><span class="title function_">sayAge</span>(); <span class="comment">// 29</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">sayAge</span>(); <span class="comment">// 29</span></span><br></pre></td></tr></table></figure>
+
+<p>这里，变量 <code>age</code> 和函数 <code>sayAge()</code>被定义在全局作用域中，它们自动成为了 <code>window</code> 对象的成员。 因此，变量 <code>age</code> 可以通过 <code>window.age</code> 来访问，而函数 <code>sayAge()</code>也可以通过 <code>window.sayAge()</code>来访问。 因为 <code>sayAge()</code>存在于全局作用域，<code>this.age</code> 映射到 <code>window.age</code>，所以就可以显示正确的结果了。</p>
+<p>如果在这里使用 <code>let</code> 或 <code>const</code> 替代 <code>var</code>，则不会把变量添加给全局对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> age = <span class="number">29</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">sayAge</span> = (<span class="params"></span>) =&gt; <span class="title function_">alert</span>(<span class="variable language_">this</span>.<span class="property">age</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_">alert</span>(<span class="variable language_">window</span>.<span class="property">age</span>); <span class="comment">// undefined</span></span><br><span class="line"><span class="title function_">sayAge</span>(); <span class="comment">// undefined</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">sayAge</span>(); <span class="comment">// TypeError: window.sayAge is not a function</span></span><br></pre></td></tr></table></figure>
+
+<p>另外，访问未声明的变量会抛出错误，但是可以在 <code>window</code> 对象上查询是否存在可能未声明的变量。 比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这会导致抛出错误，因为 oldValue 没有声明</span></span><br><span class="line"><span class="keyword">var</span> newValue = oldValue;</span><br><span class="line"><span class="comment">// 这不会抛出错误，因为这里是属性查询</span></span><br><span class="line"><span class="comment">// newValue 会被设置为 undefined</span></span><br><span class="line"><span class="keyword">var</span> newValue = <span class="variable language_">window</span>.<span class="property">oldValue</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>JavaScript</code> 中有很多对象都暴露在全局作用域中，比如 <code>location</code> 和 <code>navigator</code>，因而它们也是 <code>window</code> 对象的属性。</p>
+<h2 id="窗口关系"><a href="#窗口关系" class="headerlink" title="窗口关系"></a>窗口关系</h2><p><code>top</code> 对象始终指向最上层（最外层）窗口，即浏览器窗口本身。而 <code>parent</code> 对象则始终指向当前窗口的父窗口。如果当前窗口是最上层窗口，则 <code>parent</code> 等于 <code>top</code>（都等于 <code>window</code>）。最上层的 <code>window</code> 如果不是通过 <code>window.open()</code>打开的，那么其 <code>name</code> 属性就不会包含值。</p>
+<p>还有一个 <code>self</code> 对象，它是终极 <code>window</code> 属性，始终会指向 <code>window</code>。实际上，<code>self</code> 和 <code>window</code> 就 是同一个对象。之所以还要暴露 <code>self</code>，就是为了和 <code>top</code>、<code>parent</code> 保持一致。</p>
+<p>这些属性都是 <code>window</code> 对象的属性，因此访问 <code>window.parent</code>、<code>window.top</code> 和 <code>window.self</code> 都可以。这意味着可以把访问多个窗口的 <code>window</code> 对象串联起来，比如 <code>window.parent.parent</code>。</p>
+<h2 id="窗口位置与像素比"><a href="#窗口位置与像素比" class="headerlink" title="窗口位置与像素比"></a>窗口位置与像素比</h2><p><code>window</code> 对象的位置可以通过不同的属性和方法来确定。现代浏览器提供了 <code>screenLeft</code> 和 <code>screenTop</code> 属性，用于表示窗口相对于屏幕左侧和顶部的位置 ，返回值的单位是 <code>CSS</code> 像素。</p>
+<p>可以使用 <code>moveTo()</code>和 <code>moveBy()</code>方法移动窗口。这两个方法都接收两个参数，其中 <code>moveTo()</code>接收要移动到的新位置的绝对坐标 x 和 y；而 <code>moveBy()</code>则接收相对当前位置在两个方向上移动的像素数。 比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把窗口移动到左上角</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">moveTo</span>(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把窗口向下移动 100 像素</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">moveBy</span>(<span class="number">0</span>, <span class="number">100</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 把窗口移动到坐标位置(200, 300)</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">moveTo</span>(<span class="number">200</span>, <span class="number">300</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把窗口向左移动 50 像素</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">moveBy</span>(-<span class="number">50</span>, <span class="number">0</span>); </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="窗口大小"><a href="#窗口大小" class="headerlink" title="窗口大小"></a>窗口大小</h2><p>在不同浏览器中确定浏览器窗口大小没有想象中那么容易。所有现代浏览器都支持 4 个属性： <code>innerWidth</code>、<code>innerHeight</code>、<code>outerWidth</code> 和 <code>outerHeight</code>。<code>outerWidth</code> 和 <code>outerHeight</code> 返回浏 览器窗口自身的大小（不管是在最外层 <code>window</code> 上使用，还是在窗格中使用）。<code>innerWidth</code> 和 <code>innerHeight</code> 返回浏览器窗口中页面视口的大小（不包含浏览器边框和工具栏）。</p>
+<p><code>document.documentElement.clientWidth</code> 和 <code>document.documentElement.clientHeight</code> 返回页面视口的宽度和高度。</p>
+<h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><p><code>JavaScript</code> 在浏览器中是单线程执行的，但允许使用定时器指定在某个时间之后或每隔一段时间就 执行相应的代码。<code>setTimeout()</code>用于指定在一定时间后执行某些代码，而 <code>setInterval()</code>用于指定 每隔一段时间执行某些代码。</p>
+<p><code>setTimeout()</code>方法通常接收两个参数：要执行的代码和在执行回调函数前等待的时间（毫秒）。第 一个参数可以是包含 <code>JavaScript</code> 代码的字符串（类似于传给 <code>eval()</code>的字符串）或者一个函数，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 1 秒后显示警告框</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="title function_">alert</span>(<span class="string">&quot;Hello world!&quot;</span>), <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>第二个参数是要等待的毫秒数，而不是要执行代码的确切时间。<code>JavaScript</code> 是单线程的，所以每次 只能执行一段代码。为了调度不同代码的执行，<code>JavaScript</code> 维护了一个任务队列。其中的任务会按照添 加到队列的先后顺序执行。<code>setTimeout()</code>的第二个参数只是告诉 <code>JavaScript</code> 引擎在指定的毫秒数过后 把任务添加到这个队列。<strong>如果队列是空的，则会立即执行该代码。如果队列不是空的，则代码必须等待 前面的任务执行完才能执行。</strong></p>
+<p>调用 <code>setTimeout()</code>时，会返回一个表示该超时排期的数值 ID。这个超时 ID 是被排期执行代码的唯一标识符，可用于取消该任务。要取消等待中的排期任务，可以调用 <code>clearTimeout()</code>方法并传入超 时 ID，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置超时任务</span></span><br><span class="line"><span class="keyword">let</span> timeoutId = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="title function_">alert</span>(<span class="string">&quot;Hello world!&quot;</span>), <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取消超时任务</span></span><br><span class="line"><span class="built_in">clearTimeout</span>(timeoutId);</span><br></pre></td></tr></table></figure>
+
+<p>只要是在指定时间到达之前调用 <code>clearTimeout()</code>，就可以取消超时任务。在任务执行后再调用 <code>clearTimeout()</code>没有效果。</p>
+<p><code>setInterval()</code>与 <code>setTimeout()</code>的使用方法类似，只不过指定的任务会每隔指定时间就执行一次，直到取消循环定时或者页面卸载。<code>setInterval()</code>同样可以接收两个参数：要执行的代码（字符 串或函数），以及把下一次执行定时代码的任务添加到队列要等待的时间（毫秒）。下面是一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> <span class="title function_">alert</span>(<span class="string">&quot;Hello world!&quot;</span>), <span class="number">10000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这里的关键点是，第二个参数，也就是间隔时间，指的是向队列添加新任务之前等 待的时间。比如，调用 <code>setInterval()</code>的时间为 <code>01:00:00</code>，间隔时间为 3000 毫秒。这意 味着 <code>01:00:03</code> 时，浏览器会把任务添加到执行队列。浏览器不关心这个任务什么时候执行 或者执行要花多长时间。因此，到了 <code>01:00:06</code>，它会再向队列中添加一个任务。由此可看 出，执行时间短、非阻塞的回调函数比较适合 <code>setInterval()</code>。</p>
+<p><code>setInterval()</code>方法也会返回一个循环定时 ID，可以用于在未来某个时间点上取消循环定时。要 取消循环定时，可以调用 <code>clearInterval()</code>并传入定时 ID。相对于 <code>setTimeout()</code>而言，取消定时的能力对 <code>setInterval()</code>更加重要。毕竟，如果一直不管它，那么定时任务会一直执行到页面卸载。</p>
+<p><code>setIntervale()</code>在实践中很少会在 生产环境下使用，因为一个任务结束和下一个任务开始之间的时间间隔是无法保证的，有些循环定时任务可能会因此而被跳过。而像前面这个例子中一样使用 <code>setTimeout()</code>则能确保不会出现这种情况。一 般来说，最好不要使用 <code>setInterval()</code>。</p>
+<h2 id="系统对话框"><a href="#系统对话框" class="headerlink" title="系统对话框"></a>系统对话框</h2><p>使用 <code>alert()</code>、<code>confirm()</code>和 <code>prompt()</code>方法，可以让浏览器调用系统对话框向用户显示消息。这 些对话框与浏览器中显示的网页无关，而且也不包含 <code>HTML</code>。它们的外观由操作系统或者浏览器决定， 无法使用 <code>CSS</code> 设置。此外，这些对话框都是同步的模态对话框，即在它们显示的时候，代码会停止执行， 在它们消失以后，代码才会恢复执行。</p>
+<p>确认框，通过调用 <code>confirm()</code>来显示。确认框跟警告框类似，都会向用户显示消 息。但不同之处在于，确认框有两个按钮：“Cancel”（取消）和“OK”（确定）。用户通过单击不同的按 钮表明希望接下来执行什么操作。要知道用户单击了 OK 按钮还是 Cancel 按钮，可以判断 confirm()方法的返回值：true 表示单击 了 OK 按钮，false 表示单击了 Cancel 按钮或者通过单击某一角上的 X 图标关闭了确认框。</p>
+<p>最后一种对话框是提示框，通过调用 <code>prompt()</code>方法来显示。提示框的用途是提示用户输入消息。 除了 OK 和 Cancel 按钮，提示框还会显示一个文本框，让用户输入内容。<code>prompt()</code>方法接收两个参数： 要显示给用户的文本，以及文本框的默认值（可以是空字符串）。</p>
+<p>如果用户单击了 OK 按钮，则 <code>prompt()</code>会返回文本框中的值。如果用户单击了 <code>Cancel</code> 按钮，或者 对话框被关闭，则 <code>prompt()</code>会返回 <code>null</code>。</p>
+<h1 id="location对象"><a href="#location对象" class="headerlink" title="location对象"></a>location对象</h1><p><code>location</code> 是最有用的 <code>BOM</code> 对象之一，提供了当前窗口中加载文档的信息，以及通常的导航功能。 这个对象独特的地方在于，它既是 <code>window</code> 的属性，也是 <code>document</code> 的属性。也就是说， <code>window.location</code> 和 <code>document.location</code> 指向同一个对象。<code>location</code> 对象不仅保存着当前加载文 档的信息，也保存着把 <code>URL</code> 解析为离散片段后能够通过属性访问的信息。</p>
+<p>假设浏览器当前加载的 URL 是 <code>http://foouser:barpassword@www.wrox.com:80/WileyCDA/?q=javascript#contents</code>，<code>location</code> 对象的内容如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>location.hash</td>
+<td>“#contents”</td>
+<td>URL 散列值（井号后跟零或多个字符），如果没有则 为空字符串</td>
+</tr>
+<tr>
+<td>location.host</td>
+<td>“<a target="_blank" rel="noopener" href="http://www.wrox.com/">www.wrox.com:80</a>“</td>
+<td>服务器名及端口号</td>
+</tr>
+<tr>
+<td>location.hostname</td>
+<td>“<a target="_blank" rel="noopener" href="http://www.wrox.com/">www.wrox.com</a>“</td>
+<td>服务器名</td>
+</tr>
+<tr>
+<td>location.href</td>
+<td>“<a target="_blank" rel="noopener" href="http://www.wrox.com/WileyCDA/">http://www.wrox.com:80/WileyCDA/</a> ?q&#x3D;javascript#contents”</td>
+<td>当前加载页面的完整 URL。location 的 toString() 方法返回这个值</td>
+</tr>
+<tr>
+<td>location.pathname</td>
+<td>“&#x2F;WileyCDA&#x2F;“</td>
+<td>URL 中的路径和（或）文件名</td>
+</tr>
+<tr>
+<td>location.port</td>
+<td>“80</td>
+<td>请求的端口。如果 URL中没有端口，则返回空字符串</td>
+</tr>
+<tr>
+<td>location.protocol</td>
+<td>“http:”</td>
+<td>页面使用的协议。通常是”http:”或”https:”</td>
+</tr>
+<tr>
+<td>location.search</td>
+<td>“?q&#x3D;javascript”</td>
+<td>URL 的查询字符串。这个字符串以问号开头</td>
+</tr>
+<tr>
+<td>location.username</td>
+<td>“foouser”</td>
+<td>域名前指定的用户名</td>
+</tr>
+<tr>
+<td>location.password</td>
+<td>“barpassword”</td>
+<td>域名前指定的密码</td>
+</tr>
+<tr>
+<td>location.origin</td>
+<td>“<a target="_blank" rel="noopener" href="http://www.wrox.com/">http://www.wrox.com</a>“</td>
+<td>URL 的源地址。只读</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://pvnk1u.github.io/2023/04/16/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(10)%E2%80%94%E2%80%94BOM/" title="JS高级程序设计读书笔记(10)——BOM" target="_blank" rel="external">http://pvnk1u.github.io/2023/04/16/JS高级程序设计读书笔记(10)——BOM/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/pvnk1u" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/dog.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/pvnk1u" target="_blank"><span class="text-dark">Yolo</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>Everything happens for the best</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/04/17/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(11)%E2%80%94%E2%80%94DOM/" title="JS高级程序设计读书笔记(11)——DOM"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/03/14/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(9)%E2%80%94%E2%80%94%E6%9C%9F%E7%BA%A6%E4%B8%8E%E5%BC%82%E6%AD%A5%E5%87%BD%E6%95%B0/" title="JS高级程序设计读书笔记(9)——期约与异步函数"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2024 pvnk1u
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://pvnk1u.github.io/2023/04/16/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(10)%E2%80%94%E2%80%94BOM/';
+        
+        this.page.identifier = 'JS高级程序设计读书笔记(10)——BOM';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + '' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

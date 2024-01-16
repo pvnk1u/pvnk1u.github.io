@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>精通CSS读书笔记(4)——网页排版 | Yolo</title>
+  <meta name="description" content="CSS的基本排版技术拿到一个页面时，几乎所有设计师都会先考虑从基本的版式着手。从body元素开始，逐步细化，从而让整个页面具有基本的可行性、层次性和配色。接下来的例子就以此为目标：实现一个示例页面的基本版式。 下面的代码展示了一个非常简单的HTML文档，没有添加任何样式。此时的网页内容并没有乱作一团，这是因为浏览器有默认样式表，它为网页应用了一些必要的排版规则。 12345678910111213">
+<meta property="og:type" content="article">
+<meta property="og:title" content="精通CSS读书笔记(4)——网页排版">
+<meta property="og:url" content="http://pvnk1u.github.io/2023/06/03/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(4)%E2%80%94%E2%80%94%E7%BD%91%E9%A1%B5%E6%8E%92%E7%89%88/index.html">
+<meta property="og:site_name" content="YOLO">
+<meta property="og:description" content="CSS的基本排版技术拿到一个页面时，几乎所有设计师都会先考虑从基本的版式着手。从body元素开始，逐步细化，从而让整个页面具有基本的可行性、层次性和配色。接下来的例子就以此为目标：实现一个示例页面的基本版式。 下面的代码展示了一个非常简单的HTML文档，没有添加任何样式。此时的网页内容并没有乱作一团，这是因为浏览器有默认样式表，它为网页应用了一些必要的排版规则。 12345678910111213">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pvnk1u.github.io/images/LineFormattedModel.PNG">
+<meta property="article:published_time" content="2023-06-03T01:28:39.000Z">
+<meta property="article:modified_time" content="2023-11-27T15:34:23.886Z">
+<meta property="article:author" content="pvnk1u">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pvnk1u.github.io/images/LineFormattedModel.PNG">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://pvnk1u.github.io/2023/06/03/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(4)%E2%80%94%E2%80%94%E7%BD%91%E9%A1%B5%E6%8E%92%E7%89%88/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YOLO" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-white" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/pvnk1u" target="_blank">
+          <img class="img-circle img-rotate" src="/images/dog.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Yolo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/css/">css</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/">html</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/css/">css</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/javascript/">javascript</a><span class="category-list-count">14</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/html/">html</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81%E4%B8%8E%E8%AE%BE%E8%AE%A1/" class="title">UdemyHtmlCss学习笔记——代码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-21T07:32:39.000Z" itemprop="datePublished">2023-11-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/01/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(7)%E2%80%94%E2%80%94%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80%E4%B8%8E%E7%BD%91%E6%A0%BC/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-01T07:28:39.000Z" itemprop="datePublished">2023-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-05T07:28:39.000Z" itemprop="datePublished">2023-06-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/04/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(5)%E2%80%94%E2%80%94%E6%BC%82%E4%BA%AE%E7%9A%84%E7%9B%92%E5%AD%90/" class="title">精通CSS读书笔记(5)——漂亮的盒子</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-04T01:28:39.000Z" itemprop="datePublished">2023-06-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/03/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(4)%E2%80%94%E2%80%94%E7%BD%91%E9%A1%B5%E6%8E%92%E7%89%88/" class="title">精通CSS读书笔记(4)——网页排版</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-03T01:28:39.000Z" itemprop="datePublished">2023-06-03</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8E%92%E7%89%88%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">CSS的基本排版技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2"><span class="toc-number">1.1.</span> <span class="toc-text">文本颜色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E6%97%8F"><span class="toc-number">1.2.</span> <span class="toc-text">字体族</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E4%B8%8E%E8%A1%8C%E9%AB%98"><span class="toc-number">1.3.</span> <span class="toc-text">字体大小与行高</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E9%97%B4%E8%B7%9D%E3%80%81%E5%AF%B9%E9%BD%90%E5%92%8C%E8%A1%8C%E7%9B%92%E5%AD%90%E7%9A%84%E6%9E%84%E9%80%A0"><span class="toc-number">1.4.</span> <span class="toc-text">行间距、对齐和行盒子的构造</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E7%B2%97%E7%BB%86"><span class="toc-number">1.5.</span> <span class="toc-text">文本粗细</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%8C%E9%95%BF%E3%80%81%E5%BE%8B%E5%8A%A8%E5%92%8C%E6%AF%9B%E8%BE%B9"><span class="toc-number">2.</span> <span class="toc-text">行长、律动和毛边</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E7%BC%A9%E8%BF%9B%E4%B8%8E%E5%AF%B9%E9%BD%90"><span class="toc-number">2.1.</span> <span class="toc-text">文本缩进与对齐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%A0%8F%E6%96%87%E6%9C%AC"><span class="toc-number">2.2.</span> <span class="toc-text">多栏文本</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-精通CSS读书笔记(4)——网页排版" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      精通CSS读书笔记(4)——网页排版
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/06/03/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(4)%E2%80%94%E2%80%94%E7%BD%91%E9%A1%B5%E6%8E%92%E7%89%88/" class="article-date">
+	  <time datetime="2023-06-03T01:28:39.000Z" itemprop="datePublished">2023-06-03</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/web/">web</a>►<a class="article-category-link" href="/categories/web/css/">css</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/css/" rel="tag">css</a>, <a class="article-tag-link-link" href="/tags/web/" rel="tag">web</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/06/03/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(4)%E2%80%94%E2%80%94%E7%BD%91%E9%A1%B5%E6%8E%92%E7%89%88/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.2k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 13(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="CSS的基本排版技术"><a href="#CSS的基本排版技术" class="headerlink" title="CSS的基本排版技术"></a>CSS的基本排版技术</h1><p>拿到一个页面时，几乎所有设计师都会先考虑从基本的版式着手。从body元素开始，逐步细化，从而让整个页面具有基本的可行性、层次性和配色。接下来的例子就以此为目标：实现一个示例页面的基本版式。</p>
+<p>下面的代码展示了一个非常简单的HTML文档，没有添加任何样式。此时的网页内容并没有乱作一团，这是因为浏览器有默认样式表，它为网页应用了一些必要的排版规则。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>A Simple Document About the Moon<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>The Moon<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>The <span class="tag">&lt;<span class="name">strong</span>&gt;</span>Moon<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> (in Greek: σελήνη <span class="tag">&lt;<span class="name">i</span>&gt;</span>Selene<span class="tag">&lt;/<span class="name">i</span>&gt;</span>, in Latin: <span class="tag">&lt;<span class="name">i</span>&gt;</span>Luna<span class="tag">&lt;/<span class="name">i</span>&gt;</span>) is Earth’s only natural satellite. It is one of the largest natural satellites in the Solar System, and, among planetary satellites, the largest relative to the size of the planet it orbits (its primary). It is the second-densest satellite among those whose densities are known (after Jupiter&#x27;s satellite Io).<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>The Moon is thought to have formed approximately 4.5 billion years ago, not long after Earth. There are several hypotheses for its origin; the most widely accepted explanation is that the Moon formed from the debris left over after a giant impact between Earth and a Mars-sized body called Theia.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Orbit<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>The Moon is in synchronous rotation with Earth, always showing the same face with its near side marked by dark volcanic maria that fill between the bright ancient crustal highlands and the prominent impact craters. It is the second-brightest regularly visible celestial object in Earth’s sky after the Sun, as measured by illuminance on Earth’s surface.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Although it can appear a very bright white, its surface is actually dark, with a reflectance just slightly higher than that of worn asphalt. Its prominence in the sky and its regular cycle of phases have, since ancient times, made the Moon an important cultural influence on language, calendars, art, and mythology.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Gravitational pull <span class="symbol">&amp;amp;</span> distance<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>The Moon’s gravitational influence produces the ocean tides, body tides, and the slight lengthening of the day. The Moon’s current orbital distance is about thirty times the diameter of Earth, causing it to have an apparent size in the sky almost the same as that of the Sun, with the result that the Moon covers the Sun nearly precisely in total solar eclipse. This matching of apparent visual size will not continue in the far future. The Moon’s linear distance from Earth is currently increasing at a rate of 3.82 ± 0.07 centimetres per year, but this rate is not constant.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Lunar travels<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>The Soviet Union’s Luna programme was the first to reach the Moon with unmanned spacecraft in 1959; the United States’ <span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">&quot;National Aeronautics and Space Administration&quot;</span>&gt;</span>NASA<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span> Apollo program achieved the only manned missions to date, beginning with the first manned lunar orbiting mission by Apollo 8 in 1968, and six manned lunar landings between 1969 and 1972, with the first being Apollo 11. These missions returned over 380 <span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">&quot;kilograms&quot;</span>&gt;</span>kg<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span> of lunar rocks, which have been used to develop a geological understanding of the Moon&#x27;s origin, the formation of its internal structure, and its subsequent history. After the Apollo 17 mission in 1972, the Moon has been visited only by unmanned spacecraft.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;source&quot;</span>&gt;</span>Text fetched from <span class="tag">&lt;<span class="name">cite</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://en.wikipedia.org/wiki/Moon&quot;</span>&gt;</span>“Moon” article on Wikipedia<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">cite</span>&gt;</span> on <span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">&quot;2016-02-23&quot;</span>&gt;</span>the 23<span class="tag">&lt;<span class="name">sup</span>&gt;</span>rd<span class="tag">&lt;/<span class="name">sup</span>&gt;</span> of February<span class="symbol">&amp;nbsp;</span>2016.<span class="tag">&lt;/<span class="name">time</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>这个简单的文档包含几个标题和一些段落（段落文本中有一些行内元素，以便必要时添加样式），它们都包含在一个article元素中。这个没添加样式的网页虽然勉强能看，但效果非常不理想。我们的目标是以相对较少的样式来提升页面的易读性，并且让它变得更美观。</p>
+<p>下面逐条分析要添加的规则，同时介绍相关术语，设置规则的原因，以及所涉及的排版属性背后的原理。</p>
+<h2 id="文本颜色"><a href="#文本颜色" class="headerlink" title="文本颜色"></a>文本颜色</h2><p>默认情况下，浏览器会把绝大多数文本渲染为黑色，白底黑字的对比度极高。足够高的对比度是确保网页阅读无障碍的关键，但也往往会被过度强调。事实上，由于屏幕的高对比度，白底黑字会让大段文本显得过分密集，反而影响可读性。</p>
+<p>对于上面的例子而言，标题仍然保持黑色，但正文要改成深蓝灰色。链接还是蓝色，但需要把“活力值”下调一点。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span>&#123;</span><br><span class="line">	<span class="attribute">color</span>: <span class="number">#3b4348</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span>&#123;</span><br><span class="line">	<span class="attribute">color</span>: <span class="number">#235ea7</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字体族"><a href="#字体族" class="headerlink" title="字体族"></a>字体族</h2><p>字体族（font-family）属性的值是一个备选字体的列表，按优先级从左到右排列：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">&#x27;Georgia Pro&#x27;</span>,Georgia,Times,<span class="string">&#x27;Time New Roman&#x27;</span>,serif;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span>,<span class="selector-tag">h2</span>,<span class="selector-tag">h3</span>,<span class="selector-tag">h4</span>,<span class="selector-tag">h5</span>,<span class="selector-tag">h6</span>&#123;</span><br><span class="line">	<span class="attribute">font-family</span>: Avenir Next,SegoeUI,arial,sans-serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段CSS分别指定了body元素（以及几乎其他所有元素）和标题（h1、h2….）依次使用的字体，如果前面的字体在对应的操作系统中不存在的话，则依次尝试使用后面的字体。</p>
+<h2 id="字体大小与行高"><a href="#字体大小与行高" class="headerlink" title="字体大小与行高"></a>字体大小与行高</h2><p>几乎所有浏览器中font-size的默认大小都是16像素，除非用户修改过偏好设置。这里不修改默认的font-size，而是选择使用em单位调整特定元素的大小：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h3</span>&#123;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">1.314em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>em单位用于font-size属性时，实际上是一个相应元素继承的font-size缩放因子。比如这里的h3元素，字型大小就是1.314*16&#x3D;21px。虽然可以直接设置21px，但em更灵活一些。多数浏览器都允许用户缩放整个页面，即使像素单位也可以缩放。而使用em之后，如果用户修改偏好中的默认font-size大小，那么相应元素的大小也会调整。</p>
+<h2 id="行间距、对齐和行盒子的构造"><a href="#行间距、对齐和行盒子的构造" class="headerlink" title="行间距、对齐和行盒子的构造"></a>行间距、对齐和行盒子的构造</h2><p>随着给文本施加更多的控制，各种排版概念之间的关系便浮出水面。为了掌握这些概念，有必要深入理解CSS行内格式化模型，同时多理解一些排版术语。下图展示了一行文本的各个部分，这里仅以示例中第一段开头的两个词为例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>The <span class="tag">&lt;<span class="name">strong</span>&gt;</span>Moon<span class="tag">&lt;/<span class="name">strong</span>&gt;</span>...[etc]<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/LineFormattedModel.PNG" alt="LineFormattedModel"></p>
+<p>每行文本都会生成一个行盒子。行盒子还可以进一步拆分成表示行内元素（比如上面例子中的strong元素）的行内盒子，或者连接两个行内元素的匿名行内盒子。</p>
+<p>行内盒子中的内容区显示文本。内容区的高度由font-size的测量尺度，即图中的”Moon”末尾那个1em见方的块，以及这个块与字形本身的关系来决定。</p>
+<p>行高指的是行盒子的总高度。更通俗的叫法是行间距，排版术语叫铅空，就是排字员用来分隔字符行的铅块。但与传统排版不同，CSS中的“铅空”始终都会同时应用到行盒子的上方和下方。</p>
+<p>计算方法如下：行盒子的整体行高减去font-size，得到的值再平分成两份，也就是半铅空。如果line-height是30像素，而font-size是21像素，那么半铅空就是4.5像素。</p>
+<ol>
+<li><p>设置行高</p>
+<p>设置行高时，需要考虑当前字体大小。在这个例子中，对于Georgia这个font-family，给body设置的line-height值为1.5：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">	<span class="attribute">font-family</span>: Georgia,Times,<span class="string">&#x27;Times New Roman&#x27;</span>,serif;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">1.5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键在于行与行之间既不能太密，也不能太疏。对于较大的字体，行间距应该稍大一点。文本的长度和font-size也要考虑，短文本一般设置较小的line-height。</p>
+<p>这里给line-height设置了没有单位的值1.5，意思就是当前font-size的1.5倍。body的font-size为16px，那么默认的line-height就是24px；</p>
+</li>
+<li><p>垂直对齐</p>
+<p>除了line-height，行内盒子也会受到vertical-align属性的影响。它的默认值是baseline，即子元素的基线与父元素的基线对齐。在示例文章的末尾，有一个日期，其中的序数后缀“rd”包含在一个span中：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">&quot;2016-02-23&quot;</span>&gt;</span>the 23<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;ordinal&quot;</span>&gt;</span>rd<span class="tag">&lt;/<span class="name">span</span>&gt;</span>of February 2016.<span class="tag">&lt;/<span class="name">time</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样可以通过vertical-align将其设置为上标文本，即使用super关键字（字号也小一些）：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.ordinal</span>&#123;</span><br><span class="line">	<span class="attribute">vertical-align</span>: super;</span><br><span class="line">	<span class="attribute">font-size</span>: smaller;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="文本粗细"><a href="#文本粗细" class="headerlink" title="文本粗细"></a>文本粗细</h2><p>使用font-weight属性可设置标题文本的粗细。有些字体的变体很多，此时，可以不用给出变体的名字，而只使用关键字：normal、bold、bolder和lighter。也可以直接给出数字值，都是100的整数倍：100、200、300、400等等，最大为900。</p>
+<p>默认值normal对应400，bold对应700，这两个粗细值是最常用的。关键字bolder和lighter的工作机制略有不同，它们的作用是在继承值的基础上把文本变粗或变细。</p>
+<p>作为标题的默认值，这里使用了数字值500，而对h1和h2分别使用了超粗和中粗：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>,<span class="selector-tag">h2</span>,<span class="selector-tag">h3</span>,<span class="selector-tag">h4</span>,<span class="selector-tag">h5</span>,<span class="selector-tag">h6</span>&#123;</span><br><span class="line">	<span class="attribute">font-weight</span>: <span class="number">500</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span>&#123;</span><br><span class="line">	<span class="attribute">font-weight</span>: <span class="number">800</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h2</span>&#123;</span><br><span class="line">	<span class="attribute">font-weight</span>:<span class="number">600</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="行长、律动和毛边"><a href="#行长、律动和毛边" class="headerlink" title="行长、律动和毛边"></a>行长、律动和毛边</h1><p>接下来探讨一个对阅读体验有着重大影响的因素：行长。过长或过短的文本会打断人的眼球移动，导致读者无法连续阅读，最后甚至读不下去。</p>
+<p>主体内容的文本行长通常是45-75个字符，平均值为66个字符。排版专家发现这个建议同样适用于今天的网页，特别是大屏幕中的网页。对于小屏幕而言，行长至少也应该有40个字符。</p>
+<p>要控制行长，可以通过设定包含文本的段落、标题等元素的宽度来实现。</p>
+<p>对于页面主体文本而言，Georgia字体的字母相对较宽，因此行长就要考虑使用前述范围的上限。为此，简单地将article元素的宽度设置为36em（平均每个字符0.5em），并令其在页面上居中。如果视口缩小到比这个值更窄，该元素会自动调整宽度。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">article</span>&#123;</span><br><span class="line">	<span class="attribute">max-width</span>: <span class="number">36em</span>;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="文本缩进与对齐"><a href="#文本缩进与对齐" class="headerlink" title="文本缩进与对齐"></a>文本缩进与对齐</h2><p>默认情况下，文本是左对齐的。文本左对齐有助于眼睛找到下一行，保持阅读节奏。对于连续的段落，或者为相邻段落设置一行的外边距，或者设置首段缩进。在此选择后一种方案，使用相邻组合符设置text-indent属性：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> + <span class="selector-tag">p</span>&#123;</span><br><span class="line">	<span class="attribute">text-indent</span>: <span class="number">1.25em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>相邻兄弟选择器</strong> (<code>+</code>) 介于两个选择器之间，当第二个元素<em>紧跟在</em>第一个元素之后，并且两个元素都是属于同一个父elment的子元素，则第二个元素将被选中。</p>
+<p>这段代码将对相邻文本中的第二段文本设置文本缩进。</p>
+<p>同时再居中显示h1元素，以及给它添加一个底部边框，从而让它能跟下面的文本连成一体：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>&#123;</span><br><span class="line">	<span class="attribute">text-align</span>: center;</span><br><span class="line">	<span class="attribute">border-bottom</span>: <span class="number">1px</span> solid <span class="number">#c8bc9d</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>text-align属性可以接受下列任意一个关键字值：left、right、center和justify。</p>
+<h2 id="多栏文本"><a href="#多栏文本" class="headerlink" title="多栏文本"></a>多栏文本</h2><p>把整篇文章宽度都限制在36em可以达到限制行长的目的，但是对于大屏幕而言，却又太浪费空间了，留着大片的空白很可惜。有时候，为了有效利用宽屏，可以把文本分成多栏，并对每栏的宽度加以限制。</p>
+<p>如果把之前设置的max-width增加到70em，那么可以分成3栏。为此，要把columns属性设置为想要的最小宽度。栏间距通过column-gap属性控制：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">article</span>&#123;</span><br><span class="line">	<span class="attribute">max-width</span>: <span class="number">70em</span>;</span><br><span class="line">	<span class="attribute">columns</span>: <span class="number">20em</span>;</span><br><span class="line">	coumn-<span class="attribute">gap</span>:<span class="number">1.5em</span>;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的columns属性是column-count和column-width属性的简写形式。如果只设置column-count属性，浏览器会严格生成指定数量的栏，不管宽度如何。如果同时设置了column-count和column-width，则前者会作为最大栏数，后者会作为最小栏宽。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">columns</span>: <span class="number">20em</span>; <span class="comment">/* 在保证最小宽度20em的前提下，自动设置栏数 */</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">column-width</span>: <span class="number">20em</span>; <span class="comment">/* 同上 */</span></span><br><span class="line"></span><br><span class="line"> <span class="attribute">columns</span>:<span class="number">3</span> <span class="comment">/* 3栏，自动设置宽度 */</span></span><br><span class="line"> </span><br><span class="line"> columns-count: <span class="number">3</span>; <span class="comment">/* 同上 */</span></span><br><span class="line"> </span><br><span class="line"> <span class="attribute">columns</span>: <span class="number">3</span> <span class="number">20em</span>; <span class="comment">/* 至少3栏，每栏宽度至少20em */</span></span><br><span class="line"> </span><br><span class="line"> <span class="comment">/* 以下两条声明的组合相当于以上代码的简写形式 */</span></span><br><span class="line"> <span class="attribute">column-count</span>: <span class="number">3</span>;</span><br><span class="line"> <span class="attribute">column-width</span>: <span class="number">20em</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://pvnk1u.github.io/2023/06/03/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(4)%E2%80%94%E2%80%94%E7%BD%91%E9%A1%B5%E6%8E%92%E7%89%88/" title="精通CSS读书笔记(4)——网页排版" target="_blank" rel="external">http://pvnk1u.github.io/2023/06/03/精通CSS读书笔记(4)——网页排版/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/pvnk1u" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/dog.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/pvnk1u" target="_blank"><span class="text-dark">Yolo</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>Everything happens for the best</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/06/04/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(5)%E2%80%94%E2%80%94%E6%BC%82%E4%BA%AE%E7%9A%84%E7%9B%92%E5%AD%90/" title="精通CSS读书笔记(5)——漂亮的盒子"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/05/30/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(3)%E2%80%94%E2%80%94%E5%8F%AF%E8%A7%81%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A8%A1%E5%9E%8B/" title="精通CSS读书笔记(3)——可见格式化模型"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2024 pvnk1u
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://pvnk1u.github.io/2023/06/03/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(4)%E2%80%94%E2%80%94%E7%BD%91%E9%A1%B5%E6%8E%92%E7%89%88/';
+        
+        this.page.identifier = '精通CSS读书笔记(4)——网页排版';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + '' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

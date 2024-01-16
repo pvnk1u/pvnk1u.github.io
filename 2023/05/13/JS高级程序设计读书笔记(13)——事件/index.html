@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>JS高级程序设计读书笔记(13)——事件 | Yolo</title>
+  <meta name="description" content="JavaScript 与 HTML 的交互是通过事件实现的，事件代表文档或浏览器窗口中某个有意义的时刻。 可以使用仅在事件发生时执行的监听器（也叫处理程序）订阅事件。在传统软件工程领域，这个模型叫 “观察者模式”，其能够做到页面行为（在 JavaScript 中定义）与页面展示（在 HTML 和 CSS 中定义）的分离。 事件流在第四代 Web 浏览器开始开发时，开发团队碰到了一个有意思的问题：页">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS高级程序设计读书笔记(13)——事件">
+<meta property="og:url" content="http://pvnk1u.github.io/2023/05/13/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(13)%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6/index.html">
+<meta property="og:site_name" content="YOLO">
+<meta property="og:description" content="JavaScript 与 HTML 的交互是通过事件实现的，事件代表文档或浏览器窗口中某个有意义的时刻。 可以使用仅在事件发生时执行的监听器（也叫处理程序）订阅事件。在传统软件工程领域，这个模型叫 “观察者模式”，其能够做到页面行为（在 JavaScript 中定义）与页面展示（在 HTML 和 CSS 中定义）的分离。 事件流在第四代 Web 浏览器开始开发时，开发团队碰到了一个有意思的问题：页">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pvnk1u.github.io/images/EventFlow.PNG">
+<meta property="article:published_time" content="2023-05-13T04:26:39.000Z">
+<meta property="article:modified_time" content="2023-11-27T15:34:23.879Z">
+<meta property="article:author" content="pvnk1u">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pvnk1u.github.io/images/EventFlow.PNG">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://pvnk1u.github.io/2023/05/13/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(13)%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YOLO" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-white" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/pvnk1u" target="_blank">
+          <img class="img-circle img-rotate" src="/images/dog.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Yolo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/css/">css</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/">html</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/css/">css</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/javascript/">javascript</a><span class="category-list-count">14</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/html/">html</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81%E4%B8%8E%E8%AE%BE%E8%AE%A1/" class="title">UdemyHtmlCss学习笔记——代码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-21T07:32:39.000Z" itemprop="datePublished">2023-11-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/01/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(7)%E2%80%94%E2%80%94%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80%E4%B8%8E%E7%BD%91%E6%A0%BC/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-01T07:28:39.000Z" itemprop="datePublished">2023-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-05T07:28:39.000Z" itemprop="datePublished">2023-06-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/04/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(5)%E2%80%94%E2%80%94%E6%BC%82%E4%BA%AE%E7%9A%84%E7%9B%92%E5%AD%90/" class="title">精通CSS读书笔记(5)——漂亮的盒子</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-04T01:28:39.000Z" itemprop="datePublished">2023-06-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/03/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(4)%E2%80%94%E2%80%94%E7%BD%91%E9%A1%B5%E6%8E%92%E7%89%88/" class="title">精通CSS读书笔记(4)——网页排版</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-03T01:28:39.000Z" itemprop="datePublished">2023-06-03</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-number">1.</span> <span class="toc-text">事件流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7"><span class="toc-number">1.2.</span> <span class="toc-text">事件捕获</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-number">1.3.</span> <span class="toc-text">DOM事件流</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">事件处理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.1.</span> <span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM0%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.2.</span> <span class="toc-text">DOM0事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM2%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.3.</span> <span class="toc-text">DOM2事件处理程序</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.</span> <span class="toc-text">事件对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.1.</span> <span class="toc-text">DOM事件对象</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">事件类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E4%BA%8B%E4%BB%B6"><span class="toc-number">4.1.</span> <span class="toc-text">用户界面事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%84%A6%E7%82%B9%E4%BA%8B%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">焦点事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BC%A0%E6%A0%87%E5%92%8C%E6%BB%9A%E8%BD%AE%E4%BA%8B%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">鼠标和滚轮事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%AE%E7%9B%98%E4%B8%8E%E8%BE%93%E5%85%A5%E4%BA%8B%E4%BB%B6"><span class="toc-number">4.4.</span> <span class="toc-text">键盘与输入事件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E4%B8%8E%E6%80%A7%E8%83%BD"><span class="toc-number">5.</span> <span class="toc-text">内存与性能</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-number">5.1.</span> <span class="toc-text">事件委托</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-JS高级程序设计读书笔记(13)——事件" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS高级程序设计读书笔记(13)——事件
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/05/13/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(13)%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6/" class="article-date">
+	  <time datetime="2023-05-13T04:26:39.000Z" itemprop="datePublished">2023-05-13</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/web/">web</a>►<a class="article-category-link" href="/categories/web/javascript/">javascript</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>, <a class="article-tag-link-link" href="/tags/web/" rel="tag">web</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/05/13/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(13)%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 8.8k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 33(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><code>JavaScript</code> 与 <code>HTML</code> 的交互是通过事件实现的，事件代表文档或浏览器窗口中某个有意义的时刻。 可以使用仅在事件发生时执行的监听器（也叫处理程序）订阅事件。在传统软件工程领域，这个模型叫 “观察者模式”，其能够做到页面行为（在 <code>JavaScript</code> 中定义）与页面展示（在 <code>HTML</code> 和 <code>CSS</code> 中定义）的分离。</p>
+<h1 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h1><p>在第四代 Web 浏览器开始开发时，开发团队碰到了一个有意思的问题：页面哪个部分拥有特定的事件呢？要理解这个问题，可以在一张纸上画几个同心圆。把手指放 到圆心上，则手指不仅是在一个圆圈里，而且是在所有的圆圈里。两家浏览器的开发团队都是以同样的 方式看待浏览器事件的。当你点击一个按钮时，实际上不光点击了这个按钮，还点击了它的容器以及整 个页面。</p>
+<p>事件流描述了页面接收事件的顺序。结果非常有意思，IE 和 Netscape 开发团队提出了几乎完全相反的事件流方案。IE 将支持<strong>事件冒泡流</strong>，而 Netscape Communicator 将支持<strong>事件捕获流</strong>。</p>
+<h2 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h2><p>IE 事件流被称为事件冒泡，这是因为事件被定义为从最具体的元素（文档树中最深的节点）开始触发，然后向上传播至没有那么具体的元素（文档）。比如有如下 <code>HTML</code> 页面：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">title</span>&gt;</span>Event Bubbling Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;myDiv&quot;</span>&gt;</span>Click Me<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在点击页面中的<code>&lt;div&gt;</code>元素后，<code>click</code> 事件会以如下顺序发生：</p>
+<ol>
+<li><code>&lt;div&gt;</code></li>
+<li><code>&lt;body&gt;</code></li>
+<li><code>&lt;html&gt;</code></li>
+<li><code>document</code></li>
+</ol>
+<p>也就是说，<code>&lt;div&gt;</code>元素，即被点击的元素，最先触发 click 事件。然后，click 事件沿 DOM 树一 路向上，在经过的每个节点上依次触发，直至到达 document 对象。</p>
+<p>所有现代浏览器都支持事件冒泡。现代浏览器中的事件会一直冒泡到 <code>window</code> 对象。</p>
+<h2 id="事件捕获"><a href="#事件捕获" class="headerlink" title="事件捕获"></a>事件捕获</h2><p>Netscape Communicator 团队提出了另一种名为事件捕获的事件流。事件捕获的意思是最不具体的节 点应该最先收到事件，而最具体的节点应该最后收到事件。事件捕获实际上是为了在事件到达最终目标前拦截事件。如果前面的例子使用事件捕获，则点击<code>&lt;div&gt;</code>元素会以下列顺序触发 click 事件：</p>
+<ol>
+<li>document</li>
+<li><code>&lt;html&gt;</code></li>
+<li><code>&lt;body&gt;</code></li>
+<li><code>&lt;div&gt;</code></li>
+</ol>
+<p>在事件捕获中，<code>click</code> 事件首先由 <code>document</code> 元素捕获，然后沿 <code>DOM</code> 树依次向下传播，直至到达 实际的目标元素<code>&lt;div&gt;</code>。</p>
+<p>虽然这是 Netscape Communicator 唯一的事件流模型，但事件捕获得到了所有现代浏览器的支持。 实际上，所有浏览器都是从 <code>window</code> 对象开始捕获事件，而 <code>DOM2 Events</code>规范规定的是从 <code>document </code>开始。</p>
+<p>由于旧版本浏览器不支持，因此实际当中几乎不会使用事件捕获。通常建议使用事件冒泡，特殊情 况下可以使用事件捕获。</p>
+<h2 id="DOM事件流"><a href="#DOM事件流" class="headerlink" title="DOM事件流"></a>DOM事件流</h2><p><code>DOM2 Events</code> 规范规定事件流分为 3 个阶段：事件捕获、到达目标和事件冒泡。事件捕获最先发生， 为提前拦截事件提供了可能。然后，实际的目标元素接收到事件。最后一个阶段是冒泡，最迟要在这个 阶段响应事件。仍以前面那个简单的 <code>HTML</code> 为例，点击<code>&lt;div&gt;</code>元素会以如图所示的顺序触发事件。</p>
+<p><img src="https://pvnk1u.github.io/images/EventFlow.PNG" alt="EventFlow"></p>
+<p>在 <code>DOM</code> 事件流中，实际的目标（<code>&lt;div&gt;</code>元素）在捕获阶段不会接收到事件。这是因为捕获阶段从 <code>document</code> 到<code>&lt;html&gt;</code>再到<code>&lt;body&gt;</code>就结束了。下一阶段，即会在<code>&lt;div&gt;</code>元素上触发事件的“到达目标” 阶段，通常在事件处理时被认为是冒泡阶段的一部分。然后，冒泡阶段开始，事件反向传播至文档。</p>
+<p>大多数支持 <code>DOM</code> 事件流的浏览器实现了一个小小的拓展。<strong>虽然 <code>DOM2 Events</code> 规范明确捕获阶段不命中事件目标，但现代浏览器都会在捕获阶段在事件目标上触发事件。最终结果是在事件目标上有两个机会来处理事件。</strong></p>
+<h1 id="事件处理程序"><a href="#事件处理程序" class="headerlink" title="事件处理程序"></a>事件处理程序</h1><p><strong>事件意味着用户或浏览器执行的某种动作。比如，单击（<code>click</code>）、加载（<code>load</code>）、鼠标悬停 （<code>mouseover</code>）。为响应事件而调用的函数被称为事件处理程序（或事件监听器）。事件处理程序的名字 以”on”开头，因此 <code>click</code> 事件的处理程序叫作 <code>onclick</code>，而 <code>load</code> 事件的处理程序叫作 <code>onload</code>。有 很多方式可以指定事件处理程序。</strong></p>
+<h2 id="HTML事件处理程序"><a href="#HTML事件处理程序" class="headerlink" title="HTML事件处理程序"></a>HTML事件处理程序</h2><p>特定元素支持的每个事件都可以使用事件处理程序的名字以 <code>HTML</code> 属性的形式来指定。此时属性的值必须是能够执行的 <code>JavaScript</code> 代码。例如，要在按钮被点击时执行某些 <code>JavaScript</code> 代码，可以使用以下 <code>HTML</code> 属性：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Click Me&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;console.log(&#x27;Clicked&#x27;)&quot;</span>/&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>点击这个按钮后，控制台会输出一条消息。这种交互能力是通过为 <code>onclick</code>属性指定 <code>JavaScript</code> 代码值来实现的。注意，因为属性的值是 <code>JavaScript</code> 代码，所以不能在未经转义的情况下使用 <code>HTML</code> 语 法字符，比如和号（&amp;）、双引号（”）、小于号（&lt;）和大于号（&gt;）。此时，为了避免使用 <code>HTML</code> 实体， 可以使用单引号代替双引号。如果确实需要使用双引号，则要把代码改成下面这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Click Me&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">onclick</span>=<span class="string">&quot;console.log(<span class="symbol">&amp;quot;</span>Clicked<span class="symbol">&amp;quot;</span>)&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在 <code>HTML</code> 中定义的事件处理程序可以包含精确的动作指令，也可以调用在页面其他地方定义的脚本，比如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"> <span class="keyword">function</span> <span class="title function_">showMessage</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello world!&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"> &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Click Me&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;showMessage()&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，单击按钮会调用 <code>showMessage()</code>函数。<code>showMessage()</code>函数是在单独的<code>&lt;script&gt;</code>元素中定义的，而且也可以在外部文件中定义。作为事件处理程序执行的代码可以访问全局作用域中的一切。</p>
+<p>以这种方式指定的事件处理程序有一些特殊的地方。首先，会创建一个函数来封装属性的值。<strong>这个函数有一个特殊的局部变量 <code>event</code>，其中保存的就是 <code>event</code> 对象:</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 输出&quot;click&quot; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Click Me&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;console.log(event.type)&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>有了这个对象，就不用开发者另外定义其他变量，也不用从包装函数的参数列表中去取了。</p>
+<p><strong>在这个函数中，<code>this</code> 值相当于事件的目标元素，如下面的例子所示：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 输出&quot;Click Me&quot; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Click Me&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;console.log(this.value)&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个动态创建的包装函数还有一个特别有意思的地方，就是其作用域链被扩展了。在这个函数中， <code>document</code> 和元素自身的成员都可以被当成局部变量来访问。这是通过使用 <code>with</code> 实现的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="title function_">with</span>(<span class="params"><span class="variable language_">document</span></span>) &#123;</span><br><span class="line">     <span class="title function_">with</span>(<span class="params"><span class="variable language_">this</span></span>) &#123;</span><br><span class="line">     	<span class="comment">// 属性值</span></span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这意味着事件处理程序可以更方便地访问自己的属性。下面的代码与前面的示例功能一样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 输出&quot;Click Me&quot; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Click Me&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;console.log(value)&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>如果这个元素是一个表单输入框，则作用域链中还会包含表单元素</strong>，事件处理程序对应的函数等价于如下这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="title function_">with</span>(<span class="params"><span class="variable language_">document</span></span>) &#123;</span><br><span class="line">     <span class="title function_">with</span>(<span class="params"><span class="variable language_">this</span>.form</span>) &#123;</span><br><span class="line">         <span class="title function_">with</span>(<span class="params"><span class="variable language_">this</span></span>) &#123;</span><br><span class="line">            <span class="comment">// 属性值</span></span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>本质上，经过这样的扩展，事件处理程序的代码就可以不必引用表单元素，而直接访问同一表单中的其他成员了。下面的例子就展示了这种成员访问模式：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Echo Username&quot;</span></span></span><br><span class="line"><span class="tag"> 		<span class="attr">onclick</span>=<span class="string">&quot;console.log(username.value)&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>点击这个例子中的按钮会显示出文本框中包含的文本。注意，事件处理程序中的代码直接引用了 <code>username</code>。</p>
+<p>在 <code>HTML</code> 中指定事件处理程序有一些问题。第一个问题是时机问题。有可能 <code>HTML</code> 元素已经显示在页面上，用户都与其交互了，而事件处理程序的代码还无法执行。比如在前面的例子中，如果 <code>showMessage()</code>函数是在页面后面，在按钮中代码的后面定义的，那么当用户在 <code>showMessage()</code>函数 被定义之前点击按钮时，就会发生错误。为此，大多数 <code>HTML</code> 事件处理程序会封装在 <code>try/catch</code> 块中， 以便在这种情况下静默失败，如下面的例子所示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Click Me&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;try&#123;showMessage();&#125;catch(ex) &#123;&#125;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，如果在 <code>showMessage()</code>函数被定义之前点击了按钮，就不会发生 <code>JavaScript</code>错误了，这是因为错误在浏览器收到之前已经被拦截了。</p>
+<p>另一个问题是对事件处理程序作用域链的扩展在不同浏览器中可能导致不同的结果。不同 <code>JavaScript</code> 引擎中标识符解析的规则存在差异，因此访问无限定的对象成员可能导致错误。</p>
+<p>使用 <code>HTML</code> 指定事件处理程序的最后一个问题是 <code>HTML</code> 与 <code>JavaScript</code> 强耦合。如果需要修改事件处理程序，则必须在两个地方，即 <code>HTML</code> 和 <code>JavaScript</code> 中，修改代码。这也是很多开发者不使用 <code>HTML</code> 事件处理程序，而使用 <code>JavaScript</code> 指定事件处理程序的主要原因。</p>
+<h2 id="DOM0事件处理程序"><a href="#DOM0事件处理程序" class="headerlink" title="DOM0事件处理程序"></a>DOM0事件处理程序</h2><p>在 <code>JavaScript</code> 中指定事件处理程序的传统方式是把一个函数赋值给（<code>DOM</code> 元素的）一个事件处理程序属性。这也是在第四代 Web 浏览器中开始支持的事件处理程序赋值方法，直到现在所有现代浏览器仍然都支持此方法，主要原因是简单。要使用 <code>JavaScript</code>指定事件处理程序，必须先取得要操作对象的引用。</p>
+<p>每个元素（包括 <code>window</code> 和 <code>document</code>）都有通常小写的事件处理程序属性，比如 <code>onclick</code>。只要把这个属性赋值为一个函数即可：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line">btn.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">	 <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Clicked&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这里先从文档中取得按钮，然后给它的 <code>onclick</code> 事件处理程序赋值一个函数。注意，前面的代码在运行之后才会给事件处理程序赋值。因此如果在页面中上面的代码出现在按钮之后，则有可能出现用户点击按钮没有反应的情况。</p>
+<p><strong>像这样使用 <code>DOM0</code> 方式为事件处理程序赋值时，所赋函数被视为元素的方法。因此，事件处理程序会在元素的作用域中运行，即 <code>this</code> 等于元素。</strong>下面的例子演示了使用 <code>this</code> 引用元素本身：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line">btn.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">	 <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">id</span>); <span class="comment">// &quot;myBtn&quot;</span></span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
+
+<p>点击按钮，这段代码会显示元素的 ID。这个 ID 是通过 <code>this.id</code> 获取的。不仅仅是 id，在事件处理程序里通过 <code>this</code> 可以访问元素的任何属性和方法。<strong>以这种方式添加事件处理程序是注册在事件流的冒泡阶段的。</strong></p>
+<p>通过将事件处理程序属性的值设置为 <code>null</code>，可以移除通过 <code>DOM0</code> 方式添加的事件处理程序，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btn.<span class="property">onclick</span> = <span class="literal">null</span>; <span class="comment">// 移除事件处理程序</span></span><br></pre></td></tr></table></figure>
+
+<p>把事件处理程序设置为 <code>null</code>，再点击按钮就不会执行任何操作了。</p>
+<h2 id="DOM2事件处理程序"><a href="#DOM2事件处理程序" class="headerlink" title="DOM2事件处理程序"></a>DOM2事件处理程序</h2><p><code>DOM2 Events</code> 为事件处理程序的赋值和移除定义了两个方法：<code>addEventListener()</code>和 <code>removeEventListener()</code>。<strong>这两个方法暴露在所有 <code>DOM</code> 节点上，它们接收 3 个参数：事件名、事件处理函数和一个布尔值，true 表示在捕获阶段调用事件处理程序，false（默认值）表示在冒泡阶段调用事件处理程序。</strong></p>
+<p>仍以给按钮添加 <code>click</code> 事件处理程序为例，可以这样写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">id</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>); </span><br></pre></td></tr></table></figure>
+
+<p>以上代码为按钮添加了会在事件冒泡阶段触发的 <code>onclick</code> 事件处理程序（因为最后一个参数值为 false）。与 <code>DOM0</code> 方式类似，这个事件处理程序同样在被附加到的元素的作用域中运行。<strong>使用 <code>DOM2</code> 方式的主要优势是可以为同一个事件添加多个事件处理程序。</strong>来看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line"></span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">id</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这里给按钮添加了两个事件处理程序。多个事件处理程序以添加顺序来触发，因此前面的代码会先打印元素 ID，然后显示消息“Hello world!”。</p>
+<p>通过 <code>addEventListener()</code>添加的事件处理程序只能使用 <code>removeEventListener()</code>并传入与添加时同样的参数来移除。这意味着使用 <code>addEventListener()</code>添加的匿名函数无法移除，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">id</span>);</span><br><span class="line"> &#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 其他代码</span></span><br><span class="line">btn.<span class="title function_">removeEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="comment">// 没有效果！</span></span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">id</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>); </span><br></pre></td></tr></table></figure>
+
+<p>这个例子通过 <code>addEventListener()</code>添加了一个匿名函数作为事件处理程序。然后，又以看起来 相同的参数调用了 <code>removeEventListener()</code>。但实际上，第二个参数与传给 <code>addEventListener()</code> 的完全不是一回事。传给 <code>removeEventListener()</code>的事件处理函数必须与传给 <code>addEventListener()</code> 的是同一个，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> handler = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">id</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, handler, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 其他代码</span></span><br><span class="line">btn.<span class="title function_">removeEventListener</span>(<span class="string">&quot;click&quot;</span>, handler, <span class="literal">false</span>); <span class="comment">// 有效果！</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子有效，因为调用 <code>addEventListener()</code>和 <code>removeEventListener()</code>时传入的是同一个函数。</p>
+<p><strong>大多数情况下，事件处理程序会被添加到事件流的冒泡阶段，主要原因是跨浏览器兼容性好。把事件处理程序注册到捕获阶段通常用于在事件到达其指定目标之前拦截事件。如果不需要拦截，则不要使用事件捕获。</strong></p>
+<h1 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h1><p><strong>在 <code>DOM</code> 中发生事件时，所有相关信息都会被收集并存储在一个名为 <code>event</code> 的对象中。这个对象包含了一些基本信息，比如导致事件的元素、发生的事件类型，以及可能与特定事件相关的任何其他数据。 例如，鼠标操作导致的事件会生成鼠标位置信息，而键盘操作导致的事件会生成与被按下的键有关的信息。所有浏览器都支持这个 <code>event</code> 对象，尽管支持方式不同。</strong></p>
+<h2 id="DOM事件对象"><a href="#DOM事件对象" class="headerlink" title="DOM事件对象"></a>DOM事件对象</h2><p>在 <code>DOM</code> 合规的浏览器中，<code>event</code> 对象是传给事件处理程序的唯一参数。不管以哪种方式（<code>DOM0</code> 或 <code>DOM2</code>）指定事件处理程序，都会传入这个 <code>event</code> 对象。下面的例子展示了在两种方式下都可以使用事件对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line">btn.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">type</span>); <span class="comment">// &quot;click&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">type</span>); <span class="comment">// &quot;click&quot;</span></span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这个例子中的两个事件处理程序都会在控制台打出 <code>event.type</code> 属性包含的事件类型。这个属性中 始终包含被触发事件的类型，如”click”（与传给 <code>addEventListener()</code>和 <code>removeEventListener()</code> 方法的事件名一致）。</p>
+<p>在通过 <code>HTML</code> 属性指定的事件处理程序中，同样可以使用变量 <code>event</code> 引用事件对象。下面的例子中演示了如何使用这个变量：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Click Me&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;console.log(event.type)&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>以这种方式提供 <code>event</code> 对象，可以让 <code>HTML</code> 属性中的代码实现与 <code>JavaScript</code> 函数同样的功能。</p>
+<p>如前所述，事件对象包含与特定事件相关的属性和方法。不同的事件生成的事件对象也会包含不同 的属性和方法。不过，所有事件对象都会包含下表列出的这些公共属性和方法。</p>
+<table>
+<thead>
+<tr>
+<th>属性&#x2F;方法</th>
+<th>类型</th>
+<th>读&#x2F;写</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bubbles</td>
+<td>布尔值</td>
+<td>只读</td>
+<td>表示事件是否冒泡</td>
+</tr>
+<tr>
+<td>cancelable</td>
+<td>布尔值</td>
+<td>只读</td>
+<td>表示是否可以取消事件的默认行为</td>
+</tr>
+<tr>
+<td>currentTarget</td>
+<td>元素</td>
+<td>只读</td>
+<td>当前事件处理程序所在的元素</td>
+</tr>
+<tr>
+<td>defaultPrevented</td>
+<td>布尔值</td>
+<td>只读</td>
+<td>true 表示已经调用 preventDefault()方法（DOM3 Events 中新增）</td>
+</tr>
+<tr>
+<td>detail</td>
+<td>整数</td>
+<td>只读</td>
+<td>事件相关的其他信息</td>
+</tr>
+<tr>
+<td>eventPhase</td>
+<td>整数</td>
+<td>只读</td>
+<td>表示调用事件处理程序的阶段：1 代表捕获阶段，2 代表到达目标，3 代表冒泡阶段</td>
+</tr>
+<tr>
+<td>preventDefault()</td>
+<td>函数</td>
+<td>只读</td>
+<td>用于取消事件的默认行为。只有 cancelable 为 true 才 可以调用这个方法</td>
+</tr>
+<tr>
+<td>stopImmediatePropagation()</td>
+<td>函数</td>
+<td>只读</td>
+<td>用于取消所有后续事件捕获或事件冒泡，并阻止调用任何后续事件处理程序（DOM3 Events 中新增）</td>
+</tr>
+<tr>
+<td>stopPropagation()</td>
+<td>函数</td>
+<td>只读</td>
+<td>用于取消所有后续事件捕获或事件冒泡。只有 bubbles 为 true 才可以调用这个方法</td>
+</tr>
+<tr>
+<td>target</td>
+<td>元素</td>
+<td>只读</td>
+<td>事件目标</td>
+</tr>
+<tr>
+<td>trusted</td>
+<td>布尔值</td>
+<td>只读</td>
+<td>true 表示事件是由浏览器生成的。false 表示事件是开 发者通过 JavaScript 创建的（DOM3 Events 中新增）</td>
+</tr>
+<tr>
+<td>type</td>
+<td>字符串</td>
+<td>只读</td>
+<td>被触发的事件类型</td>
+</tr>
+<tr>
+<td>View</td>
+<td>AbstractView</td>
+<td>只读</td>
+<td>与事件相关的抽象视图。等于事件所发生的 window 对象</td>
+</tr>
+</tbody></table>
+<p>在事件处理程序内部，<code>this</code> 对象始终等于 <code>currentTarget</code> 的值，而 <code>target</code> 只包含事件的实际目标。如果事件处理程序直接添加在了意图的目标，则 <code>this</code>、<code>currentTarget</code> 和 <code>target</code> 的值是一样 的。下面的例子展示了这两个属性都等于 <code>this</code> 的情形：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line">btn.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">currentTarget</span> === <span class="variable language_">this</span>); <span class="comment">// true</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">target</span> === <span class="variable language_">this</span>); <span class="comment">// true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码检测了 <code>currentTarget</code> 和 <code>target</code> 的值是否等于 <code>this</code>。因为 <code>click</code> 事件的目标是按钮，所以这 3 个值是相等的。如果这个事件处理程序是添加到按钮的父节点（如 <code>document.body</code>）上， 那么它们的值就不一样了。比如下面的例子在 <code>document.body</code> 上添加了单击处理程序：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">currentTarget</span> === <span class="variable language_">document</span>.<span class="property">body</span>); <span class="comment">// true</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span> === <span class="variable language_">document</span>.<span class="property">body</span>); <span class="comment">// true</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">target</span> === <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>)); <span class="comment">// true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这种情况下点击按钮，<code>this</code> 和 <code>currentTarget</code> 都等于 <code>document.body</code>，这是因为它是注册事件处理程序的元素。而 <code>target</code> 属性等于按钮本身，这是因为那才是 <code>click</code> 事件真正的目标。由于按钮本身并没有注册事件处理程序，因此 <code>click</code> 事件冒泡到 <code>document.body</code>，从而触发了在它上面注册的处理程序。</p>
+<p><code>type</code> 属性在一个处理程序处理多个事件时很有用。比如下面的处理程序中就使用了 <code>event.type</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> handler = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">     <span class="keyword">switch</span>(event.<span class="property">type</span>) &#123;</span><br><span class="line">     	<span class="keyword">case</span> <span class="string">&quot;click&quot;</span>:</span><br><span class="line">     		<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Clicked&quot;</span>);</span><br><span class="line">    		 <span class="keyword">break</span>;</span><br><span class="line">     	<span class="keyword">case</span> <span class="string">&quot;mouseover&quot;</span>:</span><br><span class="line">     		event.<span class="property">target</span>.<span class="property">style</span>.<span class="property">backgroundColor</span> = <span class="string">&quot;red&quot;</span>;</span><br><span class="line">     		<span class="keyword">break</span>;</span><br><span class="line">     	<span class="keyword">case</span> <span class="string">&quot;mouseout&quot;</span>:</span><br><span class="line">     		event.<span class="property">target</span>.<span class="property">style</span>.<span class="property">backgroundColor</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">     		<span class="keyword">break</span>;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line">btn.<span class="property">onclick</span> = handler;</span><br><span class="line">btn.<span class="property">onmouseover</span> = handler;</span><br><span class="line">btn.<span class="property">onmouseout</span> = handler;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，函数 <code>handler</code> 被用于处理 3 种不同的事件：<code>click</code>、<code>mouseover</code> 和 <code>mouseout</code>。 当按钮被点击时，应该在控制台打印一条消息，如前面的例子所示。而把鼠标放到按钮上，会导致按钮 背景变成红色，接着把鼠标从按钮上移开，背景颜色应该又恢复成默认值。这个函数使用 <code>event.type</code> 属性确定了事件类型，从而可以做出不同的响应。</p>
+<p><code>preventDefault()</code>方法用于阻止特定事件的默认动作。比如，链接的默认行为就是在被单击时导航到 <code>href</code> 属性指定的 <code>URL</code>。如果想阻止这个导航行为，可以在 <code>onclick</code> 事件处理程序中取消，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> link = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myLink&quot;</span>);</span><br><span class="line">link.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line"> event.<span class="title function_">preventDefault</span>();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>任何可以通过 <code>preventDefault()</code>取消默认行为的事件，其事件对象的 <code>cancelable</code> 属性都会设置为 true。</p>
+<p><code>stopPropagation()</code>方法用于立即阻止事件流在 <code>DOM</code> 结构中传播，取消后续的事件捕获或冒泡。 例如，直接添加到按钮的事件处理程序中调用 <code>stopPropagation()</code>，可以阻止 <code>document.body</code> 上注册的事件处理程序执行。比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line">btn.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Clicked&quot;</span>);</span><br><span class="line"> 	event.<span class="title function_">stopPropagation</span>();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Body clicked&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如果这个例子中不调用<code>stopPropagation()</code>，那么点击按钮就会打印两条消息。但这里由于<code>click</code> 事件不会传播到 <code>document.body</code>，因此 <code>onclick</code> 事件处理程序永远不会执行。</p>
+<p><code>eventPhase</code> 属性可用于确定事件流当前所处的阶段。如果事件处理程序在捕获阶段被调用，则 <code>eventPhase</code> 等于 1；如果事件处理程序在目标上被调用，则 <code>eventPhase</code> 等于 2；如果事件处理程序在冒泡阶段被调用，则 <code>eventPhase</code> 等于 3。不过要注意的是，虽然“到达目标”是在冒泡阶段发生的， 但其 <code>eventPhase</code> 仍然等于 2。下面的例子展示了 <code>eventPhase</code> 在不同阶段的值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line">btn.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">eventPhase</span>); <span class="comment">// 2</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">eventPhase</span>); <span class="comment">// 1</span></span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">onclick</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">eventPhase</span>); <span class="comment">// 3</span></span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，点击按钮首先会触发注册在捕获阶段的 <code>document.body</code> 上的事件处理程序， 显示 <code>eventPhase</code> 为 1。接着，会触发按钮本身的事件处理程序（尽管是注册在冒泡阶段），此时显示 <code>eventPhase</code> 等于 2。最后触发的是注册在冒泡阶段的 <code>document.body</code> 上的事件处理程序，显示 <code>eventPhase</code> 为 3。而当 <code>eventPhase</code> 等于 2 时，<code>this</code>、<code>target</code> 和 <code>currentTarget</code> 三者相等。</p>
+<h1 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h1><p><code>Web</code> 浏览器中可以发生很多种事件。如前所述，所发生事件的类型决定了事件对象中会保存什么信息。<code>DOM3 Events</code> 定义了如下事件类型。</p>
+<ol>
+<li><p>用户界面事件（UIEvent）</p>
+<p>涉及与 <code>BOM</code> 交互的通用浏览器事件。</p>
+</li>
+<li><p>焦点事件（FocusEvent）</p>
+<p>在元素获得和失去焦点时触发。</p>
+</li>
+<li><p>鼠标事件（MouseEvent）</p>
+<p>使用鼠标在页面上执行某些操作时触发。</p>
+</li>
+<li><p>滚轮事件（WheelEvent）</p>
+<p>使用鼠标滚轮（或类似设备）时触发。</p>
+</li>
+<li><p>输入事件（InputEvent）</p>
+<p>向文档中输入文本时触发。</p>
+</li>
+<li><p>键盘事件（KeyboardEvent）</p>
+<p>使用键盘在页面上执行某些操作时触发。</p>
+</li>
+<li><p>合成事件（CompositionEvent）</p>
+<p>在使用某种 IME（Input Method Editor，输入法编辑器）输入 字符时触发。</p>
+</li>
+</ol>
+<p>除了这些事件类型之外，<code>HTML5</code> 还定义了另一组事件，而浏览器通常在 <code>DOM</code> 和 <code>BOM</code> 上实现专有事件。这些专有事件基本上都是根据开发者需求而不是按照规范增加的，因此不同浏览器的实现可能不同。</p>
+<p><code>DOM3 Events</code> 在 <code>DOM2 Events</code> 基础上重新定义了事件，并增加了新的事件类型。所有主流浏览器 都支持 <code>DOM2 Events</code> 和 <code>DOM3 Events</code>。</p>
+<h2 id="用户界面事件"><a href="#用户界面事件" class="headerlink" title="用户界面事件"></a>用户界面事件</h2><p>用户界面事件或 <code>UI</code> 事件不一定跟用户操作有关。这类事件在 <code>DOM</code> 规范出现之前就已经以某种形式存在了，保留它们是为了向后兼容。<code>UI</code> 事件主要有以下几种。</p>
+<ol>
+<li><p>DOMActivate</p>
+<p>元素被用户通过鼠标或键盘操作激活时触发（比 <code>click</code> 或 <code>keydown</code> 更通用）。 这个事件在 <code>DOM3 Events</code> 中已经废弃。因为浏览器实现之间存在差异，所以不要使用它。</p>
+</li>
+<li><p>load</p>
+<p>在 <code>window</code> 上当页面加载完成后触发，在窗套（<code>&lt;frameset&gt;</code>）上当所有窗格（<code>&lt;frame&gt;</code>） 都加载完成后触发，在<code>&lt;img&gt;</code>元素上当图片加载完成后触发，在<code>&lt;object&gt;</code>元素上当相应对象加载完成后触发。</p>
+</li>
+<li><p>unload</p>
+<p>在 <code>window</code> 上当页面完全卸载后触发，在窗套上当所有窗格都卸载完成后触发，在<code>&lt;object&gt;</code>元素上当相应对象卸载完成后触发。</p>
+</li>
+<li><p>abort</p>
+<p>在<code>&lt;object&gt;</code>元素上当相应对象加载完成前被用户提前终止下载时触发。</p>
+</li>
+<li><p>error</p>
+<p>在 <code>window</code> 上当 <code>JavaScript</code> 报错时触发，在<code>&lt;img&gt;</code>元素上当无法加载指定图片时触发， 在元素上当无法加载相应对象时触发，在窗套上当一个或多个窗格无法完成加载时触发。</p>
+</li>
+<li><p>select</p>
+<p>在文本框（<code>input</code>或 <code>textarea</code>）上当用户选择了一个或多个字符时触发。</p>
+</li>
+<li><p>resize</p>
+<p>在 <code>window</code> 或窗格上当窗口或窗格被缩放时触发。</p>
+</li>
+<li><p>scroll</p>
+<p>当用户滚动包含滚动条的元素时在元素上触发。<code>&lt;body&gt;</code>元素包含已加载页面的滚动条。</p>
+</li>
+</ol>
+<p>大多数 <code>HTML</code> 事件与 <code>window</code> 对象和表单控件有关。</p>
+<p> 除了 <code>DOMActivate</code>，这些事件在 <code>DOM2 Events</code> 中都被归为 <code>HTML Events</code>（<code>DOMActivate</code> 在 <code>DOM2</code> 中仍旧是 <code>UI</code> 事件）。</p>
+<h2 id="焦点事件"><a href="#焦点事件" class="headerlink" title="焦点事件"></a>焦点事件</h2><p>焦点事件在页面元素获得或失去焦点时触发。这些事件可以与 <code>document.hasFocus()</code>和 <code>document.activeElement</code> 一起为开发者提供用户在页面中导航的信息。焦点事件有以下 6 种。</p>
+<ol>
+<li><p><code>blur</code></p>
+<p>当元素失去焦点时触发。这个事件不冒泡，所有浏览器都支持。</p>
+</li>
+<li><p><code>focus</code></p>
+<p>当元素获得焦点时触发。这个事件不冒泡，所有浏览器都支持。</p>
+</li>
+<li><p><code>focusin</code></p>
+<p>当元素获得焦点时触发。这个事件是 <code>focus</code> 的冒泡版。</p>
+</li>
+<li><p><code>focusout</code></p>
+<p>当元素失去焦点时触发。这个事件是 <code>blur</code> 的通用版。</p>
+</li>
+</ol>
+<p>焦点事件中的两个主要事件是 <code>focus</code> 和 <code>blur</code>，这两个事件在 <code>JavaScript</code> 早期就得到了浏览器支持。 它们最大的问题是不冒泡。这导致 IE后来又增加了 <code>focusin</code> 和 <code>focusout</code>，IE 新增的这两个事件已经被 <code>DOM3 Events </code>标准化。</p>
+<p><strong>当焦点从页面中的一个元素移到另一个元素上时，会依次发生如下事件。</strong></p>
+<ol>
+<li><code>focuscout</code> 在失去焦点的元素上触发。</li>
+<li><code>focusin</code> 在获得焦点的元素上触发。</li>
+<li><code>blur</code> 在失去焦点的元素上触发。</li>
+<li><code>focus</code> 在获得焦点的元素上触发。</li>
+</ol>
+<p>其中，<code>blur</code>、<code>focusout</code> 的事件目标是失去焦点的元素，而 <code>focus</code>和 <code>focusin</code> 的事件目标是获得焦点的元素。</p>
+<h2 id="鼠标和滚轮事件"><a href="#鼠标和滚轮事件" class="headerlink" title="鼠标和滚轮事件"></a>鼠标和滚轮事件</h2><p>鼠标事件是 Web 开发中最常用的一组事件，这是因为鼠标是用户的主要定位设备。<code>DOM3 Events</code> 定义了 9 种鼠标事件。</p>
+<ol>
+<li><p>click</p>
+<p>在用户单击鼠标主键（通常是左键）或按键盘回车键时触发。这主要是基于无障碍的考虑，让键盘和鼠标都可以触发 <code>onclick</code> 事件处理程序。</p>
+</li>
+<li><p>dblclick</p>
+<p>在用户双击鼠标主键（通常是左键）时触发。这个事件不是在 <code>DOM2 Events</code> 中定义 的，但得到了很好的支持，<code>DOM3 Events</code> 将其进行了标准化。</p>
+</li>
+<li><p>mousedown</p>
+<p>在用户按下任意鼠标键时触发。这个事件不能通过键盘触发。</p>
+</li>
+<li><p>mouseenter</p>
+<p>在用户把鼠标光标从元素外部移到元素内部时触发。这个事件不冒泡，也不会在 光标经过后代元素时触发。<code>mouseenter</code> 事件不是在 <code>DOM2 Events</code> 中定义的，而是 <code>DOM3 Events</code> 中新增的事件。</p>
+</li>
+<li><p>mouseleave</p>
+<p>在用户把鼠标光标从元素内部移到元素外部时触发。这个事件不冒泡，也不会在光标经过后代元素时触发。<code>mouseleave</code> 事件不是在 <code>DOM2 Events</code> 中定义的，而是 <code>DOM3 Events</code> 中新增的事件。</p>
+</li>
+<li><p>mousemove</p>
+<p>在鼠标光标在元素上移动时反复触发。这个事件不能通过键盘触发。</p>
+</li>
+<li><p>mouseout</p>
+<p>在用户把鼠标光标从一个元素移到另一个元素上时触发。移到的元素可以是原始元素的外部元素，也可以是原始元素的子元素。这个事件不能通过键盘触发。</p>
+</li>
+<li><p>mouseover</p>
+<p>在用户把鼠标光标从元素外部移到元素内部时触发。这个事件不能通过键盘触发。</p>
+</li>
+<li><p>mouseup</p>
+<p>在用户释放鼠标键时触发。这个事件不能通过键盘触发。</p>
+</li>
+</ol>
+<p>页面中的所有元素都支持鼠标事件。除了 <code>mouseenter</code> 和 <code>mouseleave</code>，所有鼠标事件都会冒泡， 都可以被取消，而这会影响浏览器的默认行为。</p>
+<p>由于事件之间存在关系，因此取消鼠标事件的默认行为也会影响其他事件。</p>
+<p>比如，<code>click</code> 事件触发的前提是 <code>mousedown</code> 事件触发后，紧接着又在同一个元素上触发了 <code>mouseup</code> 事件。如果 <code>mousedown</code> 和 <code>mouseup</code> 中的任意一个事件被取消，那么 <code>click</code> 事件就不会触发。类似地， 两次连续的 <code>click</code> 事件会导致 <code>dblclick</code> 事件触发。只要有任何逻辑阻止了这两个 <code>click</code> 事件发生（比 如取消其中一个 <code>click</code> 事件或者取消 <code>mousedown</code> 或 <code>mouseup</code> 事件中的任一个），<code>dblclick</code>事件就不 会发生。这 4 个事件永远会按照如下顺序触发：</p>
+<ol>
+<li>mousedown</li>
+<li>mouseup</li>
+<li>click</li>
+<li>mousedown</li>
+<li>mouseup</li>
+<li>click</li>
+<li>dblclick</li>
+</ol>
+<p><code>click</code> 和 <code>dblclick</code> 在触发前都依赖其他事件触发，<code>mousedown</code> 和 <code>mouseup</code> 则不会受其他事件影响。</p>
+<h2 id="键盘与输入事件"><a href="#键盘与输入事件" class="headerlink" title="键盘与输入事件"></a>键盘与输入事件</h2><p>键盘事件是用户操作键盘时触发的。<code>DOM2 Events</code> 最初定义了键盘事件，但该规范在最终发布前删除了相应内容。因此，键盘事件很大程度上是基于原始的 <code>DOM0</code> 实现的。</p>
+<p><code>DOM3 Events</code> 为键盘事件提供了一个首先在 <code>IE9</code> 中完全实现的规范。其他浏览器也开始实现该规范， 但仍然存在很多遗留的实现。</p>
+<p>键盘事件包含 3 个事件：</p>
+<ol>
+<li><p>keydown</p>
+<p>用户按下键盘上某个键时触发，而且持续按住会重复触发。</p>
+</li>
+<li><p>keypress</p>
+<p>用户按下键盘上某个键并产生字符时触发，而且持续按住会重复触发。Esc 键也会 触发这个事件。DOM3 Events 废弃了 keypress 事件，而推荐 textInput 事件。</p>
+</li>
+<li><p>keyup</p>
+<p>用户释放键盘上某个键时触发。</p>
+</li>
+</ol>
+<p>虽然所有元素都支持这些事件，但当用户在文本框中输入内容时最容易看到。</p>
+<p>输入事件只有一个，即 <code>textInput</code>。这个事件是对 <code>keypress</code> 事件的扩展，用于在文本显示给用 户之前更方便地截获文本输入。<code>textInput</code> 会在文本被插入到文本框之前触发。</p>
+<p>当用户按下键盘上的某个字符键时，首先会触发 <code>keydown</code> 事件，然后触发 <code>keypress</code> 事件，最后 触发 <code>keyup</code> 事件。注意，这里 <code>keydown</code> 和 <code>keypress</code> 事件会在文本框出现变化之前触发，而 <code>keyup</code>事件会在文本框出现变化之后触发。如果一个字符键被按住不放，<code>keydown</code> 和 <code>keypress</code> 就会重复触 发，直到这个键被释放。</p>
+<h1 id="内存与性能"><a href="#内存与性能" class="headerlink" title="内存与性能"></a>内存与性能</h1><p>在 <code>JavaScript</code> 中，页面中事件处理程序的数量与页面整体性能直接相关。原因有很多。首先，每个函数都是对象，都占用内存空间，对象越多，性能越差。其次，为指定事件处理 程序所需访问 <code>DOM</code> 的次数会先期造成整个页面交互的延迟。只要在使用事件处理程序时多注意一些方 法，就可以改善页面性能。</p>
+<h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><p>“过多事件处理程序”的解决方案是使用事件委托。事件委托利用事件冒泡，可以只使用一个事件 处理程序来管理一种类型的事件。例如，<code>click</code> 事件冒泡到 <code>document</code>。这意味着可以为整个页面指定 一个 <code>onclick</code>事件处理程序，而不用为每个可点击元素分别指定事件处理程序。比如有以下 <code>HTML</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;myLinks&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;goSomewhere&quot;</span>&gt;</span>Go somewhere<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;doSomething&quot;</span>&gt;</span>Do something<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;sayHi&quot;</span>&gt;</span>Say hi<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的 <code>HTML</code> 包含 3 个列表项，在被点击时应该执行某个操作。对此，通常的做法是像这样指定 3 个事件处理程序：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> item1 = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;goSomewhere&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> item2 = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;doSomething&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> item3 = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;sayHi&quot;</span>);</span><br><span class="line">item1.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line"> location.<span class="property">href</span> = <span class="string">&quot;http:// www.wrox.com&quot;</span>;</span><br><span class="line">&#125;);</span><br><span class="line">item2.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="variable language_">document</span>.<span class="property">title</span> = <span class="string">&quot;I changed the document&#x27;s title&quot;</span>;</span><br><span class="line">&#125;);</span><br><span class="line">item3.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hi&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果对页面中所有需要使用 <code>onclick</code> 事件处理程序的元素都如法炮制，结果就会出现大片雷同的只为指定事件处理程序的代码。使用事件委托，只要给所有元素共同的祖先节点添加一个事件处理程序， 就可以解决问题。比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myLinks&quot;</span>);</span><br><span class="line">list.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">let</span> target = event.<span class="property">target</span>;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">switch</span>(target.<span class="property">id</span>) &#123;</span><br><span class="line">     <span class="keyword">case</span> <span class="string">&quot;doSomething&quot;</span>:</span><br><span class="line">         <span class="variable language_">document</span>.<span class="property">title</span> = <span class="string">&quot;I changed the document&#x27;s title&quot;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">     <span class="keyword">case</span> <span class="string">&quot;goSomewhere&quot;</span>:</span><br><span class="line">         location.<span class="property">href</span> = <span class="string">&quot;http:// www.wrox.com&quot;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">     <span class="keyword">case</span> <span class="string">&quot;sayHi&quot;</span>:</span><br><span class="line">         <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hi&quot;</span>);</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;); </span><br></pre></td></tr></table></figure>
+
+<p>这里只给<code>&lt;div&gt;</code>元素添加了一个 <code>onclick</code> 事件处理程序。<strong>因为所有列表项都是这个元素的后代，所以它们的事件会向上冒泡，最终都会由这个函数来处理。但事件目标是每个被点击的列表项，只要检查 <code>event</code> 对象的 id 属性就可以确定，然后再执行相应的操作即可。</strong>相对于前面不使用事件委托的代码，这里的代码不会导致先期延迟，因为只访问了一个 <code>DOM</code> 元素和添加了一个事件处理程 序。结果对用户来说没有区别，但这种方式占用内存更少。所有使用按钮的事件（大多数鼠标事件和键盘事件）都适用于这个解决方案。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://pvnk1u.github.io/2023/05/13/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(13)%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6/" title="JS高级程序设计读书笔记(13)——事件" target="_blank" rel="external">http://pvnk1u.github.io/2023/05/13/JS高级程序设计读书笔记(13)——事件/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/pvnk1u" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/dog.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/pvnk1u" target="_blank"><span class="text-dark">Yolo</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>Everything happens for the best</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/05/15/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(14)%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C/" title="JS高级程序设计读书笔记(14)——网络"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/05/11/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(12)%E2%80%94%E2%80%94DOM%E6%89%A9%E5%B1%95/" title="JS高级程序设计读书笔记(12)——DOM扩展"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2024 pvnk1u
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://pvnk1u.github.io/2023/05/13/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(13)%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6/';
+        
+        this.page.identifier = 'JS高级程序设计读书笔记(13)——事件';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + '' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

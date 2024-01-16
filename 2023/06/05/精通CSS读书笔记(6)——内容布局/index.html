@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>精通CSS读书笔记(6)——内容布局 | Yolo</title>
+  <meta name="description" content="网页是由不同内容块构成的：标题、段落、链接、列表、图片、视频等等。这些元素可以按照主题组织起来，比如一个标题，几段文本，外加一张图片就是一篇新闻报道。通过控制每个组件内部元素的位置、大小、顺序，就可以更好地传达它们的功能与含义。 所有内容块会进一步组织成整个页面的布局。下一章将会讲到如何系统化地布局页面。本章仍然聚焦于个别的内容块，从而深入理解如何对每个内容块进行布局。 之前大致讲过使用定位和浮动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="精通CSS读书笔记(6)——内容布局">
+<meta property="og:url" content="http://pvnk1u.github.io/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:site_name" content="YOLO">
+<meta property="og:description" content="网页是由不同内容块构成的：标题、段落、链接、列表、图片、视频等等。这些元素可以按照主题组织起来，比如一个标题，几段文本，外加一张图片就是一篇新闻报道。通过控制每个组件内部元素的位置、大小、顺序，就可以更好地传达它们的功能与含义。 所有内容块会进一步组织成整个页面的布局。下一章将会讲到如何系统化地布局页面。本章仍然聚焦于个别的内容块，从而深入理解如何对每个内容块进行布局。 之前大致讲过使用定位和浮动">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pvnk1u.github.io/images/Spaceship.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/SpaceX.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/OpacityAndZIndex.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/MediaComponent.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/SpaceshipFloat.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/TwoSpaceshipImage.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/author-case-1.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/author-case-2.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/author-case-3.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/author-case-4.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/author-case-5.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/author-case-6.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/middle-of-box.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/author-case-7.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/multilinenav.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flexboxmainandcross.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flexboxnav.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/justify-content.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flexbox-auto.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flexbox-min-height.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/align-items.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-active-item.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/align-some-item.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flexbox-multi-center.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-property-example.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-property-example1.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-property-example2.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-property-example3.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-algo.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-navbar-five.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-shrink1.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-shrink.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-li-item-list.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-li-item-list.-reverse.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flex-box-same-width-line.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flexbox-max-width.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flexbox-stretch.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flexbox-article1.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flexbox-article2.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flexbox-group.PNG">
+<meta property="og:image" content="https://pvnk1u.github.io/images/flexbox-margin-auto.PNG">
+<meta property="article:published_time" content="2023-06-05T07:28:39.000Z">
+<meta property="article:modified_time" content="2023-11-27T15:34:23.887Z">
+<meta property="article:author" content="pvnk1u">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pvnk1u.github.io/images/Spaceship.PNG">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://pvnk1u.github.io/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YOLO" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-white" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/pvnk1u" target="_blank">
+          <img class="img-circle img-rotate" src="/images/dog.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Yolo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/css/">css</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/">html</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/css/">css</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/javascript/">javascript</a><span class="category-list-count">14</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/html/">html</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81%E4%B8%8E%E8%AE%BE%E8%AE%A1/" class="title">UdemyHtmlCss学习笔记——代码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-21T07:32:39.000Z" itemprop="datePublished">2023-11-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/01/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(7)%E2%80%94%E2%80%94%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80%E4%B8%8E%E7%BD%91%E6%A0%BC/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-01T07:28:39.000Z" itemprop="datePublished">2023-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-05T07:28:39.000Z" itemprop="datePublished">2023-06-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/04/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(5)%E2%80%94%E2%80%94%E6%BC%82%E4%BA%AE%E7%9A%84%E7%9B%92%E5%AD%90/" class="title">精通CSS读书笔记(5)——漂亮的盒子</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-04T01:28:39.000Z" itemprop="datePublished">2023-06-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/03/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(4)%E2%80%94%E2%80%94%E7%BD%91%E9%A1%B5%E6%8E%92%E7%89%88/" class="title">精通CSS读书笔记(4)——网页排版</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-03T01:28:39.000Z" itemprop="datePublished">2023-06-03</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8D"><span class="toc-number">1.</span> <span class="toc-text">定位</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">绝对定位的应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8D%E4%B8%8Ez-index%EF%BC%9A%E5%A0%86%E5%8F%A0%E5%86%85%E5%AE%B9%E7%9A%84%E9%99%B7%E9%98%B1"><span class="toc-number">1.2.</span> <span class="toc-text">定位与z-index：堆叠内容的陷阱</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B0%B4%E5%B9%B3%E5%B8%83%E5%B1%80"><span class="toc-number">2.</span> <span class="toc-text">水平布局</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%AE%E5%8A%A8"><span class="toc-number">2.1.</span> <span class="toc-text">使用浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E5%86%85%E5%9D%97%E5%B8%83%E5%B1%80"><span class="toc-number">2.2.</span> <span class="toc-text">行内块布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%A1%A8%E6%A0%BC%E6%98%BE%E7%A4%BA%E5%B1%9E%E6%80%A7%E5%AE%9E%E7%8E%B0%E5%B8%83%E5%B1%80"><span class="toc-number">2.3.</span> <span class="toc-text">使用表格显示属性实现布局</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Flexbox"><span class="toc-number">3.</span> <span class="toc-text">Flexbox</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%94%AF%E6%8C%81%E4%B8%8E%E8%AF%AD%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">浏览器支持与语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%A7%A3Flex%E6%96%B9%E5%90%91%EF%BC%9A%E4%B8%BB%E8%BD%B4%E4%B8%8E%E8%BE%85%E8%BD%B4"><span class="toc-number">3.2.</span> <span class="toc-text">理解Flex方向：主轴与辅轴</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E9%BD%90%E4%B8%8E%E7%A9%BA%E9%97%B4"><span class="toc-number">3.3.</span> <span class="toc-text">对齐与空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E4%BC%B8%E7%BC%A9%E7%9A%84%E5%B0%BA%E5%AF%B8"><span class="toc-number">3.4.</span> <span class="toc-text">可伸缩的尺寸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flexbox%E5%B8%83%E5%B1%80"><span class="toc-number">3.5.</span> <span class="toc-text">Flexbox布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E5%B8%83%E5%B1%80%E4%B8%8E%E4%B8%AA%E5%88%AB%E6%8E%92%E5%BA%8F"><span class="toc-number">3.6.</span> <span class="toc-text">列布局与个别排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B5%8C%E5%A5%97%E7%9A%84Flexbox%E5%B8%83%E5%B1%80"><span class="toc-number">3.7.</span> <span class="toc-text">嵌套的Flexbox布局</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-精通CSS读书笔记(6)——内容布局" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      精通CSS读书笔记(6)——内容布局
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/" class="article-date">
+	  <time datetime="2023-06-05T07:28:39.000Z" itemprop="datePublished">2023-06-05</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/web/">web</a>►<a class="article-category-link" href="/categories/web/css/">css</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/css/" rel="tag">css</a>, <a class="article-tag-link-link" href="/tags/web/" rel="tag">web</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 13.8k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 55(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>网页是由不同内容块构成的：标题、段落、链接、列表、图片、视频等等。这些元素可以按照主题组织起来，比如一个标题，几段文本，外加一张图片就是一篇新闻报道。通过控制每个组件内部元素的位置、大小、顺序，就可以更好地传达它们的功能与含义。</p>
+<p>所有内容块会进一步组织成整个页面的布局。下一章将会讲到如何系统化地布局页面。本章仍然聚焦于个别的内容块，从而深入理解如何对每个内容块进行布局。</p>
+<p>之前大致讲过使用定位和浮动来实现布局，这两种手段各有千秋。此外，也可以使用表格显示模式和行内块来实现布局，当然也各有各的优缺点。CSS新增的Flexible Box Layout Module（或Flexbox）为内容块提供了一大批顺序、方向、对齐及尺寸相关的属性。Flex是非常强大的布局功能，本章会详细介绍。</p>
+<h1 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h1><p>定位并不适合于总体布局，因为它会把元素拉出页面的正常流。反过来看，这也正是定位在CSS中之所以重要的原因，接下来将简单探讨一下定位在哪些情况下最合适。</p>
+<p>以下是对定位内容的简单总结：</p>
+<ol>
+<li>元素的初始定位方式是静态定位（static），意思是块级元素垂直堆叠。</li>
+<li>可以把元素设置为相对定位（relative），然后可以相对于其原始位置控制该元素的偏移量，同时又不影响其周围的元素。<strong>与此同时，这也为该元素的后代元素创造了定位上下文。</strong>这一点也是相对定位真正的用处。以前，在一些古老的布局技巧中，经常要偏移元素，当然现在已经很少这样了。</li>
+<li>绝对定位（absolute）支持精确定位元素，相对于其最近的定位上下文：或者是其非静态定位的祖先元素，或者是HTML元素。绝对定位的元素会脱离页面流，然后再相对于其定位上下文进行定位。默认情况下，它们会被浏览器定位于之前静态定位时所处的位置但不会影响周围的元素。然后，可以相对于定位上下文来改变它们的位置。</li>
+<li>固定定位（fixed）与绝对定位基本类似，只不过<strong>定位上下文被自动设置为浏览器视口。</strong></li>
+</ol>
+<h2 id="绝对定位的应用场景"><a href="#绝对定位的应用场景" class="headerlink" title="绝对定位的应用场景"></a>绝对定位的应用场景</h2><p>绝对定位非常适合创建弹出层、提示和对话框这类覆盖于其他内容之上的组件。它们的位置可以通过top、right、bottom和left属性控制。关于绝对定位，了结以下知识可以写出更高效的代码。</p>
+<ol>
+<li><p>利用初始位置</p>
+<p>比如有一篇介绍太空飞船的文章，想在文章上添加一些行内的评注。这些评注最好以气泡图的样式显示在文章外部的空白区域，如下图所示。</p>
+<p><img src="https://pvnk1u.github.io/images/Spaceship.PNG" alt="Spaceship"></p>
+<p>每个评注组件都是一个aside组件，实际位置在它们指向的段落后面：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is	a fake article[...]<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aside</span> <span class="attr">class</span>=<span class="string">&quot;comment&quot;</span>&gt;</span>I`ve never done this. Is that really true?<span class="tag">&lt;/<span class="name">aside</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>You may think[...]<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>为了让评注显示在段落之后，需要使其绝对定位。而我们不必为了在垂直方向上准确的定位它们而给出确切的上偏移量。</p>
+<p><strong>绝对定位的元素默认会待在自己静态定位时的地方</strong>，因此第一步是让评注显示在其初始位置。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.comment</span>&#123;</span><br><span class="line">	<span class="attribute">position</span>: absolute;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>添加这段CSS代码之后，aside元素将会变成绝对定位，即脱离页面流。这样一来，原本会跟在p元素文本段落之后看起来像是单独段落的aside内的内容将会出现在再往后的第二段p元素的上方，导致显示重叠。</p>
+<p>接下来需要把评注向左和向上偏移，把它定位到之前段落的旁边。这听起来像是要使用相对定位，但元素不能同时既是绝对定位又是相对定位。如果此时使用方向性偏移属性（top、right、left和bottom），那就既要用到定位上下文，又要设置确定的偏移量。好在不用这么麻烦，在这里完全可以通过负外边距来移动元素：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.comment</span>&#123;</span><br><span class="line">	<span class="attribute">position</span>: absolute;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">7em</span>;</span><br><span class="line">	<span class="attribute">margin-left</span>: -<span class="number">9.5em</span>;</span><br><span class="line">	<span class="attribute">margin-top</span>: -<span class="number">2.5em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在CSS中，负外边距是完全有效的，它们有如下有趣的行为。</p>
+<ul>
+<li>左边或上边的负外边距会把元素向左或向上拉，盖住其旁边的元素。</li>
+<li>右边或下边的负外边距会把相邻元素向左或向上拉，盖住设置了负外边距的元素。</li>
+<li>在浮动的元素上，与浮动方向相反的负外边距会导致浮动区域缩小，使得相邻元素盖住浮动的元素。而与浮动方向相同的负外边距会在该方向上把浮动的元素向外拉。</li>
+<li>给未声明宽度的非浮动元素应用负外边距时，左、右负外边距会向外拉伸元素，导致元素扩张，有可能盖住相邻元素。</li>
+</ul>
+<p>对评注气泡组件而言，使用左和上负外边距把元素拉到位的做法，与使用相对定位很相似。</p>
+</li>
+<li><p>创建三角形</p>
+<p>在评注气泡组件中，指向前面段落的小三角形又相对于评注气泡进行了绝对定位。它是通过伪元素创建的，使用了一种很古老的基于边框的技巧。</p>
+<p>相关代码如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.comment</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border</span>: .<span class="number">5em</span> solid <span class="number">#dcf0ff</span>;</span><br><span class="line">  <span class="attribute">border-bottom-color</span>: transparent;</span><br><span class="line">  <span class="attribute">border-right-color</span>: transparent;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">right</span>: -<span class="number">1em</span>;</span><br><span class="line">  <span class="attribute">top</span>: .<span class="number">5em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里创建了一个0像素的块，其边框是0.5em，而且边框也只显示左、上边框。结果浏览器就只渲染出一个三角形。不用图片一样可以创造出三角形来！然后再把三角形定位到评估气泡的右上角位置。这里通过将border-bottom-color和border-right-color的值设置为transparent透明进而实现右半下角透明的效果（进而只剩下左上半角的图形）。</p>
+</li>
+<li><p>利用偏移实现自动大小</p>
+<p>从另一个角度看，有必要知道：<strong>在绝对定位的情况下，如果声明了多个或所有偏移值，那么结果会怎么样。如果没有显式声明元素大小，那么绝对定位元素的大小由自身包含内容的多少来决定。如果相对于定位上下文的各个边声明偏移值，那么元素会被拉伸以满足设定的规则。</strong></p>
+<p>比如，如果希望让某元素总是与其外部元素保持一定距离，但又不给任何元素设定大小。如下图所示，一张图片上有一个包含文本的元素。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span> <span class="attr">class</span>=<span class="string">&quot;photo-header&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;images/big_spaceship.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;An artist`s mockup of the &quot;</span><span class="attr">Dragon</span>&quot; <span class="attr">spaceship</span>&quot;&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;photo-header-plate&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">h1</span>&gt;</span>SpaceX unveil the Crew Dragon<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">p</span>&gt;</span>Photo from SpaceX on <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://www.flickr.com/photos/spacexphotos/16787988882/&quot;</span> &gt;</span></span><br><span class="line">		Flickr<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/SpaceX.PNG" alt="SpaceX"></p>
+</li>
+</ol>
+<p><strong>假设不想给这个包含标题的盒子设定明确的宽度，那么可以只指定其右、下、左边的偏移，让它自己去计算上空距离</strong>：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.photo-header</span>&#123;</span><br><span class="line">	<span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.photo-header-plate</span>&#123;</span><br><span class="line">	<span class="attribute">position</span>: absolute;</span><br><span class="line">	<span class="attribute">right</span>: <span class="number">4em</span>;</span><br><span class="line">	<span class="attribute">bottom</span>: <span class="number">4em</span>;</span><br><span class="line">	<span class="attribute">left</span>: <span class="number">4em</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0.7</span>);</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">2em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>无论图片多大，标题区始终都会位于距离底边及左、右两边4em的地方，而且会在标题折行的情况下自动调整高度，从而适应不同的屏幕大小。</strong></p>
+<h2 id="定位与z-index：堆叠内容的陷阱"><a href="#定位与z-index：堆叠内容的陷阱" class="headerlink" title="定位与z-index：堆叠内容的陷阱"></a>定位与z-index：堆叠内容的陷阱</h2><p>要用好定位，还有一个重点技术必须掌握，那就是z-index，也就是堆叠元素的次序。基本原理：<strong>静态定位（static）以外的元素会根据它们在代码树中的深度依次叠放，就像打扑克牌一样，后发的牌会压在先发的牌上面。它们的次序可以通过z-index来调整。</strong></p>
+<p>设置了z-index的元素，只要值是正值，就会出现在没有设置z-index的元素上方。尚未设置z-inde的元素在z-index值为负的元素上方。</p>
+<p>除了z-index，还有其他影响元素堆叠次序的因素。这里也有一个概念，叫堆叠上下文。就像一盒扑克牌，每张牌本身也是一个上下文（牌盒），而牌只能相对于当前的牌盒排定次序。有一个根堆叠上下文，所有z-index不是auto的定位元素都会在这个上下文中排序。随着其他上下文的建立，就会出现堆叠层级。</p>
+<p>堆叠上下文是由特定属性和值创建的。比如，任何设定了position: absolute及值不是auto的z-index属性的元素，都会创建一个自己后代元素的堆叠上下文。</p>
+<p>在一个堆叠上下文内部，无论z-index值多大或多小，都不会影响其他堆叠上下文，毕竟不能相对于别的堆叠上下文重新排序。</p>
+<p>如下图所示：</p>
+<p><img src="https://pvnk1u.github.io/images/OpacityAndZIndex.PNG" alt="OpacityAndZIndex"></p>
+<p><strong>容器A、B、C和D都是绝对定位的，其中C是B的子元素。容器C和D设置了z-index，但由于容器B的opacity值小于1，所以它又创建了一个新的独立的堆叠上下文。于是，就算C的z-index的值再大，它也不会跑到D的上方。</strong></p>
+<p><strong>设置小于1的opacity值也可以创建新的堆叠上下文。opacity小于1的元素需要独立渲染（包括它的所有后代元素），然后再放到页面上。这样就可以保证在把它们放到页面上时，原有的元素不会与半透明的元素发生交错。后面会有这个例子及其他类似的例子，比如transform和filter属性，也会触发创建新的堆叠上下文。</strong></p>
+<h1 id="水平布局"><a href="#水平布局" class="headerlink" title="水平布局"></a>水平布局</h1><p>通常，页面会随内容增加沿垂直方向扩展。后来添加的任何块容器（div、article、h1-h6等等）都会垂直堆放起来，因为<strong>块级元素的宽度是自动计算的</strong>。<strong>因此，在需要给内容块设置明确宽度，并让它们水平排列时，就需要特殊处理。</strong></p>
+<p>使用浮动来实现小型“媒体组件”布局是一种基础的组件模式，即组件一边是图片（或其他媒体），另一边是文本，“左边是这个，右边是那个，二者相互关联“。很多网站都在使用这种模式。如下图所示：</p>
+<p><img src="https://pvnk1u.github.io/images/MediaComponent.PNG" alt="MediaComponent"></p>
+<p><strong>除此之外，还有很多通用模式的组件，可见于各类网站。其中很多都涉及水平布局。为此，CSS引入了Flexbox来专门解决水平布局问题（以及其他问题）</strong>，但在得到浏览器完全支持之前，可能还要借助浮动、inline-block显示，或者表格显示模式，才能完美实现水平布局。</p>
+<h2 id="使用浮动"><a href="#使用浮动" class="headerlink" title="使用浮动"></a>使用浮动</h2><p>在太空飞船的例子中，有一个使用浮动的例子。figure浮动到了右侧，让行盒子对其四周环绕。同时通过margin-right的负外边距把图片向外推出去一点，以便与文本保持一些间距。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">figure</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">background-color</span>: <span class="number">#eee</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">padding</span>: <span class="number">1em</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">float</span>: right;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">max-width</span>: <span class="number">17em</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin-right</span>: -<span class="number">8em</span>; <span class="comment">/* 向右推出 */</span></span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin-left</span>: <span class="number">1em</span>;</span></span><br><span class="line"><span class="language-css">	&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>You may think[...]<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">figure</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;images/spaceship.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;The Dragon spaceship in orbit around Earth.&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">figcaption</span>&gt;</span>The &quot;Dragon&quot; spaceship,created by SpaceX.Image from <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://www.flickr.com/photos/spacexphotos/16787988882/&quot;</span>&gt;</span>Flickr.com<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">figuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">figure</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>There`s various[...]<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/SpaceshipFloat.PNG" alt="SpaceshipFloat"></p>
+<p>下面的代码中，删除了这个负外边距，并把插图宽度设置为文章宽度的一半，而且还增加了第二幅插图。此时，两幅插图并肩而立。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Two floated images side by side<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;js/html5shiv.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">body</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">font-family</span>: Georgia, Times New Roman, serif;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">padding</span>: <span class="number">2em</span> <span class="number">8em</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">max-width</span>: <span class="number">35em</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">margin</span>: <span class="number">0</span> auto;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">h1</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">font-family</span>: Avenir, Franklin Gothic, sans-serif;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">figure</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background-color</span>: <span class="number">#eee</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">padding</span>: <span class="number">1em</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">box-sizing</span>: border-box;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">float</span>: right;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">max-width</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">figure</span> <span class="selector-tag">img</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: block;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">margin-bottom</span>: .<span class="number">5em</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">figcaption</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">font-style</span>: italic;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">font-size</span>: .<span class="number">875em</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>A fake article about spaceships<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a fake article about spaceships. Remember when you did presentations in middle school, and you told the class about what your assignment was about, then read aloud from the paper you had written, including the title?</span><br><span class="line">    ”My assignment is about spaceships. Spaceships. Spaceships are very large, and fly in space...”.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>You may think that spaceships are fake, like this article, but they’re not. There are actual spaceships,</span><br><span class="line">  flying in space right now, probably. For example, there’s the International Space Station, which is </span><br><span class="line">  a spaceship of sorts. Well, actually it’s a space station, which is even cooler!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">figure</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;images/spaceship.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;The Dragon spaceship in orbit around Earth.&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">figcaption</span>&gt;</span>The ”Dragon” spaceship, created by SpaceX. Image from <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://www.flickr.com/photos/spacexphotos/16787988882/&quot;</span>&gt;</span>Flickr.com<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">figcaption</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">figure</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">figure</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;images/spaceship2.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;The Dragon spaceship landing on Mars.&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">figcaption</span>&gt;</span>Artist mockup of Mars landing. Image from <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://www.flickr.com/photos/spacexphotos/21424800115&quot;</span>&gt;</span>Flickr.com<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">figcaption</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">figure</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>There’s various government organizations and companies that are building spaceships. One of them is</span><br><span class="line">  SpaceX. An image of one of their spaceships appears on this very page.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>I can&#x27;t be bothered to write any more about spaceships so the rest of the text will just be</span><br><span class="line">    nonsense. This isn’t a school assignment after all.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi saepe harum, excepturi dolorum voluptatem hic amet nemo. Incidunt tenetur dignissimos laborum molestiae reiciendis ipsum quas temporibus nisi dolor, ea libero!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>A assumenda, et eius odit, rerum delectus placeat dolores eveniet quis. Iure neque deserunt mollitia impedit illo corporis odio quod, velit ducimus!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下图所示：</p>
+<p><img src="https://pvnk1u.github.io/images/TwoSpaceshipImage.PNG" alt="TwoSpaceshipImage"></p>
+<p>可以看到从第一个figure元素开始排在最右边，后面的第二个figure元素依次向左排列。</p>
+<p><strong>这种布局方式是很多CSS布局会用到的一种基本技术，即让浮动的元素构成一行中的列。但正如之前讨论过的，浮动也会有一些问题。浮动的元素并不在页面流中，因此需要一个元素来包含浮动元素。为此，可以给容器内部的一个（伪）元素应用clear，也可以通过规则让容器成为一个新的块级格式化上下文（BFC，blocking formating context）。必要时，浮动也可以包含多行，但如果上面的行有浮动元素，也可能会被卡住。</strong></p>
+<p>浮动也可以对有限的水平内容进行独立于源码次序的排序。比如，通过分别向左或向右浮动两个元素，可以调整两幅插图的次序。将上面代码示例中的float的值由right改为left即可实现两幅图片位置调换的效果。</p>
+<p>因为浏览器对浮动的支持极为普遍，所以浮动也成为了各种水平布局中的常用技术。除了浮动，实际上还有其他技术可以用来创建水平布局，虽然这些技术各有利弊。</p>
+<h2 id="行内块布局"><a href="#行内块布局" class="headerlink" title="行内块布局"></a>行内块布局</h2><p>文本行自身就是水平布局时，至少在从左往右和从右往左书写的语言中是如此。使用行内元素（如span、time或a）时，它们会与文本沿相同方向水平对齐。也可以把行内块加入到文本流中，创造出水平对齐的元素，从视觉上看又是一个块。</p>
+<p>比如，为太空飞船的文章末尾添加一些元数据，包括作者姓名、照片和电子邮件地址。为了添加样式，还使用了两个额外的span元素：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;author-meta&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;author-image&quot;</span> <span class="attr">src</span>=<span class="string">&quot;images/author.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;Arthur C. Lark&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;author-info&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;author-name&quot;</span>&gt;</span>Written by Arthur C. Lark<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;author-email&quot;</span> <span class="attr">href</span>=<span class="string">&quot;mailto:arthur.c.lark@example.com&lt;/a&gt;&quot;</span>&gt;</span>arthur.c.lark@example.com<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>现在，.author-meta段落的底部会与图片底部及文本基线对齐。段落中的所有空白字符，包括图片和作者信息之间的换行符都被渲染为空格。这些空格的宽度取决于字体及其大小。</p>
+<p><img src="https://pvnk1u.github.io/images/author-case-1.PNG" alt="author-case-1"></p>
+<p>接下来，把图片和作者信息转换为行内块：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.author-image</span>,</span><br><span class="line"><span class="selector-class">.author-info</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>渲染之后，其实并没有什么可见的差别。差别只在于现在图片和作者信息都是块了。比如，可以把作者信息中包含的姓名和电子邮件地址分别列为两行，只要把它们修改为块级元素即可：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.author-name</span>,</span><br><span class="line"><span class="selector-class">.author-email</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 现在已经比较接近想要的水平布局了：左边是浮动的图片，右边是一个文本块。但还有一点，此时作者信息块最后一行的基线与图片底部是对齐的。下图展示了此时的状况：</p>
+<p><img src="https://pvnk1u.github.io/images/author-case-2.PNG" alt="author-case-2"></p>
+<p>现在可以通过vertical-align属性相对于图片来对齐作者信息。下图展示了在对齐关键字设置为top时，作者信息块的顶部与图片顶部对齐的效果：</p>
+<p><img src="https://pvnk1u.github.io/images/author-case-3.PNG" alt="author-case-3"></p>
+<ol>
+<li><p>行内块的垂直居中</p>
+<p>假设想要的设计是让作者信息块相对于图片垂直居中。可能会这么写：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.author-info</span>&#123;</span><br><span class="line">	<span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而，结果可能并非是垂直居中，如下图所示：</p>
+<p><img src="https://pvnk1u.github.io/images/author-case-4.PNG" alt="author-case-4"></p>
+<p>这是因为，<strong>关键字middle在应用给行内块时，其含义是“将这个行内块的垂直中心点与这行文本x高度的中心点对齐”。这个例子中没有行内文本，（行内最高的）图片就成为行盒子高度以及基线位置的元素。而此时x高度的中心点就在图片底部（基线）靠上一点。要想将作者信息与图片一起垂直居中，需要让这两个元素都参照同一个“中心点”：</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.author-image</span>,</span><br><span class="line"><span class="selector-class">.author-info</span>&#123;</span><br><span class="line">	<span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>因为图片此时也是行内块，所以它就与作者信息在同一个垂直点上居中对齐了</strong>，从而得到了想要的布局，如下图所示：</p>
+<p><img src="https://pvnk1u.github.io/images/author-case-5.PNG" alt="author-case-5"></p>
+<p>如何确定行盒子的基线，以及这些规则如何影响行内及行内块元素是比较复杂的。<strong>对于利用行内块创建水平布局而言，如果需要垂直对齐，有以下两个要点：</strong></p>
+<ul>
+<li><strong>要让行内块沿上方对齐（很像浮动），设置：vertical-align: top;</strong></li>
+<li><strong>要让两个元素的内容垂直对齐，先把它们都转化成行内块，再对它们应用vertical-align: middle。</strong></li>
+</ul>
+</li>
+<li><p>在容器元素中垂直居中</p>
+<p>前面的两个要点的第二个告诉我们：可以在任意高度的容器内垂直居中内容。其实也不完全对。唯一的前提是把容器的高度设置为确切的高度。</p>
+<p>比如，假设想把作者元数据块设置为10em高，然后在其中居中放置作者图片和信息。首先，给.author-meta块应用这个高度。为清晰起见，也添加了一个边框。如下图：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.author-meta</span>&#123;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">10em</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/author-case-6.PNG" alt="author-case-6"></p>
+<p>但作者信息和图片并没有相对于容器块垂直居中对齐，而是仍然沿原来那条假想的文本行对齐。<strong>为了实现与容器垂直对齐，还需要增加一个行内块元素，让它占据100%的容器高度。这个元素会让middle关键字认为容器的垂直中点是对齐点。为此，可以借助伪元素。如下图所示，在引入了这个“幽灵元素”后，假想的基线就以它为准了。</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.author-meta</span><span class="selector-pseudo">:before</span>&#123;</span><br><span class="line">	<span class="attribute">content</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">	display: inline-block;</span><br><span class="line">	<span class="attribute">vertical-align</span>: middle;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/middle-of-box.PNG" alt="middle-of-box"></p>
+<p>如图所示，利用高度为100%的伪元素，让middle关键字代表容器的垂直中心点。此时，就好像整个.author-meta容器中只有一行文本，且高度与容器高度相同。因为这个伪元素是一个行内块，且其垂直对齐方式设置为middle，所以其他行内块也就与容器的中心垂直对齐了。接下来要做的就是水平居中内容。因为行内块像文本一样对齐，所以这里使用text-align。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.author-meta</span>&#123;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">10em</span>;</span><br><span class="line">	<span class="attribute">text-align</span>: center;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.author-info</span>&#123;</span><br><span class="line">	<span class="attribute">text-align</span>: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果就是.author-meta既水平居中又垂直居中，如下图所示：</p>
+<p><img src="https://pvnk1u.github.io/images/author-case-7.PNG" alt="author-case-7"></p>
+<p>确切地讲，这里的水平居中并不准确。这是因为行盒子内的任何空白符都会被渲染为一个空格。伪元素就会创建这么一个空格，导致内容向右偏移几个像素。通过给伪元素应用负外边距，可以抵消空格的宽度。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.author-info</span><span class="selector-pseudo">:before</span>&#123;</span><br><span class="line">	<span class="attribute">margin-right</span>: -.<span class="number">25em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>追究细节：与空白战斗到底</p>
+<p>对于每个块都占据确切宽度的水平布局而言，空白是个突出的问题。下面以另一个常见的组件为例，介绍在使用行内块的情况下如何解决这个问题，尽量不使用具体数值。</p>
+<p>创建一个导航条，包含4个链接项，每一项都占据宽度的四分之一。标记如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">&quot;navbar&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/home&quot;</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/spaceships&quot;</span>&gt;</span>Spaceships<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/planets&quot;</span>&gt;</span>Planets<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/stars&quot;</span>&gt;</span>Stars<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>以下CSS标记为导航条添加了基本的颜色及字体样式，并通过轮廓线突出了链接项的边界。这里将每一项设置为占据25%的宽度，4项正好占据全部宽度。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">nav</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&#x27;Avenir Next&#x27;</span>, Avenir, Corbel, <span class="string">&#x27;Franklin Gothic&#x27;</span>, <span class="string">&#x27;Century Gothic&#x27;</span>, CenturyGothic, AppleGothic, sans-serif;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#486a8e</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">text-transform</span>: uppercase;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">25%</span>;</span><br><span class="line">  -moz-<span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">       <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#12459e</span>;</span><br><span class="line">  <span class="attribute">outline</span>: <span class="number">1px</span> solid <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">text-decoration</span>: none;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">1.75em</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">1em</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过使用box-sizing: border-box确保每一项的边框及内边距都包含在各自25%的宽度以内。导航条本身的背景颜色是蓝灰色，链接项的颜色是深蓝色，链接文本颜色是白色。</p>
+<p><img src="https://pvnk1u.github.io/images/multilinenav.PNG" alt="multilinenav"></p>
+<p><strong>HTML源代码中的换行符被渲染成了空白符，再加上每一项25%的宽度，就导致了折行。</strong>要消灭这些空白符，可以尝试把所有li标签都排到一行，但这种要求显示不友好。</p>
+<p>解决问题的方法也很简单粗暴，就是把包含元素ul的font-size设置为0（从而让每个空格的宽度为0），然后在每一项上重新设置大小：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">ul</span>&#123;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span>&#123;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">1rem</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就如期解决了空白问题，每一项都相互靠拢，只占据了一行。但这个技术也有缺点。首先与可以继承的font-size有关。假设在导航条上设置的是16像素的font-size，那么就不能再使用em单位或比例，让每一项继承一个可伸缩的大小了。它会变成与0相乘。不过，可以使用rem单位，相对于根字体大小来保持可伸缩性。</p>
+</li>
+</ol>
+<h2 id="使用表格显示属性实现布局"><a href="#使用表格显示属性实现布局" class="headerlink" title="使用表格显示属性实现布局"></a>使用表格显示属性实现布局</h2><p>表格中的行恰好具有导航条例子中我们想要的特质：一组单元格恰好占满一行，而且永远不会折行。这也正是HTML表格在WEB发展早期成为页面布局垄断技术的缘由。可以通过CSS来借用表格的显示模式，不必求诸HTML表格标记。</p>
+<p>如果将前面导航条的例子改为对ul元素使用的一种表格显示模式，并将其中的每一项设置为表格单元，那么也会得到与使用行内块一样的效果：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">ul</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">	<span class="attribute">display</span>: table;</span><br><span class="line">	<span class="attribute">table-layout</span>: fixed;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">25%</span>;</span><br><span class="line">	<span class="attribute">display</span>: table-cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样可以得到相同的布局效果。</p>
+<p><strong>注意这里将ul元素的宽度设置为100，是为了保证导航条能扩展到与父元素同宽。与常规块不同，不设置宽度的表格会“收缩适应”内容宽度，除非包含内容的单元把它撑开，让它的宽度足以填充父容器。</strong></p>
+<p>表格行中每一列的宽度有两种算法。默认情况下，浏览器会使用“自动”算法。这是一种没有明确规定，但某种程度上又是事实标准的算法，基本上就是根据自身单元格内容所需的宽度来决定整个表格的宽度。</p>
+<p>另一种算法是“固定”表格布局，即使用table-layout: fixed。这种算法下的列宽由表格第一行的列决定。第一行中声明的列宽具有决定性，后续行如果遇到内容较多的情况，只能折行或者溢出。</p>
+<p>在利用表格显示模式来创建布局时，必须清楚这样也会引入表格的问题。比如，渲染为表格单元的元素无法应用外边距，给表格单元应用定位时的行为也无法预料。</p>
+<p><strong>表格单元格中的垂直对齐</strong></p>
+<p>使用表格显示模式时，表格单元格中的垂直对齐效果无须借助任何额外的技术。只要给显示为table-cell的元素应用vertical-align: middle，就可以令其中的内容在单元格中垂直居中。</p>
+<h1 id="Flexbox"><a href="#Flexbox" class="headerlink" title="Flexbox"></a>Flexbox</h1><p>Flexbox，也就是Flexible Box Layout模块，是CSS提供的用于布局的一套新属性。这套属性包含针对容器（弹性容器，flex container）和针对其直接子元素（弹性项，flex item）的两类属性。Flexbox可以控制弹性项的如下方面：</p>
+<ol>
+<li>大小</li>
+<li>流动方向，水平还是垂直，正向还是反向</li>
+<li>两个轴向上的对齐与分布</li>
+<li>顺序，与源代码中的顺序无关</li>
+</ol>
+<p>Flexbox就是为了解决行内块、浮动和表格格式对应的棘手问题而生的。</p>
+<h2 id="浏览器支持与语法"><a href="#浏览器支持与语法" class="headerlink" title="浏览器支持与语法"></a>浏览器支持与语法</h2><p>Flexbox已经得到主流浏览器较新版本的广泛支持。对于某些需要兼容的旧版本浏览器，只要调整一下语法或提供商前缀，基本上也没问题。</p>
+<h2 id="理解Flex方向：主轴与辅轴"><a href="#理解Flex方向：主轴与辅轴" class="headerlink" title="理解Flex方向：主轴与辅轴"></a>理解Flex方向：主轴与辅轴</h2><p>Flexbox可以针对页面中某一区域，控制其中元素的顺序、大小、分布及对齐。这个区域内的盒子可以沿两个方向排列：默认水平排列（成一行），也可以垂直排列（成一列），这个排列方式称为主轴。</p>
+<p>与主轴垂直的方向称为辅轴，区域内的盒子可以沿辅轴发生位移或伸缩，如下图所示。通常，Flexbox布局中最重要的尺寸就是主轴方向的尺寸：水平布局时的宽度或垂直布局时的高度。主轴方向的这个尺寸为主尺寸。</p>
+<p><img src="https://pvnk1u.github.io/images/flexboxmainandcross.PNG" alt="flexboxmainandcross"></p>
+<p>回头再看看之前的导航条（包含链接的无序列表和容器），它很容易转换成Flex容器。假设其他样式（颜色、字体、链接、边框）都一样，那么只要一行CSS代码即可。至于列表项，无须声明任何属性，而且也不必给每一项指明宽度。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Navbar using flexbox, no width<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;js/html5shiv.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">nav</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: block;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.navbar</span> <span class="selector-tag">ul</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: -webkit-flex;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: -ms-flexbox;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: -webkit-box;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: -moz-box;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">font-family</span>: <span class="string">&#x27;Avenir Next&#x27;</span>, Avenir, Corbel, <span class="string">&#x27;Franklin Gothic&#x27;</span>, <span class="string">&#x27;Century Gothic&#x27;</span>, CenturyGothic, AppleGothic, sans-serif;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">list-style</span>: none;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">padding</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background-color</span>: <span class="number">#486a8e</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.navbar</span> <span class="selector-tag">li</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">text-transform</span>: uppercase;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">text-align</span>: center;</span></span><br><span class="line"><span class="language-css">      -moz-<span class="attribute">box-sizing</span>: border-box;</span></span><br><span class="line"><span class="language-css">           <span class="attribute">box-sizing</span>: border-box;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background-color</span>: <span class="number">#12459e</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">outline</span>: <span class="number">1px</span> solid <span class="number">#fff</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.navbar</span> <span class="selector-tag">li</span> <span class="selector-tag">a</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: block;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">text-decoration</span>: none;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">line-height</span>: <span class="number">1.75em</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">padding</span>: <span class="number">1em</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">color</span>: <span class="number">#fff</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">&quot;navbar&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/home&quot;</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/spaceships&quot;</span>&gt;</span>Spaceships<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/planets&quot;</span>&gt;</span>Planets<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/stars&quot;</span>&gt;</span>Stars<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/flexboxnav.PNG" alt="flexboxnav"></p>
+<p>从上图中可以看到，链接项是水平排列的，而且根据各自的内容进行了收缩适应。结果就好像是块级文档流被旋转了90度一样。所有链接项集中在左侧，是从左到右书写的语言环境下的默认行为。如果把flex-direction改成row-inverse，那么所有链接就会集中到右侧，而且变成从右向左排列。</p>
+<p><strong>如果不指定大小，Flex容器内的项目会自动收缩。也就是说，一行中的各项会收缩到各自的最小宽度，或者一列中的各项会收缩到各自的最小高度，以恰好可以容纳自身内容为限。</strong></p>
+<h2 id="对齐与空间"><a href="#对齐与空间" class="headerlink" title="对齐与空间"></a>对齐与空间</h2><p>Flexbox对子项的排列有多种方式。沿主轴的排列叫排布，沿辅轴的排列叫对齐。</p>
+<p>用于指定排布格式的属性叫justify-content，其默认值是flex-start，表示按照当前文本方向排布（也就是向左对齐）。如果改成flex-end，所有项就都会挤到右侧（变成向右对齐），但顺序不变。下面的四个图分别展示了flex-end以及另外三个关键字center、space-between和space-around的效果。</p>
+<p><img src="https://pvnk1u.github.io/images/justify-content.PNG" alt="justify-content"></p>
+<p>Flexbox不允许通过以上这些关键字指定个别项的排布方式。然而，对Flexbox的子项指定值为auto的外边距在这里却有不同的含义。因此，可以利用这一点。<strong>具体来说，如果指定某项一侧的外边距值为auto，而且在容器里那一侧还有空间，那么该外边距就会扩展占据可用空间。</strong>利用这一点，可以创造让一项位于一侧，其他项位于另一侧的布局。下图展示了第一项在左侧，其他项在右侧的布局。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span><span class="selector-pseudo">:first</span>-child&#123;</span><br><span class="line">	<span class="attribute">margin-right</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/flexbox-auto.PNG" alt="flexbox-auto"></p>
+<p>本质上来说，像这样使用自动外边距抵消了其他项的排布效果，因为之后就没有多余空间可分了。尽管如此，对其他项仍然可以应用外边距。</p>
+<ol>
+<li><p>辅轴对齐</p>
+<p>前面通过Flexbox轻松解决了水平布局的问题。实际上，Flexbox还支持对另一轴向的控制。如果增加Flex容器自身或其中一项的高度，会发现控制另一轴向属性的默认值会产生下图这种有趣的效果。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">ul</span>&#123;</span><br><span class="line">	<span class="attribute">min-height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/flexbox-min-height.PNG" alt="flexbox-min-height"></p>
+<p>如图所示，默认情况下，Flex子项会沿辅轴方向填满Flex容器。好像这些子项被拉高了。实际上，控制辅轴对齐的属性align-items，其默认值是stretch（拉伸）。也就是说，子项默认拉伸，以填满可用空间。其他的关键字还有flex-start、center和flex-end，效果分别如下图所示。这3个关键字都会把子项收缩成原有大小，然后再沿辅轴进行上、中、下对齐。</p>
+<p><img src="https://pvnk1u.github.io/images/align-items.PNG" alt="align-items"></p>
+<p>最后，<strong>还可以使用baseline关键字，将子项中文本的基线与容器基线对齐，效果与行内块的默认行为类似。如果子项大小不一，而又希望它们在辅轴上虽然位置不同，但本身对齐，那么就可以采用这种方法。</strong></p>
+<p>在下图中，添加了一个类名表示当前活动的项：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/home&quot;</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;navbar-active&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/spaceships&quot;</span>&gt;</span>Spaceships<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;planets&quot;</span>&gt;</span>Planets<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/stars&quot;</span>&gt;</span>Stars<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/flex-active-item.PNG" alt="flex-active-item"></p>
+<p>这个活动项的font-size稍大一点，而且z-index值为1.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-class">.navbar-active</span>&#123;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">1.25em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在，容器的基线由较大活动项的基线决定，其他项都自动与之对齐。</p>
+</li>
+<li><p>对齐个别项</p>
+<p>除了同时对齐所有项，还可以在辅轴上指定个别项的对齐方式。比如，可以让“HOME”项对齐到左上角，让其他项对齐到右下角。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">ul</span>&#123;</span><br><span class="line">	<span class="attribute">min-height</span>: <span class="number">100px</span>;</span><br><span class="line">	<span class="attribute">align-items</span>; <span class="attribute">flex</span>-end;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span><span class="selector-pseudo">:first</span>-child&#123;</span><br><span class="line">	<span class="attribute">align-self</span>: flex-start;</span><br><span class="line">	<span class="attribute">margin-right</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/align-some-item.PNG" alt="align-some-item"></p>
+</li>
+<li><p>Flexbox中的垂直对齐</p>
+<p>终于，Flex使得可以轻松解决垂直对齐问题了。在容器里面只有一个元素时，只要将容器设置为flex，再将需要居中的元素的外边距设置为auto就行了。这是因为Flexbox中各项的自动外边距会扩展“填充”相应方向的空间。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;flex-container&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;flex-item&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">h2</span>&gt;</span>Not so lost in space<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">p</span>&gt;</span>This item sits right in the middle of its container...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>无论容器或其中元素有多大，仅需以下代码，即可实现水平垂直居中.flex-item。在这个例子中，让容器与视口一样高（在html、body和.flex-container元素上都设置了height: 100%），就是为了让效果更明显。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>,<span class="selector-tag">body</span>&#123;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.flex-container</span>&#123;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">	<span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.flex-item</span>&#123;</span><br><span class="line">	<span class="attribute">margin</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果Flex容器中有多个元素，就像前面作者元素数据的例子一样，那么可以使用对齐属性把它们聚拢到水平和垂直中心上。为此，把排布和对齐都设置为center（当然，这也适用于单个元素的情况，只不过margin: auto的代码更少）。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Vertical centering using flexbox<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;js/html5shiv.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">body</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">font-family</span>: Georgia, Times New Roman, serif;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">padding</span>: <span class="number">2em</span> <span class="number">8em</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">max-width</span>: <span class="number">35em</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">margin</span>: <span class="number">0</span> auto;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    </span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.author-meta</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">160px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: -webkit-box;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: -webkit-flex;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: -moz-box;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: -ms-flexbox;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: flex; <span class="comment">/* [1] */</span></span></span><br><span class="line"><span class="language-css">      -webkit-box-align: center;</span></span><br><span class="line"><span class="language-css">      -webkit-<span class="attribute">align-items</span>: center;</span></span><br><span class="line"><span class="language-css">         -moz-box-align: center;</span></span><br><span class="line"><span class="language-css">          -ms-<span class="attribute">flex</span>-align: center;</span></span><br><span class="line"><span class="language-css">              <span class="attribute">align-items</span>: center; <span class="comment">/* [2] */</span></span></span><br><span class="line"><span class="language-css">      -webkit-box-pack: center;</span></span><br><span class="line"><span class="language-css">      -webkit-<span class="attribute">justify-content</span>: center;</span></span><br><span class="line"><span class="language-css">         -moz-box-pack: center;</span></span><br><span class="line"><span class="language-css">          -ms-<span class="attribute">flex</span>-pack: center;</span></span><br><span class="line"><span class="language-css">              <span class="attribute">justify-content</span>: center; <span class="comment">/* [3] */</span></span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.author-info</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">margin-left</span>: <span class="number">0.5em</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.author-name</span>,</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.author-email</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">display</span>: block;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;author-meta&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;author-image&quot;</span> <span class="attr">src</span>=<span class="string">&quot;images/author.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;Arthur C. Lark&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;author-info&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;author-name&quot;</span>&gt;</span>Written by Arthur C. Lark<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;author-email&quot;</span> <span class="attr">href</span>=<span class="string">&quot;mailto:arthur.c.lark@example.com&quot;</span>&gt;</span>arthur.c.lark@example.com<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://pvnk1u.github.io/images/flexbox-multi-center.PNG" alt="flexbox-multi-center"></p>
+<p>在这里，使用flex-direction将author-meta内的元素排列为垂直显示，就像一列一样。所以排在行内元素img之后的文本元素author-info中的两个行内元素便被垂直排布了。</p>
+</li>
+</ol>
+<h2 id="可伸缩的尺寸"><a href="#可伸缩的尺寸" class="headerlink" title="可伸缩的尺寸"></a>可伸缩的尺寸</h2><p>Flexbox支持对元素大小的灵活控制。这一点是实现精确内容布局的关键。</p>
+<ol>
+<li><p>相关属性</p>
+<p>Flex的意思是“可伸缩”，这体现在以下3个容器中：flex-basis、flex-grow和flex-shrink。这3个属性应用给每个可伸缩项，而不是容器。</p>
+<ul>
+<li><p>flex-basis</p>
+<p>控制项目在主轴方向上、经过修正之前的“首选”大小（width或height）。可以是长度值（如18em）、百分比（相对于容器的主轴而言），也可以是关键字auto（默认值）。</p>
+<p>关键字auto的意思好像是把width或height设置为自动，但实际上并不是那么回事。这里auto值的意思是这个项目可以从对应的属性（width或height）那里获得主尺寸——如果设置了相应属性的话。如果没有设置主尺寸，那么该项目就根据其内容确定大小，有点类似浮动元素或行内块。</p>
+<p>也可以设置content值，意思也是根据项目内容确定大小，但是会忽略通过width或height设置的主轴尺寸（与auto不同了）。注意，content关键字是后来才加入Flexbox的，支持程度可能不一致。</p>
+</li>
+<li><p>flex-grow</p>
+<p>一个弹性系数。在通过flex-basis为每一项设置了首选大小之后，如果还有剩余空间，该系数表示该怎么处理。其值是一个数值，表示剩余空间的一个比值。这个比值的默认值是0，表示从flex-basis取得尺寸后就不再扩展。</p>
+</li>
+<li><p>flex-shrink</p>
+<p>也是一个弹性系数，与flex-grow类似，但作用相反。换句话说，如果空间不够，该项如何收缩？增加了flex-shrink这个因素之后，计算过程更加复杂了。默认值是1，表示如果空间不够，所有项都会以自己的首选尺寸为基准等比例收缩。</p>
+</li>
+</ul>
+<p>要理解flex-basis与flex-grow以及flex-shrink的关系并不容易。Flexbox使用了相当复杂的算法来计算各伸缩项的大小。但是，如果将计算过程简化为以下两个步骤，那么理解起来就容易多了。</p>
+<ul>
+<li>检查flex-basis，确定假想的主尺寸。</li>
+<li>确定实际的主尺寸。如果按照假想的主尺寸把各项排布好之后，容器内还有剩余空间，那么它们可以伸展。伸展多少由flex-grow系数决定。相应地，如果容器装不下那么多项，则根据flex-shrink系数决定各项如何收缩。</li>
+</ul>
+<p>举一个例子来更好地理解这些属性。在这个例子中，假设容器宽度是1000像素。标记中，这个容器包含两个子元素。其中一个包含一个短单词（用“Short”表示），另一个包含一个长单词（用“Looooooong”表示）。因此，前者要占据200像素宽度，后者要占据400像素宽度。此时项目还没有放到容器中。</p>
+<p><img src="https://pvnk1u.github.io/images/flex-property-example.PNG" alt="flex-property-example"></p>
+<p>如果这两项的flex-basis值都是默认的auto，而且都没有设置width属性，那么当它们放到容器中时，它们会各自依据自身内容确定宽度（如下图），因此一共会占据600像素。这是flex-basis默认值的结果，与前面导航条中的例子一致。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span>&#123;</span><br><span class="line">	<span class="attribute">flex-basis</span>: auto; <span class="comment">/* 默认值 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/flex-property-example1.PNG" alt="flex-property-example1"></p>
+<p>因为有剩余空间可分配，所以可以考虑flex-grow了。默认情况下，flex-grow的值为0，对各项的大小没有影响。假设此时把flex-flow的值设置为1会怎么样呢？</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span>&#123;</span><br><span class="line">	<span class="attribute">flex-basis</span>: auto;</span><br><span class="line">	<span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>默认的0和现在的1都代表什么？它们并不表示特定的大小，而表示具体的”几份“。</p>
+<p><strong>这个例子里有两项，结果是两项会伸展相同的距离。它们的1份表示各自分得剩余空间的一半，也就是200像素。</strong>换句话说第一项最终的宽度是400像素，第二项最终的宽度是600像素。加在一起，正好是容器的宽度，如下图所示。</p>
+<p><img src="https://pvnk1u.github.io/images/flex-property-example2.PNG" alt="flex-property-example2"></p>
+<p>假如给它们分别设置不同的flex-grow，类似这样：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span><span class="selector-pseudo">:first</span>-child&#123;</span><br><span class="line">	<span class="attribute">flex-grow</span>: <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span><span class="selector-pseudo">:last-child</span>&#123;</span><br><span class="line">	<span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这会导致第一项分得剩余空间的四分之三，第二项分得四分之一。结果就是，两项各占500像素的宽度！</p>
+<p><img src="https://pvnk1u.github.io/images/flex-property-example3.PNG" alt="flex-property-example3"></p>
+<p>此例中的两项最终恰好平分秋色。如果希望各项能够按比例占据整个空间而不考虑各自内容，那么还有更合适的Flexbox技术，后面会介绍。</p>
+</li>
+<li><p>纯粹按伸缩系数计算大小</p>
+<p>在上一节用到的“简化版Flexbox布局算法”的第一个步骤中，是根据内容宽度来确定项目宽度的，因为flex-basis的值是默认的auto，而且也没有给项目设定明确的宽度。假如第一步中flex-basis的值是0，那在这一步就不会给项目分配空间了。这种情况下，容器内部的全部空间都会留到第二步再分配，就是根据伸缩系数切分，然后将最终尺寸指定给具体的项目。</p>
+<p>在下图中，两个项目的flex-basis值为0，flex-grow的值为1。这意味着容器的全部空间要分为两部分，从而每个项目恰好占据可分配空间的一半。这个效果很接近使用百分比计算的布局，但好在无论有多少项目，Flexbox都会自动伸缩以适应整个宽度。</p>
+<p><img src="https://pvnk1u.github.io/images/flex-algo.PNG" alt="flex-algo"></p>
+<p>接下来要使用flex这个简写属性一次性设置flex-grow、flex-shrink和flex-basis属性，顺序就是这样，值以空格分隔：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span>&#123;</span><br><span class="line">	<span class="attribute">flex</span>: <span class="number">1</span> <span class="number">0</span> <span class="number">0%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，最后一个flex-basis值加了百分号。这是因为简写法中的flex-basis必须带单位，因此这里要么加百分号，要么就写成0px。</p>
+<p>如果想让第一个项目占据的空间是其他项目的2倍，就把其flex-grow值设置为2：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span>&#123;</span><br><span class="line">	<span class="attribute">flex</span>: <span class="number">1</span> <span class="number">0</span> <span class="number">0%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span><span class="selector-pseudo">:first</span>-child&#123;</span><br><span class="line">	<span class="attribute">flex-grow</span>: <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将以上规则应用给包含4项的导航条标记后，第一项占据2&#x2F;5（40%）的宽度，后三项各占1&#x2F;5（20%）的宽度，如下图所示:</p>
+<p><img src="https://pvnk1u.github.io/images/flex-navbar-five.PNG" alt="flex-navbar-five"></p>
+</li>
+<li><p>收缩项目</p>
+<p>当项目宽度总和超过容器宽度时，Flexbox会按照flex-shrink属性来决定如何收缩它们。此时的收缩机制比flex-grow稍微麻烦一些。麻烦的根源在于，不能因为某个大项目总体宽度超出，就把小项目压缩得不可见了。让项目占据更多空间（比如前面的flex-grow）比较容易理解，不过是按比例分配而已。但收缩的时候，情况就不一样了。</p>
+<p>再以之前1000像素宽的导航条为例，假设这一次两个子项目都通过flex-basis预先设置了宽度。两项宽度的总和超出了容器宽度300像素，如下图所示：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span><span class="selector-pseudo">:first</span>-child&#123;</span><br><span class="line">	<span class="attribute">flex</span>: <span class="number">1</span> <span class="number">1</span> <span class="number">800px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.navbar</span> <span class="selector-tag">li</span><span class="selector-pseudo">:last-child</span>&#123;</span><br><span class="line">	<span class="attribute">flex</span>: <span class="number">1</span> <span class="number">1</span> <span class="number">500px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/flex-shrink1.PNG" alt="flex-shrink1"></p>
+<p>加在一起的首选宽度（1300像素）超出了容器宽度300像素。而且两个项目的flex-shrink值都是1。看起来似乎此时两个项目会分别收缩150像素，以便适应容器宽度。然而事实并非如此。它们会根据自己flex-shrink系数和flex-basis的值来按比例收缩。具体来说，每个项目先用自己的flex-shrink乘以自己的flex-basis，然后再用乘积除以每一项的flex-shrink与flex-basis的乘积之和，最后再拿得到的比例系数去乘以超出的宽度（负空间），从而得到该项目要收缩的空间数量。</p>
+<p>将以上几个步骤简化一下表达：首选尺寸大的项目比首选尺寸小的项目收缩的更多（相对于flex-shrink系数而言）。因此就算这里两个项目的flex-shrink系数都是1，它们收缩的量也是不一样的。以下是求第一个项目要收缩的量的过程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((800* 1) / ((800 * 1) + (500 * 1 )) ) * 300 = 184.6</span><br></pre></td></tr></table></figure>
+
+<p>第一项要收缩184.6像素。用同一个公式计算第二项的收缩量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((500 * 1) / ((800 * 1) + (500 * 1))) * 300 = 115.4</span><br></pre></td></tr></table></figure>
+
+<p>第二项要收缩115.4像素。两者相加，正好是为适应容器宽度而必须减少的300像素：</p>
+<p><img src="https://pvnk1u.github.io/images/flex-shrink.PNG" alt="flex-shrink"></p>
+</li>
+</ol>
+<h2 id="Flexbox布局"><a href="#Flexbox布局" class="headerlink" title="Flexbox布局"></a>Flexbox布局</h2><p>前面导航条和作者元数据的例子只涉及一行内容。与行内块和浮动类似，Flexbox也支持让内容排布到多行（列），但具有更强的可控性。</p>
+<p>这次设计一组标签，表示星球的种类。这些标签是包含链接的一个无序列表，跟导航条例子中类似。但这里的列表项目要多出好几倍，因此不可能让它们都挤在一行中。这里会给标签设置统一的背景颜色，并使用前面评注气泡中用到的伪元素技术，给它们应用实际标签的外观。</p>
+<p><img src="https://pvnk1u.github.io/images/flex-li-item-list.PNG" alt="flex-li-item-list"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;tags&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Binary_planet&quot;</span>&gt;</span>Binary planet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Carbon_planet&quot;</span>&gt;</span>Carbon planet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Coreless_planet&quot;</span>&gt;</span>Coreless planet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Desert_planet&quot;</span>&gt;</span>Desert planet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Dwarf_planet&quot;</span>&gt;</span>Dwarf planet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Earth_analog&quot;</span>&gt;</span>Earth analog<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Exoplanet&quot;</span>&gt;</span>Exoplanet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Gas_giant&quot;</span>&gt;</span>Gas giant<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Helium_planet&quot;</span>&gt;</span>Helium planet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Ice_giant&quot;</span>&gt;</span>Ice giant<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Lava_planet&quot;</span>&gt;</span>Lava planet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Mesoplanet&quot;</span>&gt;</span>Mesoplanet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Ocean_planet&quot;</span>&gt;</span>Ocean planet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Pulsar_planet&quot;</span>&gt;</span>Pulsar planet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Rogue_planet&quot;</span>&gt;</span>Rogue planet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Terrestrial_planet&quot;</span>&gt;</span>Terrestrial planet<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/Sub-brown_dwarf&quot;</span>&gt;</span>Sub-brown dwarf<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>样式有点多：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&#x27;Avenir Next&#x27;</span>, Avenir, Corbel, <span class="string">&#x27;Franklin Gothic&#x27;</span>, <span class="string">&#x27;Century Gothic&#x27;</span>, CenturyGothic, AppleGothic, sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tags</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#c9e1f4</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">1em</span>;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tags</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">margin</span>: .<span class="number">5em</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tags</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">padding</span>: .<span class="number">25em</span> .<span class="number">5em</span> .<span class="number">25em</span> .<span class="number">25em</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#c9e1f4</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">0</span> .<span class="number">25em</span> .<span class="number">25em</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span><br><span class="line">  <span class="attribute">text-decoration</span>: none;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#28448f</span>;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tags</span> <span class="selector-tag">a</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1em</span> solid transparent;</span><br><span class="line">  <span class="attribute">border-right-width</span>: .<span class="number">5em</span>;</span><br><span class="line">  <span class="attribute">border-right-color</span>: <span class="number">#c9e1f4</span>;</span><br><span class="line">  <span class="attribute">left</span>: -<span class="number">1.5em</span>;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>应用上面的样式后，标签都成了行内块，可以随时折行。接下来该Flexbox上场了。首先，把列表元素转换为Flex容器，再通过flex-wrap属性的wrap值告诉它允许子元素折行：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tags</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>: -webkit-flex;</span><br><span class="line">    <span class="attribute">display</span>: -ms-flexbox;</span><br><span class="line">    <span class="attribute">display</span>: -moz-box;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    -webkit-<span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">    -ms-<span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">    <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#c9e1f4</span>;</span><br><span class="line">  	<span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  	<span class="attribute">padding</span>: <span class="number">1em</span>;</span><br><span class="line">  	<span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果跟刚才差不多。但现在可以用Flexbox来控制方向、大小和行的对齐了。</p>
+<ol>
+<li><p>折行与方向</p>
+<p>首先，可以反转行中标签的排布方向（跟导航条例子中一样）。把flex-direction的值改为row-reverse，所有标签一下子就变成了从右上角起从右向左排布，每一行都变成了右对齐，如下图所示：</p>
+<p><img src="https://pvnk1u.github.io/images/flex-li-item-list.-reverse.PNG" alt="flex-li-item-list.-reverse"></p>
+<p>也可以通过flex-wrap反转垂直排布的方向，让第一行从底部开头，然后向上折行！</p>
+</li>
+<li><p>多行布局中可伸缩的大小</p>
+<p>Flexbox对多行布局的另一个好处是，可以利用可伸缩的大小均匀填充每一行（如下图所示）。flex-grow的计算是以行为单位的，因此项目的可扩展空间以行的宽度为限。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tag</span> <span class="selector-tag">li</span>&#123;</span><br><span class="line">	<span class="attribute">flex</span>: <span class="number">1</span> <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/flex-box-same-width-line.PNG" alt="flex-box-same-width-line"></p>
+<p>此时最后一个标签另起一行后变得非常长。然而，多行Flexbox布局中没有办法控制特定的某一行。换句话说，无法告诉这些项目，让它们到了最后一行就不再扩展了。</p>
+<p>要解决当前这个问题，可以给所有标签设置max-width，限制可伸缩的范围（如下图所示）。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tags</span> <span class="selector-tag">li</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>: inline-block;</span><br><span class="line">	<span class="attribute">margin</span>: .<span class="number">5em</span>;</span><br><span class="line">	<span class="attribute">flex</span>: <span class="number">1</span> <span class="number">0</span> auto;</span><br><span class="line">	<span class="attribute">max-width</span>: <span class="number">14em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/flexbox-max-width.PNG" alt="flexbox-max-width"></p>
+<p>总体来说，可以填充多余空间是Flexbox的核心优势。通过综合使用flex-grow及min-width和max-width，就能实现非常智能的多行flexbox布局。无论屏幕多大，或者容器里项目有多少，所有项目都会有合理的大小。</p>
+</li>
+<li><p>对齐所有行</p>
+<p>在前面介绍辅轴对齐属性（align-items和align-self）时，我们知道flexbox允许我们相对于一行的flex-start、center、baseline和flex-end这几个点来对齐项目。而在多行布局中，则可以相对于容器来对齐行或列。</p>
+<p>如果在标签容器列表中设置了min-height: 300px，就可以知道相对于容器对齐行或列的align-content属性的效果了。默认情况下，这个属性的值是stretch，意思是每一行都会拉伸以填充自己应占的容器高度。如果通过浏览器右键菜单中“检查“来看一看标签，会发现每一个li元素都拉伸为容器高度的三分之一，如下图所示：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tags</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>: flex;</span><br><span class="line">	<span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">	<span class="attribute">min-height</span>: <span class="number">300px</span>;</span><br><span class="line">	<span class="comment">/* align-content: stretch; 在这里是默认值 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/flexbox-stretch.PNG" alt="flexbox-stretch"></p>
+<p>align-content对容器中多行的作用，与justify-content对主轴内容排布的作用非常相似。换句话说，通过align-content还可以把多行排布到flex-start（容器顶部）、flex-end（容器底部）、center（容器中部），还可以通过space-between或space-arount让多行分隔开。</p>
+</li>
+</ol>
+<h2 id="列布局与个别排序"><a href="#列布局与个别排序" class="headerlink" title="列布局与个别排序"></a>列布局与个别排序</h2><p>使用Flexbox的order属性，可以完全摆脱项目在源代码中顺序的约束。只要告诉浏览器这个项目排第几就可以了。默认情况下，每个项目的order值都为0，意味着按照它们在源代码中的顺序出现。</p>
+<p>通过Flexbox可以任意摆放项目顺序。在接下来的例子中，来创建一个小小的“文章导读”组件，其中包含飞船文章的节选，有标题、图片，还有一个阅读全文的链接。这个组件会以一列的形式出现。</p>
+<p>首先从标记开始，组件内容的次序按照它们的重要性来排定：</p>
+<ol>
+<li>以文章标题为内容的标题</li>
+<li>导读正文</li>
+<li>与文本主题相关的插图</li>
+<li>指向文章的链接</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article-teaser&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">h2</span>&gt;</span>The Dragon and other spaceships<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article-teaser-text&quot;</span>&gt;</span></span><br><span class="line">  		<span class="tag">&lt;<span class="name">p</span>&gt;</span>There are actual spaceships,</span><br><span class="line">    	flying in space right now, probably. For example, there’s the International Space Station, which is </span><br><span class="line">    	a spaceship of sorts. Well, actually it’s a space station, which is even cooler!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;images/medium_spaceship.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;The Dragon spaceship in orbit around Earth.&quot;</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;article-teaser-more&quot;</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/spaceships&quot;</span>&gt;</span>Read the whole Spaceship article<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>完成后的文章导读组件如下图所示。这里为组件添加了一些基本样式，主要是外边距、颜色和字体。</p>
+<p><img src="https://pvnk1u.github.io/images/flexbox-article1.PNG" alt="flexbox-article1"></p>
+<p>从设计上说，把图片放在最前面可以抓住读者的眼球。但在HTML中，把图片放在第一位不一定合适。这是因为对屏幕阅读器而言，最好是一上来就拿到文章标题，然后播报给读者。</p>
+<p>为了能让图片排在最前头，需要把.article-teaser容器转换为一个Flexbox列：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.article-teaser</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>: flex;</span><br><span class="line">	<span class="attribute">flex-direction</span>: column;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，给图片一个比默认值0小的order值，让它第一个出现（如下图）：</p>
+<p><img src="https://pvnk1u.github.io/images/flexbox-article2.PNG" alt="flexbox-article2"></p>
+<h2 id="嵌套的Flexbox布局"><a href="#嵌套的Flexbox布局" class="headerlink" title="嵌套的Flexbox布局"></a>嵌套的Flexbox布局</h2><p>最后一个例子会展示可嵌套的Flexbox布局，以及一种非常实用的技术。</p>
+<p>重用上面的文章导读组件的例子，但这次有两个组件，并排在一起。为此，给它们加一个包装元素，将Flexbox方向设置为row。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article-teaser-group&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article-teaser&quot;</span>&gt;</span></span><br><span class="line">  		<span class="tag">&lt;<span class="name">h2</span>&gt;</span>The Dragon and other spaceships<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article-teaser-text&quot;</span>&gt;</span></span><br><span class="line">    		<span class="tag">&lt;<span class="name">p</span>&gt;</span>There are actual spaceships,</span><br><span class="line">      			flying in space right now, probably. For example, there’s the International Space Station, which is </span><br><span class="line">      			a spaceship of sorts. Well, actually it’s a space station, which is even cooler!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    	<span class="comment">&lt;!-- image from SpaceX on Flick: https://flic.kr/p/rzuQdb --&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;images/medium_spaceship.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;The Dragon spaceship in orbit around Earth.&quot;</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;article-teaser-more&quot;</span>&gt;</span></span><br><span class="line">      		<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/spaceships&quot;</span>&gt;</span>Read the whole Spaceship article<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article-teaser&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Mission to mars<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article-teaser-text&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a pretty cool article about spaceships flying to Mars.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- image from SpaceX on Flick: https://flic.kr/p/xGdh8d --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;images/medium_mars.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;A spaceship about to land on Mars.&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;article-teaser-more&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/spaceships&quot;</span>&gt;</span>Read the whole Mars article<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>将包装元素设置为一个Flexbox行：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.article-teaser-group</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下图：</p>
+<p><img src="https://pvnk1u.github.io/images/flexbox-group.PNG" alt="flexbox-group"></p>
+<p>之前也看到过等高的Flexbox可伸缩项。但在可伸缩项本身又是Flexbox容器时，比如本例的情况，还得再祭出一个“终极大法”。因为两个组件虽然一样高，但它们的内容却不是。第二个组件明显短一截，“阅读详情”按钮一个高一个低，视觉上明显不平衡。Flexbox可以解决这个问题。</p>
+<p>还记得把外边距设为auto就能让可伸缩项吃掉所有剩余空间吗？所以这里只要在“阅读详情”元素上设置margin-top: auto，就可以把它推到列的底部，让两个组件的元素在视觉上对齐。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.article-teaser-more</span>&#123;</span><br><span class="line">	<span class="attribute">margin-top</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pvnk1u.github.io/images/flexbox-margin-auto.PNG" alt="flexbox-margin-auto"></p>
+<p>如果使用之前的老技术，比如浮动、行内块和定位，那么实现这种动态内容布局肯定会相当麻烦。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://pvnk1u.github.io/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/" title="精通CSS读书笔记(6)——内容布局" target="_blank" rel="external">http://pvnk1u.github.io/2023/06/05/精通CSS读书笔记(6)——内容布局/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/pvnk1u" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/dog.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/pvnk1u" target="_blank"><span class="text-dark">Yolo</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>Everything happens for the best</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/07/01/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(7)%E2%80%94%E2%80%94%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80%E4%B8%8E%E7%BD%91%E6%A0%BC/" title="精通CSS读书笔记(6)——内容布局"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/06/04/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(5)%E2%80%94%E2%80%94%E6%BC%82%E4%BA%AE%E7%9A%84%E7%9B%92%E5%AD%90/" title="精通CSS读书笔记(5)——漂亮的盒子"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2024 pvnk1u
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://pvnk1u.github.io/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/';
+        
+        this.page.identifier = '精通CSS读书笔记(6)——内容布局';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + '' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

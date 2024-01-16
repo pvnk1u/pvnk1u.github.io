@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>JS高级程序设计读书笔记(14)——网络 | Yolo</title>
+  <meta name="description" content="2005 年，Jesse James Garrett 撰写了一篇文章，“Ajax—A New Approach to Web Applications”。这篇 文章中描绘了一个被他称作 Ajax（Asynchronous JavaScript+XML，即异步 JavaScript 加 XML）的技术。 这个技术涉及发送服务器请求额外数据而不刷新页面，从而实现更好的用户体验。Garrett 解释了这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS高级程序设计读书笔记(14)——网络">
+<meta property="og:url" content="http://pvnk1u.github.io/2023/05/15/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(14)%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="YOLO">
+<meta property="og:description" content="2005 年，Jesse James Garrett 撰写了一篇文章，“Ajax—A New Approach to Web Applications”。这篇 文章中描绘了一个被他称作 Ajax（Asynchronous JavaScript+XML，即异步 JavaScript 加 XML）的技术。 这个技术涉及发送服务器请求额外数据而不刷新页面，从而实现更好的用户体验。Garrett 解释了这">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-15T04:26:39.000Z">
+<meta property="article:modified_time" content="2023-11-27T15:34:23.880Z">
+<meta property="article:author" content="pvnk1u">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://pvnk1u.github.io/2023/05/15/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(14)%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YOLO" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-white" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/pvnk1u" target="_blank">
+          <img class="img-circle img-rotate" src="/images/dog.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Yolo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/css/">css</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/">html</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/css/">css</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/javascript/">javascript</a><span class="category-list-count">14</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/html/">html</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81%E4%B8%8E%E8%AE%BE%E8%AE%A1/" class="title">UdemyHtmlCss学习笔记——代码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-21T07:32:39.000Z" itemprop="datePublished">2023-11-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/01/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(7)%E2%80%94%E2%80%94%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80%E4%B8%8E%E7%BD%91%E6%A0%BC/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-01T07:28:39.000Z" itemprop="datePublished">2023-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-05T07:28:39.000Z" itemprop="datePublished">2023-06-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/04/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(5)%E2%80%94%E2%80%94%E6%BC%82%E4%BA%AE%E7%9A%84%E7%9B%92%E5%AD%90/" class="title">精通CSS读书笔记(5)——漂亮的盒子</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-04T01:28:39.000Z" itemprop="datePublished">2023-06-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/03/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(4)%E2%80%94%E2%80%94%E7%BD%91%E9%A1%B5%E6%8E%92%E7%89%88/" class="title">精通CSS读书笔记(4)——网页排版</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-03T01:28:39.000Z" itemprop="datePublished">2023-06-03</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XMLHttpRequest%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">XMLHttpRequest对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8XHR"><span class="toc-number">1.1.</span> <span class="toc-text">使用XHR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E5%A4%B4%E9%83%A8"><span class="toc-number">1.2.</span> <span class="toc-text">HTTP头部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GET%E8%AF%B7%E6%B1%82"><span class="toc-number">1.3.</span> <span class="toc-text">GET请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POST%E8%AF%B7%E6%B1%82"><span class="toc-number">1.4.</span> <span class="toc-text">POST请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest-Level-2"><span class="toc-number">1.5.</span> <span class="toc-text">XMLHttpRequest Level 2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E5%BA%A6%E4%BA%8B%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">进度事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#load%E4%BA%8B%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text">load事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#progress%E4%BA%8B%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">progress事件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB"><span class="toc-number">3.</span> <span class="toc-text">跨域资源共享</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E6%A3%80%E8%AF%B7%E6%B1%82"><span class="toc-number">3.1.</span> <span class="toc-text">预检请求</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%BF%E4%BB%A3%E6%80%A7%E8%B7%A8%E6%BA%90%E6%8A%80%E6%9C%AF"><span class="toc-number">4.</span> <span class="toc-text">替代性跨源技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E6%A3%80%E6%B5%8B"><span class="toc-number">4.1.</span> <span class="toc-text">图片检测</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fetch-API"><span class="toc-number">5.</span> <span class="toc-text">Fetch API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81fetch%E8%AF%B7%E6%B1%82%E6%A8%A1%E5%BC%8F"><span class="toc-number">5.2.</span> <span class="toc-text">常见fetch请求模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Headers%E5%AF%B9%E8%B1%A1"><span class="toc-number">5.3.</span> <span class="toc-text">Headers对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Request%E5%AF%B9%E8%B1%A1"><span class="toc-number">5.4.</span> <span class="toc-text">Request对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Response%E5%AF%B9%E8%B1%A1"><span class="toc-number">5.5.</span> <span class="toc-text">Response对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Request%E3%80%81Response-%E5%8F%8A-Body-%E6%B7%B7%E5%85%A5"><span class="toc-number">5.6.</span> <span class="toc-text">Request、Response 及 Body 混入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Socket"><span class="toc-number">6.</span> <span class="toc-text">Web Socket</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#API"><span class="toc-number">6.1.</span> <span class="toc-text">API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE"><span class="toc-number">6.2.</span> <span class="toc-text">发送和接收数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E4%BA%8B%E4%BB%B6"><span class="toc-number">6.3.</span> <span class="toc-text">其他事件</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-JS高级程序设计读书笔记(14)——网络" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS高级程序设计读书笔记(14)——网络
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/05/15/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(14)%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C/" class="article-date">
+	  <time datetime="2023-05-15T04:26:39.000Z" itemprop="datePublished">2023-05-15</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/web/">web</a>►<a class="article-category-link" href="/categories/web/javascript/">javascript</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>, <a class="article-tag-link-link" href="/tags/web/" rel="tag">web</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/05/15/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(14)%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 14.8k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 62(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>2005 年，Jesse James Garrett 撰写了一篇文章，“Ajax—A New Approach to Web Applications”。这篇 文章中描绘了一个被他称作 Ajax（Asynchronous JavaScript+XML，即异步 JavaScript 加 XML）的技术。 这个技术涉及发送服务器请求额外数据而不刷新页面，从而实现更好的用户体验。Garrett 解释了这个技 术怎样改变自 Web 诞生以来就一直延续的传统单击等待的模式。</p>
+<p>把 Ajax 推到历史舞台上的关键技术是 <code>XMLHttpRequest</code>（<code>XHR</code>）对象。这个对象最早由微软发明， 然后被其他浏览器所借鉴。在 <code>XHR</code> 出现之前，<code>Ajax</code> 风格的通信必须通过一些黑科技实现，主要是使用隐藏的窗格或内嵌窗格。<code>XHR</code> 为发送服务器请求和获取响应提供了合理的接口。这个接口可以实现异步从服务器获取额外数据，意味着用户点击不用页面刷新也可以获取数据。通过 <code>XHR</code> 对象获取数据后， 可以使用 <code>DOM</code> 方法把数据插入网页。虽然 <code>Ajax</code> 这个名称中包含 <code>XML</code>，但实际上 <code>Ajax </code>通信与数据格式无关。这个技术主要是可以实现在不刷新页面的情况下从服务器获取数据，格式并不一定是 <code>XML</code>。</p>
+<p><code>XHR</code> 对象的 <code>API</code> 被普遍认为比较难用，而 <code>Fetch API</code> 自从诞生以后就迅速成为了 <code>XHR</code> 更现代的替代标准。<code>Fetch API</code> 支持期约（<code>promise</code>）和服务线程（service worker），已经成为极其强大的 Web 开发工具。</p>
+<p>本章会全面介绍 <code>XMLHttpRequest</code>，但它实际上是过时 Web 规范的产物，应该只在旧版本浏览器中使用。实际开发中，应该尽可能使用 <code>fetch()</code>。</p>
+<h1 id="XMLHttpRequest对象"><a href="#XMLHttpRequest对象" class="headerlink" title="XMLHttpRequest对象"></a>XMLHttpRequest对象</h1><p>所有现代浏览器都通过 <code>XMLHttpRequest</code> 构造函数原生支持 <code>XHR</code> 对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用XHR"><a href="#使用XHR" class="headerlink" title="使用XHR"></a>使用XHR</h2><p>使用 <code>XHR</code> 对象首先要调用 <code>open()</code>方法，这个方法接收 3 个参数：请求类型（”get”、”post”等）、 请求 URL，以及表示请求是否异步的布尔值。下面是一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;example.php&quot;</span>, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这行代码就可以向 <code>example.php</code> 发送一个同步的 <code>GET</code> 请求。关于这行代码需要说明几点。首先，这 里的 URL 是相对于代码所在页面的，当然也可以使用绝对 URL。其次，<strong>调用 <code>open()</code>不会实际发送请 求，只是为发送请求做好准备。</strong></p>
+<p>要发送定义好的请求，必须像下面这样调用 <code>send()</code>方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;example.txt&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>send()方法接收一个参数，是作为请求体发送的数据。如果不需要发送请求体，则必须传 <code>null</code>， 因为这个参数在某些浏览器中是必需的。调用 <code>send()</code>之后，请求就会发送到服务器。</p>
+<p>因为这个请求是同步的，所以 <code>JavaScript</code> 代码会等待服务器响应之后再继续执行。收到响应后，<code>XHR</code> 对象的以下属性会被填充上数据。</p>
+<ol>
+<li><p>responseText</p>
+<p>作为响应体返回的文本</p>
+</li>
+<li><p>responseXML</p>
+<p>如果响应的内容类型是”text&#x2F;xml”或”application&#x2F;xml”，那就是包含响应 数据的 XML DOM 文档。</p>
+</li>
+<li><p>status</p>
+<p>响应的HTTP状态</p>
+</li>
+<li><p>statusText</p>
+<p>响应的HTTP状态描述</p>
+</li>
+</ol>
+<p>收到响应后，第一步要检查 <code>status</code> 属性以确保响应成功返回。一般来说，HTTP 状态码为 2xx 表 示成功。此时，responseText 或 responseXML（如果内容类型正确）属性中会有内容。<strong>如果 HTTP 状态码是 304，则表示资源未修改过，是从浏览器缓存中直接拿取的。当然这也意味着响应有效。为确保收到正确的响应，应该检查这些状态</strong>，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;example.txt&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br><span class="line"><span class="keyword">if</span> ((xhr.<span class="property">status</span> &gt;= <span class="number">200</span> &amp;&amp; xhr.<span class="property">status</span> &lt; <span class="number">300</span>) || xhr.<span class="property">status</span> == <span class="number">304</span>) &#123;</span><br><span class="line"> 	<span class="title function_">alert</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"> 	<span class="title function_">alert</span>(<span class="string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="property">status</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>以上代码可能显示服务器返回的内容，也可能显示错误消息，取决于 HTTP 响应的状态码。为确定下一步该执行什么操作，最好检查 status 而不是 statusText 属性，因为后者已经被证明在跨浏览器 的情况下不可靠。无论是什么响应内容类型，responseText 属性始终会保存响应体，而 responseXML则对于非 XML 数据是 null。</p>
+<p>虽然可以像前面的例子一样发送同步请求，但多数情况下最好使用异步请求，这样可以不阻塞<code>JavaScript</code> 代码继续执行。<code>XHR</code> 对象有一个 <code>readyState</code> 属性，表示当前处在请求&#x2F;响应过程的哪个阶段。 这个属性有如下可能的值。</p>
+<ul>
+<li><p>0：未初始化(Uninitialized)</p>
+<p>尚未调用open()方法</p>
+</li>
+<li><p>1：已打开（Open）</p>
+<p>已调用open()方法，尚未调用send()方法</p>
+</li>
+<li><p>2：已发送（Sent）</p>
+<p>已调用send()方法，尚未收到响应</p>
+</li>
+<li><p>3：接收中(Receiving)</p>
+<p>已经收到部分响应</p>
+</li>
+<li><p>4：完成（Complete）</p>
+<p>已经收到所有响应，可以使用了</p>
+</li>
+</ul>
+<p>每次 readyState 从一个值变成另一个值，都会触发 <code>readystatechange</code> 事件。可以借此机会检 查 <code>readyState</code> 的值。一般来说，唯一关心的 <code>readyState</code> 值是 4，表示数据已就绪。为保证跨浏览器兼容，<code>onreadystatechange</code> 事件处理程序应该在调用 <code>open()</code>之前赋值。来看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="keyword">if</span> (xhr.<span class="property">readyState</span> == <span class="number">4</span>) &#123;</span><br><span class="line">         <span class="keyword">if</span> ((xhr.<span class="property">status</span> &gt;= <span class="number">200</span> &amp;&amp; xhr.<span class="property">status</span> &lt; <span class="number">300</span>) || xhr.<span class="property">status</span> == <span class="number">304</span>) &#123;</span><br><span class="line">            <span class="title function_">alert</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="title function_">alert</span>(<span class="string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="property">status</span>);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;example.txt&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码使用 DOM Level 0 风格为 XHR 对象添加了事件处理程序，因为并不是所有浏览器都支持 DOM Level 2 风格。与其他事件处理程序不同，<code>onreadystatechange</code> 事件处理程序不会收到 <code>event</code> 对象。在事件处理程序中，必须使用 XHR 对象本身来确定接下来该做什么。</p>
+<p>在收到响应之前如果想取消异步请求，可以调用 <code>abort()</code>方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.<span class="title function_">abort</span>();</span><br></pre></td></tr></table></figure>
+
+<p>调用这个方法后，<code>XHR</code> 对象会停止触发事件，并阻止访问这个对象上任何与响应相关的属性。中断请求后，应该取消对 <code>XHR</code> 对象的引用。由于内存问题，不推荐重用 <code>XHR</code> 对象。</p>
+<h2 id="HTTP头部"><a href="#HTTP头部" class="headerlink" title="HTTP头部"></a>HTTP头部</h2><p>每个 HTTP 请求和响应都会携带一些头部字段，这些字段可能对开发者有用。XHR 对象会通过一 些方法暴露与请求和响应相关的头部字段。</p>
+<p>默认情况下，XHR 请求会发送以下头部字段。</p>
+<ol>
+<li><p>Accept</p>
+<p>浏览器可以处理的内容类型</p>
+</li>
+<li><p>Accept-Charset</p>
+<p>浏览器可以显示的字符集类型</p>
+</li>
+<li><p>Accept-Encoding</p>
+<p>浏览器可以处理的压缩编码类型</p>
+</li>
+<li><p>Accept-Language</p>
+<p>浏览器使用的语言</p>
+</li>
+<li><p>Connection</p>
+<p>浏览器与服务器的连接类型</p>
+</li>
+<li><p>Cookie</p>
+<p>页面中设置的Cookie</p>
+</li>
+<li><p>Host</p>
+<p>发送请求的页面所在的域</p>
+</li>
+<li><p>Referer</p>
+<p>发送请求的页面的URI。这个字段在HTTP规范中就拼错了，所以考虑到兼容性也必须将错就错（正确的拼写应该是Referrer）</p>
+</li>
+<li><p>User-Agent</p>
+<p>浏览器的用户代理字符串。</p>
+</li>
+</ol>
+<p>虽然不同浏览器发送的确切头部字段可能各不相同，但这些通常都是会发送的。**如果需要发送额外的请求头部，可以使用<code>setRequestHeader()</code>方法。这个方法接收两个参数：头部字段的名称和值。为保证请求头部被发送，必须在<code>open()</code>之后，<code>send()</code>之前调用<code>setRequestHeader()</code>**，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="keyword">if</span> (xhr.<span class="property">readyState</span> == <span class="number">4</span>) &#123;</span><br><span class="line">     <span class="keyword">if</span> ((xhr.<span class="property">status</span> &gt;= <span class="number">200</span> &amp;&amp; xhr.<span class="property">status</span> &lt; <span class="number">300</span>) || xhr.<span class="property">status</span> == <span class="number">304</span>) &#123;</span><br><span class="line">        <span class="title function_">alert</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">alert</span>(<span class="string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="property">status</span>);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;example.php&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.<span class="title function_">setRequestHeader</span>(<span class="string">&quot;MyHeader&quot;</span>, <span class="string">&quot;MyValue&quot;</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>服务器通过读取自定义头部可以确定适当的操作。自定义头部一定要区别于浏览器正常发送的头部， 否则可能影响服务器正常响应。有些浏览器允许重写默认头部，有些浏览器则不允许。</p>
+<p>可以使用 <code>getResponseHeader()</code>方法从 XHR 对象获取响应头部，只要传入要获取头部的名称即 可。如果想取得所有响应头部，可以使用 <code>getAllResponseHeaders()</code>方法，这个方法会返回包含所有响应头部的字符串。下面是调用这两个方法的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myHeader = xhr.<span class="title function_">getResponseHeader</span>(<span class="string">&quot;MyHeader&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> allHeaders xhr.<span class="title function_">getAllResponseHeaders</span>(); </span><br></pre></td></tr></table></figure>
+
+<p>服务器可以使用头部向浏览器传递额外的结构化数据。<code>getAllResponseHeaders()</code>方法通常返回 类似如下的字符串：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Date</span><span class="punctuation">: </span>Sun, 14 Nov 2004 18:04:03 GMT</span><br><span class="line"><span class="attribute">Server</span><span class="punctuation">: </span>Apache/1.3.29 (Unix)</span><br><span class="line"><span class="attribute">Vary</span><span class="punctuation">: </span>Accept</span><br><span class="line"><span class="attribute">X-Powered-By</span><span class="punctuation">: </span>PHP/4.3.8</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/html; charset=iso-8859-1</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h2><p>最常用的请求方法是 GET 请求，用于向服务器查询某些信息。必要时，需要在 GET 请求的 URL 后面添加查询字符串参数。对 XHR 而言，查询字符串必须正确编码后添加到 URL 后面，然后再传给 <code>open()</code>方法。</p>
+<p>发送 GET 请求最常见的一个错误是查询字符串格式不对。查询字符串中的每个名和值都必须使用 <code>encodeURIComponent()</code>编码，所有名&#x2F;值对必须以和号（&amp;）分隔，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;example.php?name1=value1&amp;name2=value2&quot;</span>, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>可以使用以下函数将查询字符串参数添加到现有的 URL 末尾：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">addURLParam</span>(<span class="params">url, name, value</span>) &#123;</span><br><span class="line">     url += (url.<span class="title function_">indexOf</span>(<span class="string">&quot;?&quot;</span>) == -<span class="number">1</span> ? <span class="string">&quot;?&quot;</span> : <span class="string">&quot;&amp;&quot;</span>);</span><br><span class="line">     url += <span class="built_in">encodeURIComponent</span>(name) + <span class="string">&quot;=&quot;</span> + <span class="built_in">encodeURIComponent</span>(value);</span><br><span class="line">     <span class="keyword">return</span> url;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以使用这个函数构建请求 URL，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> url = <span class="string">&quot;example.php&quot;</span>;</span><br><span class="line"><span class="comment">// 添加参数</span></span><br><span class="line">url = <span class="title function_">addURLParam</span>(url, <span class="string">&quot;name&quot;</span>, <span class="string">&quot;Nicholas&quot;</span>);</span><br><span class="line">url = <span class="title function_">addURLParam</span>(url, <span class="string">&quot;book&quot;</span>, <span class="string">&quot;Professional JavaScript&quot;</span>);</span><br><span class="line"><span class="comment">// 初始化请求</span></span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, url, <span class="literal">false</span>); </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h2><p>第二个最常用的请求是 POST 请求，用于向服务器发送应该保存的数据。每个 POST 请求都应该在 请求体中携带提交的数据，而 GET 请求则不然。POST 请求的请求体可以包含非常多的数据，而且数据 可以是任意格式。要初始化 POST 请求，<code>open()</code>方法的第一个参数要传”post”，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;post&quot;</span>, <span class="string">&quot;example.php&quot;</span>, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>接下来就是要给 <code>send()</code>方法传入要发送的数据。因为 XHR 最初主要设计用于发送 XML，所以可以传入序列化之后的 XML DOM 文档作为请求体。当然，也可以传入任意字符串。</p>
+<p>默认情况下，对服务器而言，POST 请求与提交表单是不一样的。服务器逻辑需要读取原始 POST 数据才能取得浏览器发送的数据。不过，可以使用 XHR 模拟表单提交。为此，第一步需要把 <code>ContentType</code> 头部设置为”application&#x2F;x-www-formurlencoded”，这是提交表单时使用的内容类型。第二 步是创建对应格式的字符串。<code>POST</code> 数据此时使用与查询字符串相同的格式。如果网页中确实有一个表 单需要序列化并通过 <code>XHR</code> 发送到服务器，则可以使用 <code>serialize()</code>函数来创建相应的字符串，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">submitData</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">     xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">         <span class="keyword">if</span> (xhr.<span class="property">readyState</span> == <span class="number">4</span>) &#123;</span><br><span class="line">             <span class="keyword">if</span> ((xhr.<span class="property">status</span> &gt;= <span class="number">200</span> &amp;&amp; xhr.<span class="property">status</span> &lt; <span class="number">300</span>) || xhr.<span class="property">status</span> == <span class="number">304</span>) &#123;</span><br><span class="line">                <span class="title function_">alert</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">             &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">alert</span>(<span class="string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="property">status</span>);</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;;</span><br><span class="line">     xhr.<span class="title function_">open</span>(<span class="string">&quot;post&quot;</span>, <span class="string">&quot;postexample.php&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">     xhr.<span class="title function_">setRequestHeader</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>);</span><br><span class="line">     <span class="keyword">let</span> form = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;user-info&quot;</span>);</span><br><span class="line">     xhr.<span class="title function_">send</span>(<span class="title function_">serialize</span>(form));</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>在这个函数中，来自 ID 为”user-info”的表单中的数据被序列化之后发送给了服务器。PHP 文件 postexample.php 随后可以通过$_POST 取得 POST 的数据。比如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> 		<span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Type: text/plain&quot;</span>);</span><br><span class="line"> 		<span class="keyword">echo</span> <span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">	Name: <span class="subst">&#123;$_POST[&#x27;user-name&#x27;]&#125;</span></span></span><br><span class="line"><span class="string">	Email: <span class="subst">&#123;$_POST[&#x27;user-email&#x27;]&#125;</span></span></span><br><span class="line"><span class="string">	EOF</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>假如没有发送 <code>Content-Type</code> 头部，PHP 的全局$_POST 变量中就不会包含数据，而需要通过 $HTTP_RAW_POST_DATA 来获取。</p>
+<p>POST 请求相比 GET 请求要占用更多资源。从性能方面说，发送相同数量的数据， GET 请求比 POST 请求要快两倍。</p>
+<h2 id="XMLHttpRequest-Level-2"><a href="#XMLHttpRequest-Level-2" class="headerlink" title="XMLHttpRequest Level 2"></a>XMLHttpRequest Level 2</h2><p>XHR 对象作为事实标准的迅速流行，也促使 W3C 为规范这一行为而制定了正式标准。 XMLHttpRequest Level 1 只是把已经存在的 XHR 对象的实现细节明确了一下。XMLHttpRequest Level 2 又进一步发展了 XHR 对象。并非所有浏览器都实现了 XMLHttpRequest Level 2 的所有部分，但所有浏览器都实现了其中部分功能。</p>
+<ol>
+<li><p>FormData类型</p>
+<p>现代 Web 应用程序中经常需要对表单数据进行序列化，因此 XMLHttpRequest Level 2 新增了 FormData 类型。FormData 类型便于表单序列化，也便于创建与表单类似格式的数据然后通过 XHR 发送。下面的代码创建了一个 FormData 对象，并填充了一些数据：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line">data.<span class="title function_">append</span>(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;Nicholas&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>append()</code>方法接收两个参数：键和值，相当于表单字段名称和该字段的值。可以像这样添加任意 多个键&#x2F;值对数据。此外，通过直接给 FormData 构造函数传入一个表单元素，也可以将表单中的数据作为键&#x2F;值对填充进去：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = <span class="keyword">new</span> <span class="title class_">FormData</span>(<span class="variable language_">document</span>.<span class="property">forms</span>[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>有了 <code>FormData</code> 实例，可以像下面这样直接传给 <code>XHR</code> 对象的 <code>send()</code>方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="keyword">if</span> (xhr.<span class="property">readyState</span> == <span class="number">4</span>) &#123;</span><br><span class="line">         <span class="keyword">if</span> ((xhr.<span class="property">status</span> &gt;= <span class="number">200</span> &amp;&amp; xhr.<span class="property">status</span> &lt; <span class="number">300</span>) || xhr.<span class="property">status</span> == <span class="number">304</span>) &#123;</span><br><span class="line">            <span class="title function_">alert</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="title function_">alert</span>(<span class="string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="property">status</span>);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;post&quot;</span>, <span class="string">&quot;postexample.php&quot;</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">let</span> form = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;user-info&quot;</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="keyword">new</span> <span class="title class_">FormData</span>(form));</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>FormData</code> 的另一个方便之处是不再需要给 XHR 对象显式设置任何请求头部了。XHR 对象能 够识别作为 <code>FormData</code> 实例传入的数据类型并自动配置相应的头部。</p>
+</li>
+<li><p>超时</p>
+<p>IE8 给 <code>XHR</code> 对象增加了一个 <code>timeout</code> 属性，用于表示发送请求后等待多少毫秒，如果响应不成功就中断请求。之后所有浏览器都在自己的 <code>XHR</code> 实现中增加了这个属性。在给 <code>timeout</code> 属性设置了一个 时间且在该时间过后没有收到响应时，<code>XHR</code> 对象就会触发 <code>timeout</code> 事件，调用 <code>ontimeout</code> 事件处理 程序。这个特性后来也被添加到了 XMLHttpRequest Level 2 规范。下面看一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="keyword">if</span> (xhr.<span class="property">readyState</span> == <span class="number">4</span>) &#123;</span><br><span class="line">         <span class="keyword">try</span> &#123;</span><br><span class="line">             <span class="keyword">if</span> ((xhr.<span class="property">status</span> &gt;= <span class="number">200</span> &amp;&amp; xhr.<span class="property">status</span> &lt; <span class="number">300</span>) || xhr.<span class="property">status</span> == <span class="number">304</span>) &#123;</span><br><span class="line">                <span class="title function_">alert</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">             &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">alert</span>(<span class="string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="property">status</span>);</span><br><span class="line">             &#125;</span><br><span class="line">         &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">            <span class="comment">// 假设由 ontimeout 处理</span></span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;timeout.php&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.<span class="property">timeout</span> = <span class="number">1000</span>; <span class="comment">// 设置 1 秒超时</span></span><br><span class="line">xhr.<span class="property">ontimeout</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"> 	<span class="title function_">alert</span>(<span class="string">&quot;Request did not return in a second.&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>); </span><br></pre></td></tr></table></figure>
+
+<p>这个例子演示了使用 timeout 设置超时。给 timeout 设置 1000 毫秒意味着，如果请求没有在 1 秒钟内返回则会中断。此时则会触发 ontimeout 事件处理程序，readyState 仍然会变成 4，因此也 会调用 onreadystatechange 事件处理程序。不过，如果在超时之后访问 status 属性则会发生错误。 为做好防护，可以把检查 status 属性的代码封装在 try&#x2F;catch 语句中。</p>
+</li>
+<li><p>overrideMimeType()方法</p>
+<p>Firefox 首先引入了 <code>overrideMimeType()</code>方法用于重写 <code>XHR</code> 响应的 <code>MIME</code> 类型。这个特性后来 也被添加到了 XMLHttpRequest Level 2。因为响应返回的 MIME 类型决定了 XHR 对象如何处理响应， 所以如果有办法覆盖服务器返回的类型，那么是有帮助的。</p>
+<p>假设服务器实际发送了 XML 数据，但响应头设置的 MIME 类型是 text&#x2F;plain。结果就会导致虽 然数据是 XML，但 responseXML 属性值是 null。此时调用 overrideMimeType()可以保证将响应 当成 XML 而不是纯文本来处理：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;text.php&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.<span class="title function_">overrideMimeType</span>(<span class="string">&quot;text/xml&quot;</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这个例子强制让 XHR 把响应当成 XML 而不是纯文本来处理。为了正确覆盖响应的 MIME 类型， 必须在调用 send()之前调用 <code>overrideMimeType()</code>。</p>
+</li>
+</ol>
+<h1 id="进度事件"><a href="#进度事件" class="headerlink" title="进度事件"></a>进度事件</h1><p>Progress Events 是 W3C 的工作草案，定义了客户端-服务器端通信。这些事件最初只针对 XHR，现 在也推广到了其他类似的 API。有以下 6 个进度相关的事件。</p>
+<ol>
+<li><p>loadstart</p>
+<p>在接收到响应的第一个字节时触发。</p>
+</li>
+<li><p>progress</p>
+<p>在接收响应期间反复触发。</p>
+</li>
+<li><p>error</p>
+<p>在请求出错时触发。</p>
+</li>
+<li><p>abort</p>
+<p>在调用 abort()终止连接时触发。</p>
+</li>
+<li><p>load</p>
+<p>在成功接收完响应时触发。</p>
+</li>
+<li><p>loadend</p>
+<p>在通信完成时，且在 error、abort 或 load 之后触发。</p>
+</li>
+</ol>
+<p>每次请求都会首先触发 loadstart 事件，之后是一个或多个 progress 事件，接着是 error、abort 或 load 中的一个，最后以 loadend 事件结束。</p>
+<p>这些事件大部分都很好理解，但其中有两个需要说明一下。</p>
+<h2 id="load事件"><a href="#load事件" class="headerlink" title="load事件"></a>load事件</h2><p>Firefox 最初在实现 XHR 的时候，曾致力于简化交互模式。最终，增加了一个 load 事件用于替代 readystatechange 事件。load 事件在响应接收完成后立即触发，这样就不用检查 readyState 属性了。onload 事件处理程序会收到一个 event 对象，其 target 属性设置为 XHR 实例，在这个实例上可以访问所有 XHR 对象属性和方法。不过，并不是所有浏览器都实现了这个事件的 event 对象。考虑到跨浏览器兼容，还是需要像下面这样使用 XHR 对象变量：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="property">onload</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="keyword">if</span> ((xhr.<span class="property">status</span> &gt;= <span class="number">200</span> &amp;&amp; xhr.<span class="property">status</span> &lt; <span class="number">300</span>) || xhr.<span class="property">status</span> == <span class="number">304</span>) &#123;</span><br><span class="line">        <span class="title function_">alert</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">alert</span>(<span class="string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="property">status</span>);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;altevents.php&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>); </span><br></pre></td></tr></table></figure>
+
+<p>只要是从服务器收到响应，无论状态码是什么，都会触发 load 事件。这意味着还需要检查 status 属性才能确定数据是否有效。Firefox、Opera、Chrome 和 Safari 都支持 load 事件。</p>
+<h2 id="progress事件"><a href="#progress事件" class="headerlink" title="progress事件"></a>progress事件</h2><p>Mozilla 在 XHR 对象上另一个创新是 progress 事件，<strong>在浏览器接收数据期间，这个事件会反复触发。</strong>每次触发时，onprogress 事件处理程序都会收到 event 对象，其 target 属性是 XHR 对象，且 包含 3 个额外属性：lengthComputable、position 和 totalSize。其中，lengthComputable 是 一个布尔值，表示进度信息是否可用；position 是接收到的字节数；totalSize 是响应的 ContentLength 头部定义的总字节数。有了这些信息，就可以给用户提供进度条了。以下代码演示了如何向用户展示进度：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="property">onload</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">     <span class="keyword">if</span> ((xhr.<span class="property">status</span> &gt;= <span class="number">200</span> &amp;&amp; xhr.<span class="property">status</span> &lt; <span class="number">300</span>) ||</span><br><span class="line">        xhr.<span class="property">status</span> == <span class="number">304</span>) &#123;</span><br><span class="line">        <span class="title function_">alert</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">alert</span>(<span class="string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="property">status</span>);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.<span class="property">onprogress</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line"> <span class="keyword">let</span> divStatus = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;status&quot;</span>);</span><br><span class="line"> <span class="keyword">if</span> (event.<span class="property">lengthComputable</span>) &#123;</span><br><span class="line">     divStatus.<span class="property">innerHTML</span> = <span class="string">&quot;Received &quot;</span> + event.<span class="property">position</span> + <span class="string">&quot; of &quot;</span> +</span><br><span class="line">     event.<span class="property">totalSize</span> +</span><br><span class="line">    <span class="string">&quot; bytes&quot;</span>;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;altevents.php&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>为了保证正确执行，必须在调用 open()之前添加 onprogress 事件处理程序。在前面的例子中， 每次触发 progress 事件都会更新 HTML 元素中的信息。假设响应有 Content-Length 头部，就可以利用这些信息计算出已经收到响应的百分比。</p>
+<h1 id="跨域资源共享"><a href="#跨域资源共享" class="headerlink" title="跨域资源共享"></a>跨域资源共享</h1><p>通过 XHR 进行 Ajax 通信的一个主要限制是跨源安全策略。默认情况下，XHR 只能访问与发起请求的页面在同一个域内的资源。这个安全限制可以防止某些恶意行为。不过，浏览器也需要支持合法跨源访问的能力。</p>
+<p>跨源资源共享（CORS，<code>Cross-Origin Resource Sharing</code>）定义了浏览器与服务器如何实现跨源通信。 <code>CORS</code> 背后的基本思路就是使用自定义的 HTTP 头部允许浏览器和服务器相互了解，以确实请求或响应应该成功还是失败。</p>
+<p>对于简单的请求，比如 GET 或 POST 请求，没有自定义头部，而且请求体是 <code>text/plain</code> 类型， 这样的请求在发送时会有一个额外的头部叫 <code>Origin</code>。<code>Origin</code> 头部包含发送请求的页面的源（协议、 域名和端口），以便服务器确定是否为其提供响应。下面是 <code>Origin</code> 头部的一个示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Origin: http://www.nczonline.net</span><br></pre></td></tr></table></figure>
+
+<p>如果服务器决定响应请求，那么应该发送 Access-Control-Allow-Origin 头部，包含相同的源； 或者如果资源是公开的，那么就包含”*”。比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://www.nczonline.net</span><br></pre></td></tr></table></figure>
+
+<p>如果没有这个头部，或者有但源不匹配，则表明不会响应浏览器请求。否则，服务器就会处理这个请求。注意，无论请求还是响应都不会包含 cookie 信息。</p>
+<p>现代浏览器通过 XMLHttpRequest 对象原生支持 CORS。在尝试访问不同源的资源时，这个行为会被自动触发。要向不同域的源发送请求，可以使用标准 XHR对象并给 open()方法传入一个绝对 URL， 比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="keyword">if</span> (xhr.<span class="property">readyState</span> == <span class="number">4</span>) &#123;</span><br><span class="line">     <span class="keyword">if</span> ((xhr.<span class="property">status</span> &gt;= <span class="number">200</span> &amp;&amp; xhr.<span class="property">status</span> &lt; <span class="number">300</span>) || xhr.<span class="property">status</span> == <span class="number">304</span>) &#123;</span><br><span class="line">        <span class="title function_">alert</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">alert</span>(<span class="string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="property">status</span>);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;http://www.somewhere-else.com/page/&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>跨域 XHR 对象允许访问 status 和 statusText 属性，也允许同步请求。出于安全考虑，跨域 XHR 对象也施加了一些额外限制。</p>
+<ol>
+<li>不能使用setRequestHeader()设置自定义头部</li>
+<li>不能发送和接收cookie</li>
+<li>getAllResponseHeaders()方法始终返回空字符串</li>
+</ol>
+<p>因为无论同域还是跨域请求都使用同一个接口，所以最好在访问本地资源时使用相对 URL，在访问远程资源时使用绝对 URL。这样可以更明确地区分使用场景，同时避免出现访问本地资源时出现头部或 cookie 信息访问受限的问题。</p>
+<h2 id="预检请求"><a href="#预检请求" class="headerlink" title="预检请求"></a>预检请求</h2><p>CORS 通过一种叫预检请求（preflighted request）的服务器验证机制，允许使用自定义头部、除 GET 和 POST 之外的方法，以及不同请求体内容类型。在要发送涉及上述某种高级选项的请求时，会先向服务器发送一个“预检”请求。这个请求使用 OPTIONS 方法发送并包含以下头部。</p>
+<ol>
+<li><p>Origin</p>
+<p>与简单请求相同</p>
+</li>
+<li><p>Access-Control-Request-Method</p>
+<p>请求希望使用的方法</p>
+</li>
+<li><p>Access-Control-Request-Headers</p>
+<p>（可选）要使用的逗号分隔的自定义头部列表。</p>
+</li>
+</ol>
+<p>下面是一个假设的 POST 请求，包含自定义的 NCZ 头部：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Origin: http://www.nczonline.net</span><br><span class="line">Access-Control-Request-Method: POST</span><br><span class="line">Access-Control-Request-Headers: NCZ</span><br></pre></td></tr></table></figure>
+
+<p>在这个请求发送后，服务器可以确定是否允许这种类型的请求。服务器会通过在响应中发送如下头部与浏览器沟通这些信息。</p>
+<ol>
+<li><p>Access-Control-Allow-Origin</p>
+<p>与简单请求相同。</p>
+</li>
+<li><p>Access-Control-Allow-Methods</p>
+<p>允许的方法（逗号分隔的列表）。</p>
+</li>
+<li><p>Access-Control-Allow-Headers</p>
+<p>服务器允许的头部（逗号分隔的列表）</p>
+</li>
+<li><p>Access-Control-Max-Age</p>
+<p>缓存预检请求的秒数。</p>
+</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://www.nczonline.net</span><br><span class="line">Access-Control-Allow-Methods: POST, GET</span><br><span class="line">Access-Control-Allow-Headers: NCZ</span><br><span class="line">Access-Control-Max-Age: 1728000</span><br></pre></td></tr></table></figure>
+
+<p>预检请求返回后，结果会按响应指定的时间缓存一段时间。换句话说，只有第一次发送这种类型的 请求时才会多发送一次额外的 HTTP 请求。</p>
+<h1 id="替代性跨源技术"><a href="#替代性跨源技术" class="headerlink" title="替代性跨源技术"></a>替代性跨源技术</h1><p>CORS 出现之前，实现跨源 Ajax 通信是有点麻烦的。开发者需要依赖能够执行跨源请求的 DOM 特 性，在不使用 XHR 对象情况下发送某种类型的请求。虽然 CORS 目前已经得到广泛支持，但这些技术 仍然没有过时，因为它们不需要修改服务器。</p>
+<h2 id="图片检测"><a href="#图片检测" class="headerlink" title="图片检测"></a>图片检测</h2><p>图片探测是利用<code>&lt;img&gt;</code>标签实现跨域通信的最早的一种技术。任何页面都可以跨域加载图片而不必担心限制，因此这也是在线广告跟踪的主要方式。可以动态创建图片，然后通过它们的 <code>onload</code> 和 <code>onerror</code> 事件处理程序得知何时收到响应。</p>
+<p>这种动态创建图片的技术经常用于图片探测（image pings）。图片探测是与服务器之间简单、跨域、 单向的通信。数据通过查询字符串发送，响应可以随意设置，不过一般是位图图片或值为 204 的状态码。 浏览器通过图片探测拿不到任何数据，但可以通过监听 onload 和 onerror 事件知道什么时候能接收 到响应。下面看一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> img = <span class="keyword">new</span> <span class="title class_">Image</span>();</span><br><span class="line">img.<span class="property">onload</span> = img.<span class="property">onerror</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="title function_">alert</span>(<span class="string">&quot;Done!&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line">img.<span class="property">src</span> = <span class="string">&quot;http://www.example.com/test?name=Nicholas&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这个例子创建了一个新的 Image 实例，然后为它的 onload 和 onerror 事件处理程序添加了同一 个函数。这样可以确保请求完成时无论什么响应都会收到通知。设置完 src 属性之后请求就开始了，这个例子向服务器发送了一个 name 值。</p>
+<p>图片探测频繁用于跟踪用户在页面上的点击操作或动态显示广告。当然，图片探测的缺点是只能发送 GET 请求和无法获取服务器响应的内容。这也是只能利用图片探测实现浏览器与服务器单向通信的原因。</p>
+<h1 id="Fetch-API"><a href="#Fetch-API" class="headerlink" title="Fetch API"></a>Fetch API</h1><p>Fetch API 能够执行 XMLHttpRequest 对象的所有任务，但更容易使用，接口也更现代化，能够在 Web 工作线程等现代 Web 工具中使用。XMLHttpRequest 可以选择异步，而 Fetch API 则必须是异步。Fetch API 是 WHATWG 的一个“活标准”（living standard），用规范原文说，就是“Fetch 标准定义请求、 响应，以及绑定二者的流程：获取（fetch）”。</p>
+<p>Fetch API 本身是使用 JavaScript 请求资源的优秀工具，同时这个 API 也能够应用在服务线程 （service worker）中，提供拦截、重定向和修改通过 fetch()生成的请求接口。</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p><code>fetch()</code>方法是暴露在全局作用域中的，包括主页面执行线程、模块和工作线程。调用这个方法， 浏览器就会向给定 URL 发送请求。</p>
+<ol>
+<li><p>分派请求</p>
+<p><code>fetch()</code>只有一个必需的参数 <code>input</code>。多数情况下，这个参数是要获取资源的 URL。这个方法返回 一个期约：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="title function_">fetch</span>(<span class="string">&#x27;/bar&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r); <span class="comment">// Promise &lt;pending&gt; </span></span><br></pre></td></tr></table></figure>
+
+<p>URL 的格式（相对路径、绝对路径等）的解释与 XHR 对象一样。</p>
+<p> 请求完成、资源可用时，期约会解决为一个 Response 对象。这个对象是 API 的封装，可以通过它取得相应资源。获取资源要使用这个对象的属性和方法，掌握响应的情况并将负载转换为有用的形式， 如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;bar.txt&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(response);</span><br><span class="line"> &#125;);</span><br><span class="line"><span class="comment">// Response &#123; type: &quot;basic&quot;, url: ... &#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>读取响应</p>
+<p>读取响应内容的最简单方式是取得纯文本格式的内容，这要用到 <code>text()</code>方法。这个方法返回一个期约，会解决为取得资源的完整内容：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;bar.txt&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">     response.<span class="title function_">text</span>().<span class="title function_">then</span>(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">     &#125;);</span><br><span class="line"> &#125;);</span><br><span class="line"><span class="comment">// bar.txt 的内容</span></span><br></pre></td></tr></table></figure>
+
+<p>内容的结构通常是打平的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;bar.txt&#x27;</span>)</span><br><span class="line"> 	.<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line"> 	.<span class="title function_">then</span>(<span class="function">(<span class="params">data</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(data));</span><br><span class="line"><span class="comment">// bar.txt 的内容</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>处理状态码和请求失败</p>
+<p>Fetch API 支持通过 Response 的 status（状态码）和 statusText（状态文本）属性检查响应状态。成功获取响应的请求通常会产生值为 200 的状态码，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/bar&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">status</span>); <span class="comment">// 200</span></span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">statusText</span>); <span class="comment">// OK</span></span><br><span class="line"> &#125;); </span><br></pre></td></tr></table></figure>
+
+<p>请求不存在的资源通常会产生值为 404 的状态码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/does-not-exist&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">status</span>); <span class="comment">// 404</span></span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">statusText</span>); <span class="comment">// Not Found</span></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>请求的 URL 如果抛出服务器错误会产生值为 500 的状态码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/throw-server-error&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">status</span>); <span class="comment">// 500</span></span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">statusText</span>); <span class="comment">// Internal Server Error</span></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>可以显式地设置 <code>fetch()</code>在遇到重定向时的行为（本章后面会介绍），不过默认行为是跟随重定向 并返回状态码不是 300~399 的响应。跟随重定向时，响应对象的 redirected 属性会被设置为 true， 而状态码仍然是 200：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/permanent-redirect&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="comment">// 默认行为是跟随重定向直到最终 URL</span></span><br><span class="line">     <span class="comment">// 这个例子会出现至少两轮网络请求</span></span><br><span class="line">     <span class="comment">// &lt;origin url&gt;/permanent-redirect -&gt; &lt;redirect url&gt;</span></span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">status</span>); <span class="comment">// 200</span></span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">statusText</span>); <span class="comment">// OK</span></span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">redirected</span>); <span class="comment">// true</span></span><br><span class="line"> &#125;); </span><br></pre></td></tr></table></figure>
+
+<p>在前面这几个例子中，虽然请求可能失败（如状态码为 500），但都只执行了期约的解决处理函数。 事实上，只要服务器返回了响应，fetch()期约都会解决。这个行为是合理的：系统级网络协议已经成 功完成消息的一次往返传输。至于真正的“成功”请求，则需要在处理响应时再定义。</p>
+<p>通常状态码为 200 时就会被认为成功了，其他情况可以被认为未成功。为区分这两种情况，可以在 状态码非 200~299 时检查 Response 对象的 ok 属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/bar&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">status</span>); <span class="comment">// 200</span></span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">ok</span>); <span class="comment">// true</span></span><br><span class="line"> &#125;);</span><br><span class="line"> </span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/does-not-exist&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">status</span>); <span class="comment">// 404</span></span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">ok</span>); <span class="comment">// false</span></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>因为服务器没有响应而导致浏览器超时，这样真正的 fetch()失败会导致期约被拒绝：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/hangs-forever&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(response);</span><br><span class="line"> &#125;, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123; </span><br><span class="line">  	<span class="variable language_">console</span>.<span class="title function_">log</span>(err);</span><br><span class="line"> &#125;);</span><br><span class="line"><span class="comment">//（浏览器超时后）</span></span><br><span class="line"><span class="comment">// TypeError: &quot;NetworkError when attempting to fetch resource.&quot; </span></span><br></pre></td></tr></table></figure>
+
+<p>违反 CORS、无网络连接、HTTPS 错配及其他浏览器&#x2F;网络策略问题都会导致期约被拒绝。</p>
+<p>可以通过 url 属性检查通过 fetch()发送请求时使用的完整 URL：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// foo.com/bar/baz 发送的请求</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span>); <span class="comment">// https://foo.com/bar/baz</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;qux&#x27;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">url</span>));</span><br><span class="line"><span class="comment">// https://foo.com/bar/qux</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/qux&#x27;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">url</span>));</span><br><span class="line"><span class="comment">// https://foo.com/qux</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;//qux.com&#x27;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">url</span>));</span><br><span class="line"><span class="comment">// https://qux.com</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://qux.com&#x27;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">url</span>));</span><br><span class="line"><span class="comment">// https://qux.com</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义选项</p>
+<p>只使用 URL 时，fetch()会发送 GET 请求，只包含最低限度的请求头。要进一步配置如何发送请 求，需要传入可选的第二个参数 init 对象。</p>
+</li>
+</ol>
+<h2 id="常见fetch请求模式"><a href="#常见fetch请求模式" class="headerlink" title="常见fetch请求模式"></a>常见fetch请求模式</h2><p>与 XMLHttpRequest 一样，fetch()既可以发送数据也可以接收数据。使用 init 对象参数，可以配置 fetch()在请求体中发送各种序列化的数据。</p>
+<ol>
+<li><p>发送JSON数据</p>
+<p>可以像下面这样发送简单 JSON 字符串：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> payload = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line"> 	<span class="attr">foo</span>: <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> jsonHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>(&#123;</span><br><span class="line"> 	<span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/send-me-json&#x27;</span>, &#123;</span><br><span class="line">     <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="comment">// 发送请求体时必须使用一种 HTTP 方法</span></span><br><span class="line">     <span class="attr">body</span>: payload,</span><br><span class="line">     <span class="attr">headers</span>: jsonHeaders</span><br><span class="line">&#125;); </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在请求体中发送参数</p>
+<p>因为请求体支持任意字符串值，所以可以通过它发送请求参数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> payload = <span class="string">&#x27;foo=bar&amp;baz=qux&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> paramHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>(&#123;</span><br><span class="line"> 	<span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/x-www-form-urlencoded; charset=UTF-8&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/send-me-params&#x27;</span>, &#123;</span><br><span class="line">     <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="comment">// 发送请求体时必须使用一种 HTTP 方法</span></span><br><span class="line">     <span class="attr">body</span>: payload,</span><br><span class="line">     <span class="attr">headers</span>: paramHeaders</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>发送文件</p>
+<p>因为请求体支持 FormData 实现，所以 fetch()也可以序列化并发送文件字段中的文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> imageFormData = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line"><span class="keyword">let</span> imageInput = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;input[type=&#x27;file&#x27;]&quot;</span>);</span><br><span class="line"></span><br><span class="line">imageFormData.<span class="title function_">append</span>(<span class="string">&#x27;image&#x27;</span>, imageInput.<span class="property">files</span>[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/img-upload&#x27;</span>, &#123;</span><br><span class="line">     <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">     <span class="attr">body</span>: imageFormData</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这个 fetch()实现可以支持多个文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> imageFormData = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line"><span class="keyword">let</span> imageInput = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;input[type=&#x27;file&#x27;][multiple]&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; imageInput.<span class="property">files</span>.<span class="property">length</span>; ++i) &#123;</span><br><span class="line"> imageFormData.<span class="title function_">append</span>(<span class="string">&#x27;image&#x27;</span>, imageInput.<span class="property">files</span>[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/img-upload&#x27;</span>, &#123;</span><br><span class="line"> <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line"> <span class="attr">body</span>: imageFormData</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加载Blob文件</p>
+<p>Fetch API也能提供 Blob 类型的响应，而 Blob 又可以兼容多种浏览器 API。一种常见的做法是明确将 图片文件加载到内存，然后将其添加到 HTML图片元素。为此，可以使用响应对象上暴露的 blob()方法。 这个方法返回一个期约，解决为一个 Blob 的实例。然后，可以将这个实例传给 URL.createObjectUrl() 以生成可以添加给图片元素 src 属性的值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> imageElement = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;img&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;my-image.png&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> response.<span class="title function_">blob</span>())</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">blob</span>) =&gt;</span> &#123;</span><br><span class="line"> 	imageElement.<span class="property">src</span> = <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(blob);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>发送跨源请求</p>
+<p>从不同的源请求资源，响应要包含 CORS 头部才能保证浏览器收到响应。没有这些头部，跨源请求会失败并抛出错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;//cross-origin.com&#x27;</span>);</span><br><span class="line"><span class="comment">// TypeError: Failed to fetch</span></span><br><span class="line"><span class="comment">// No &#x27;Access-Control-Allow-Origin&#x27; header is present on the requested resource.</span></span><br></pre></td></tr></table></figure>
+
+<p>如果代码不需要访问响应，也可以发送 no-cors 请求。此时响应的 type 属性值为 opaque，因此无法读取响应内容。这种方式适合发送探测请求或者将响应缓存起来供以后使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;//cross-origin.com&#x27;</span>, &#123; <span class="attr">method</span>: <span class="string">&#x27;no-cors&#x27;</span> &#125;)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">type</span>));</span><br><span class="line"><span class="comment">// opaque</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>中断请求</p>
+<p>Fetch API 支持通过 AbortController&#x2F;AbortSignal 对中断请求。调用 AbortController. abort()会中断所有网络传输，特别适合希望停止传输大型负载的情况。中断进行中的 fetch()请求会 导致包含错误的拒绝。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> abortController = <span class="keyword">new</span> <span class="title class_">AbortController</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;wikipedia.zip&#x27;</span>, &#123; <span class="attr">signal</span>: abortController.<span class="property">signal</span> &#125;)</span><br><span class="line"> 	.<span class="title function_">catch</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;aborted!&#x27;</span>);</span><br><span class="line">           </span><br><span class="line"><span class="comment">// 10 毫秒后中断请求</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> abortController.<span class="title function_">abort</span>(), <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 已经中断</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Headers对象"><a href="#Headers对象" class="headerlink" title="Headers对象"></a>Headers对象</h2><p>Headers 对象是所有外发请求和入站响应头部的容器。每个外发的 Request 实例都包含一个空的 Headers 实例，可以通过 Request.prototype.headers 访问，每个入站 Response 实例也可以通过 Response.prototype.headers 访问包含着响应头部的 Headers 对象。这两个属性都是可修改属性。 另外，使用 new Headers()也可以创建一个新实例。</p>
+<ol>
+<li><p>Headers 与 Map 的相似之处</p>
+<p>Headers 对象与 Map 对象极为相似。这是合理的，因为 HTTP 头部本质上是序列化后的键&#x2F;值对， 它们的 JavaScript 表示则是中间接口。Headers 与 Map 类型都有 get()、set()、has()和 delete() 等实例方法，如下面的代码所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> h = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line"><span class="keyword">let</span> m = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line"><span class="comment">// 设置键</span></span><br><span class="line">h.<span class="title function_">set</span>(<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>);</span><br><span class="line">m.<span class="title function_">set</span>(<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>);</span><br><span class="line"><span class="comment">// 检查键</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(h.<span class="title function_">has</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m.<span class="title function_">has</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(h.<span class="title function_">has</span>(<span class="string">&#x27;qux&#x27;</span>)); <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m.<span class="title function_">has</span>(<span class="string">&#x27;qux&#x27;</span>)); <span class="comment">// false</span></span><br><span class="line"><span class="comment">// 获取值</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(h.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// bar</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// bar</span></span><br><span class="line"><span class="comment">// 更新值</span></span><br><span class="line">h.<span class="title function_">set</span>(<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;baz&#x27;</span>);</span><br><span class="line">m.<span class="title function_">set</span>(<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;baz&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得更新的值</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(h.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// baz</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// baz</span></span><br><span class="line"><span class="comment">// 删除值</span></span><br><span class="line">h.<span class="title function_">delete</span>(<span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line">m.<span class="title function_">delete</span>(<span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line"><span class="comment">// 确定值已经删除</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(h.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>Headers 和 Map 都可以使用一个可迭代对象来初始化，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> seed = [[<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>]];</span><br><span class="line"><span class="keyword">let</span> h = <span class="keyword">new</span> <span class="title class_">Headers</span>(seed);</span><br><span class="line"><span class="keyword">let</span> m = <span class="keyword">new</span> <span class="title class_">Map</span>(seed);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(h.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// bar</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// bar</span></span><br></pre></td></tr></table></figure>
+
+<p>而且，它们也都有相同的 keys()、values()和 entries()迭代器接口：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> seed = [[<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>], [<span class="string">&#x27;baz&#x27;</span>, <span class="string">&#x27;qux&#x27;</span>]];</span><br><span class="line"><span class="keyword">let</span> h = <span class="keyword">new</span> <span class="title class_">Headers</span>(seed);</span><br><span class="line"><span class="keyword">let</span> m = <span class="keyword">new</span> <span class="title class_">Map</span>(seed);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(...h.<span class="title function_">keys</span>()); <span class="comment">// foo, baz</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(...m.<span class="title function_">keys</span>()); <span class="comment">// foo, baz</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(...h.<span class="title function_">values</span>()); <span class="comment">// bar, qux</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(...m.<span class="title function_">values</span>()); <span class="comment">// bar, qux</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(...h.<span class="title function_">entries</span>()); <span class="comment">// [&#x27;foo&#x27;, &#x27;bar&#x27;], [&#x27;baz&#x27;, &#x27;qux&#x27;]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(...m.<span class="title function_">entries</span>()); <span class="comment">// [&#x27;foo&#x27;, &#x27;bar&#x27;], [&#x27;baz&#x27;, &#x27;qux&#x27;]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Headers独有的特性</p>
+<p>Headers 并不是与 Map 处处都一样。在初始化 Headers 对象时，也可以使用键&#x2F;值对形式的对象， 而 Map 则不可以：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> seed = &#123;<span class="attr">foo</span>: <span class="string">&#x27;bar&#x27;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> h = <span class="keyword">new</span> <span class="title class_">Headers</span>(seed);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(h.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// bar</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> m = <span class="keyword">new</span> <span class="title class_">Map</span>(seed);</span><br><span class="line"><span class="comment">// TypeError: object is not iterable</span></span><br></pre></td></tr></table></figure>
+
+<p>一个 HTTP 头部字段可以有多个值，而 Headers 对象通过 append()方法支持添加多个值。在 Headers 实例中还不存在的头部上调用 append()方法相当于调用 set()。后续调用会以逗号为分隔符 拼接多个值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> h = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line"></span><br><span class="line">h.<span class="title function_">append</span>(<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(h.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// &quot;bar&quot;</span></span><br><span class="line"></span><br><span class="line">h.<span class="title function_">append</span>(<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;baz&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(h.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// &quot;bar, baz&quot; </span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>头部护卫</p>
+<p>某些情况下，并非所有 HTTP 头部都可以被客户端修改，而 Headers 对象使用护卫来防止不被允 许的修改。不同的护卫设置会改变 set()、append()和 delete()的行为。违反护卫限制会抛出 TypeError。</p>
+<p>Headers 实例会因来源不同而展现不同的行为，它们的行为由护卫来控制。JavaScript 可以决定 Headers 实例的护卫设置。下表列出了不同的护卫设置和每种设置对应的行为。</p>
+<table>
+<thead>
+<tr>
+<th>护卫</th>
+<th>适用情形</th>
+<th>限制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>none</td>
+<td>在通过构造函数创建 Headers 实例时激活</td>
+<td>无</td>
+</tr>
+<tr>
+<td>Request</td>
+<td>在通过构造函数初始化 Request对象，且 mode 值为非 no-cors 时激活</td>
+<td>不允许修改禁止修改的头部（参见 MDN 文档中 的 forbidden header name 词条）</td>
+</tr>
+<tr>
+<td>request-no-cors</td>
+<td>在通过构造函数初始化 Request对象，且 mode 值为 no-cors 时激活</td>
+<td>不允许修改非简单头部（参见 MDN 文档中的 simple header 词条）</td>
+</tr>
+<tr>
+<td>response</td>
+<td>在通过构造函数初始化 Response 对象时激活</td>
+<td>不允许修改禁止修改的响应头部（参见 MDN 文 档中的 forbidden response header name 词条）</td>
+</tr>
+<tr>
+<td>immutable</td>
+<td>在通过 error()或 redirect()静态方法初始 化 Response 对象时激活</td>
+<td>不允许修改任何头部</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h2 id="Request对象"><a href="#Request对象" class="headerlink" title="Request对象"></a>Request对象</h2><p>顾名思义，Request 对象是获取资源请求的接口。这个接口暴露了请求的相关信息，也暴露了使用请求体的不同方式。</p>
+<ol>
+<li><p>创建Request对象</p>
+<p>可以通过构造函数初始化 Request 对象。为此需要传入一个 input 参数，一般是 URL：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r);</span><br><span class="line"><span class="comment">// Request &#123;...&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Request 构造函数也接收第二个参数——一个 init 对象。这个 init 对象与前面介绍的 fetch() 的 init 对象一样。没有在 init 对象中涉及的值则会使用默认值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用所有默认值创建 Request 对象</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;&#x27;</span>));</span><br><span class="line"><span class="comment">// Request &#123;</span></span><br><span class="line"><span class="comment">// 		bodyUsed: false</span></span><br><span class="line"><span class="comment">// 		cache: &quot;default&quot;</span></span><br><span class="line"><span class="comment">// 		credentials: &quot;same-origin&quot;</span></span><br><span class="line"><span class="comment">// 		destination: &quot;&quot;</span></span><br><span class="line"><span class="comment">// 		headers: Headers &#123;&#125;</span></span><br><span class="line"><span class="comment">// 		integrity: &quot;&quot;</span></span><br><span class="line"><span class="comment">// 		keepalive: false</span></span><br><span class="line"><span class="comment">// 		method: &quot;GET&quot;</span></span><br><span class="line"><span class="comment">// 		mode: &quot;cors&quot;</span></span><br><span class="line"><span class="comment">// 		redirect: &quot;follow&quot;</span></span><br><span class="line"><span class="comment">// 		referrer: &quot;about:client&quot;</span></span><br><span class="line"><span class="comment">// 		referrerPolicy: &quot;&quot;</span></span><br><span class="line"><span class="comment">// 		signal: AbortSignal &#123;aborted: false, onabort: null&#125;</span></span><br><span class="line"><span class="comment">// 		url: &quot;&lt;current URL&gt;&quot;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用指定的初始值创建 Request 对象</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line"> &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span> &#125;));</span><br><span class="line"><span class="comment">// Request &#123;</span></span><br><span class="line"><span class="comment">// 		bodyUsed: false</span></span><br><span class="line"><span class="comment">// 		cache: &quot;default&quot;</span></span><br><span class="line"><span class="comment">// 		credentials: &quot;same-origin&quot;</span></span><br><span class="line"><span class="comment">// 		destination: &quot;&quot;</span></span><br><span class="line"><span class="comment">// 		headers: Headers &#123;&#125;</span></span><br><span class="line"><span class="comment">// 		integrity: &quot;&quot;</span></span><br><span class="line"><span class="comment">// 		keepalive: false</span></span><br><span class="line"><span class="comment">// 		method: &quot;POST&quot;</span></span><br><span class="line"><span class="comment">// 		mode: &quot;cors&quot;</span></span><br><span class="line"><span class="comment">// 		redirect: &quot;follow&quot;</span></span><br><span class="line"><span class="comment">// 		referrer: &quot;about:client&quot;</span></span><br><span class="line"><span class="comment">// 		referrerPolicy: &quot;&quot;</span></span><br><span class="line"><span class="comment">// 		signal: AbortSignal &#123;aborted: false, onabort: null&#125;</span></span><br><span class="line"><span class="comment">// 		url: &quot;https://foo.com/&quot;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>克隆Request对象</p>
+<p>Fetch API 提供了两种不太一样的方式用于创建 Request 对象的副本：使用 Request 构造函数和使用 clone()方法。</p>
+<p>将 Request 实例作为 input 参数传给 Request 构造函数，会得到该请求的一个副本：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r1 = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> r2 = <span class="keyword">new</span> <span class="title class_">Request</span>(r1);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r2.<span class="property">url</span>); <span class="comment">// https://foo.com/</span></span><br></pre></td></tr></table></figure>
+
+<p>如果再传入 init 对象，则 init 对象的值会覆盖源对象中同名的值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r1 = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> r2 = <span class="keyword">new</span> <span class="title class_">Request</span>(r1, &#123;<span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r1.<span class="property">method</span>); <span class="comment">// GET</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r2.<span class="property">method</span>); <span class="comment">// POST</span></span><br></pre></td></tr></table></figure>
+
+<p>这种克隆方式并不总能得到一模一样的副本。最明显的是，第一个请求的请求体会被标记为“已使用”：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r1 = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line"> &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;foobar&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> r2 = <span class="keyword">new</span> <span class="title class_">Request</span>(r1);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r1.<span class="property">bodyUsed</span>); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r2.<span class="property">bodyUsed</span>); <span class="comment">// false </span></span><br></pre></td></tr></table></figure>
+
+<p>如果源对象与创建的新对象不同源，则 referrer 属性会被清除。此外，如果源对象的 mode 为 navigate，则会被转换为 same-origin。</p>
+<p>第二种克隆 Request 对象的方式是使用 clone()方法，这个方法会创建一模一样的副本，任何值都不会被覆盖。与第一种方式不同，这种方法不会将任何请求的请求体标记为“已使用”：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r1 = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>, &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;foobar&#x27;</span> &#125;);</span><br><span class="line"><span class="keyword">let</span> r2 = r1.<span class="title function_">clone</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r1.<span class="property">url</span>); <span class="comment">// https://foo.com/</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r2.<span class="property">url</span>); <span class="comment">// https://foo.com/</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r1.<span class="property">bodyUsed</span>); <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r2.<span class="property">bodyUsed</span>); <span class="comment">// false </span></span><br></pre></td></tr></table></figure>
+
+<p>如果请求对象的 bodyUsed 属性为 true（即请求体已被读取），那么上述任何一种方式都不能用来创建这个对象的副本。在请求体被读取之后再克隆会导致抛出 TypeError。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>);</span><br><span class="line">r.<span class="title function_">clone</span>();</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Request</span>(r);</span><br><span class="line"><span class="comment">// 没有错误</span></span><br><span class="line"></span><br><span class="line">r.<span class="title function_">text</span>(); <span class="comment">// 设置 bodyUsed 为 true</span></span><br><span class="line">r.<span class="title function_">clone</span>();</span><br><span class="line"><span class="comment">// TypeError: Failed to execute &#x27;clone&#x27; on &#x27;Request&#x27;: Request body is already used</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Request</span>(r);</span><br><span class="line"><span class="comment">// TypeError: Failed to construct &#x27;Request&#x27;: Cannot construct a Request with a</span></span><br><span class="line"><span class="title class_">Request</span> object that has already been used.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在fetch()中使用Request对象</p>
+<p>fetch()和 Request 构造函数拥有相同的函数签名并不是巧合。在调用 fetch()时，可以传入已经创建好的 Request 实例而不是 URL。与 Request 构造函数一样，传给 fetch()的 init 对象会覆 盖传入请求对象的值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向 foo.com 发送 GET 请求</span></span><br><span class="line"><span class="title function_">fetch</span>(r);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向 foo.com 发送 POST 请求</span></span><br><span class="line"><span class="title function_">fetch</span>(r, &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>fetch()会在内部克隆传入的 Request 对象。与克隆 Request 一样，fetch()也不能拿请求体已经用过的 Request 对象来发送请求：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line"> &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;foobar&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line">r.<span class="title function_">text</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(r);</span><br><span class="line"><span class="comment">// TypeError: Cannot construct a Request with a Request object that has already</span></span><br><span class="line">been used.</span><br></pre></td></tr></table></figure>
+
+<p>关键在于，通过 fetch 使用 Request 会将请求体标记为已使用。也就是说，有请求体的 Request 只能在一次 fetch 中使用。（不包含请求体的请求不受此限制。）演示如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line"> &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;foobar&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(r);</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(r);</span><br><span class="line"><span class="comment">// TypeError: Cannot construct a Request with a Request object that has already been used. </span></span><br></pre></td></tr></table></figure>
+
+<p>要想基于包含请求体的相同 Request 对象多次调用 fetch()，必须在第一次发送 fetch()请求前 调用 clone()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line"> &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;foobar&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3 个都会成功</span></span><br><span class="line"><span class="title function_">fetch</span>(r.<span class="title function_">clone</span>());</span><br><span class="line"><span class="title function_">fetch</span>(r.<span class="title function_">clone</span>());</span><br><span class="line"><span class="title function_">fetch</span>(r); </span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Response对象"><a href="#Response对象" class="headerlink" title="Response对象"></a>Response对象</h2><p>顾名思义，Response 对象是获取资源响应的接口。这个接口暴露了响应的相关信息，也暴露了使用响应体的不同方式。</p>
+<ol>
+<li><p>创建Response对象</p>
+<p>可以通过构造函数初始化 Response 对象且不需要参数。此时响应实例的属性均为默认值，因为它并不代表实际的 HTTP 响应：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="keyword">new</span> <span class="title class_">Response</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r);</span><br><span class="line"><span class="comment">// Response &#123;</span></span><br><span class="line"><span class="comment">// 		body: (...)</span></span><br><span class="line"><span class="comment">// 		bodyUsed: false</span></span><br><span class="line"><span class="comment">// 		headers: Headers &#123;&#125;</span></span><br><span class="line"><span class="comment">// 		ok: true</span></span><br><span class="line"><span class="comment">// 		redirected: false</span></span><br><span class="line"><span class="comment">// 		status: 200</span></span><br><span class="line"><span class="comment">// 		statusText: &quot;OK&quot;</span></span><br><span class="line"><span class="comment">// 		type: &quot;default&quot;</span></span><br><span class="line"><span class="comment">// 		url: &quot;&quot;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Response 构造函数接收一个可选的 body 参数。这个 body 可以是 null，等同于 fetch()参数 init 中的 body。还可以接收一个可选的 init 对象，这个对象可以包含下表所列的键和值。</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>headers</td>
+<td>必须是 Headers 对象实例或包含字符串键&#x2F;值对的常规对象实例，默认为没有键&#x2F;值对的 Headers 对象</td>
+</tr>
+<tr>
+<td>status</td>
+<td>表示 HTTP 响应状态码的整数，默认为 200</td>
+</tr>
+<tr>
+<td>statusText</td>
+<td>表示 HTTP 响应状态的字符串，默认为空字符串</td>
+</tr>
+</tbody></table>
+<p>可以像下面这样使用 body 和 init 来构建 Response 对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">&#x27;foobar&#x27;</span>, &#123;</span><br><span class="line"> <span class="attr">status</span>: <span class="number">418</span>,</span><br><span class="line"> <span class="attr">statusText</span>: <span class="string">&#x27;I\&#x27;m a teapot&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Response &#123;</span></span><br><span class="line"><span class="comment">// 		body: (...)</span></span><br><span class="line"><span class="comment">// 		bodyUsed: false</span></span><br><span class="line"><span class="comment">// 		headers: Headers &#123;&#125;</span></span><br><span class="line"><span class="comment">// 		ok: false</span></span><br><span class="line"><span class="comment">// 		redirected: false</span></span><br><span class="line"><span class="comment">// 		status: 418</span></span><br><span class="line"><span class="comment">// 		statusText: &quot;I&#x27;m a teapot&quot;</span></span><br><span class="line"><span class="comment">// 		type: &quot;default&quot;</span></span><br><span class="line"><span class="comment">// 		url: &quot;&quot;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>大多数情况下，产生 Response 对象的主要方式是调用 fetch()，它返回一个最后会解决为 Response 对象的期约，这个 Response 对象代表实际的 HTTP 响应。下面的代码展示了这样得到的 Response 对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://foo.com&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(response);</span><br><span class="line"> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Response &#123;</span></span><br><span class="line"><span class="comment">// 		body: (...)</span></span><br><span class="line"><span class="comment">// 		bodyUsed: false</span></span><br><span class="line"><span class="comment">// 		headers: Headers &#123;&#125;</span></span><br><span class="line"><span class="comment">// 		ok: true</span></span><br><span class="line"><span class="comment">// 		redirected: false</span></span><br><span class="line"><span class="comment">// 		status: 200</span></span><br><span class="line"><span class="comment">// 		statusText: &quot;OK&quot;</span></span><br><span class="line"><span class="comment">// 		type: &quot;basic&quot;</span></span><br><span class="line"><span class="comment">// 		url: &quot;https://foo.com/&quot;</span></span><br><span class="line"><span class="comment">// &#125; </span></span><br></pre></td></tr></table></figure>
+
+<p>Response 类还有两个用于生成 Response 对象的静态方法：Response.redirect()和 Response. error()。前者接收一个 URL 和一个重定向状态码（301、302、303、307 或 308），返回重定向的 Response 对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Response</span>.<span class="title function_">redirect</span>(<span class="string">&#x27;https://foo.com&#x27;</span>, <span class="number">301</span>));</span><br><span class="line"><span class="comment">// Response &#123;</span></span><br><span class="line"><span class="comment">// 		body: (...)</span></span><br><span class="line"><span class="comment">// 		bodyUsed: false</span></span><br><span class="line"><span class="comment">// 		headers: Headers &#123;&#125;</span></span><br><span class="line"><span class="comment">// 		ok: false</span></span><br><span class="line"><span class="comment">// 		redirected: false</span></span><br><span class="line"><span class="comment">// 		status: 301</span></span><br><span class="line"><span class="comment">// 		statusText: &quot;&quot;</span></span><br><span class="line"><span class="comment">// 		type: &quot;default&quot;</span></span><br><span class="line"><span class="comment">// 		url: &quot;&quot;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>提供的状态码必须对应重定向，否则会抛出错误：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Response</span>.<span class="title function_">redirect</span>(<span class="string">&#x27;https://foo.com&#x27;</span>, <span class="number">200</span>);</span><br><span class="line"><span class="comment">// RangeError: Failed to execute &#x27;redirect&#x27; on &#x27;Response&#x27;: Invalid status code</span></span><br></pre></td></tr></table></figure>
+
+<p>另一个静态方法 Response.error()用于产生表示网络错误的 Response 对象（网络错误会导致 fetch()期约被拒绝）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Response</span>.<span class="title function_">error</span>());</span><br><span class="line"><span class="comment">// Response &#123;</span></span><br><span class="line"><span class="comment">// 		body: (...)</span></span><br><span class="line"><span class="comment">// 		bodyUsed: false</span></span><br><span class="line"><span class="comment">// 		headers: Headers &#123;&#125;</span></span><br><span class="line"><span class="comment">// 		ok: false</span></span><br><span class="line"><span class="comment">// 		redirected: false</span></span><br><span class="line"><span class="comment">// 		status: 0</span></span><br><span class="line"><span class="comment">// 		statusText: &quot;&quot;</span></span><br><span class="line"><span class="comment">// 		type: &quot;error&quot;</span></span><br><span class="line"><span class="comment">// 		url: &quot;&quot;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>读取响应状态信息</p>
+<p>Response 对象包含一组只读属性，描述了请求完成后的状态，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>headers</td>
+<td>响应包含的 Headers 对象</td>
+</tr>
+<tr>
+<td>ok</td>
+<td>布尔值，表示 HTTP 状态码的含义。200~299 的状态码返回 true，其他状态码返回 false</td>
+</tr>
+<tr>
+<td>redirected</td>
+<td>布尔值，表示响应是否至少经过一次重定向</td>
+</tr>
+<tr>
+<td>status</td>
+<td>整数，表示响应的 HTTP 状态码</td>
+</tr>
+<tr>
+<td>statusText</td>
+<td>字符串，包含对 HTTP 状态码的正式描述。这个值派生自可选的 HTTP Reason-Phrase 字段，因此如果服务器以 Reason-Phrase 为由拒绝响应，这个字段可能是空字符串</td>
+</tr>
+<tr>
+<td>type</td>
+<td>字符串，包含响应类型。可能是下列字符串值之一<br />1、basic：表示标准的同源响应<br />2、cors：表示标准的跨源响应<br />3、error：表示响应对象是通过 Response.error()创建的<br />4、opaque：表示 no-cors 的 fetch()返回的跨源响应<br />5、opaqueredirect：表示对 redirect 设置为 manual 的请求的响应</td>
+</tr>
+<tr>
+<td>url</td>
+<td>包含响应 URL 的字符串。对于重定向响应，这是最终的 URL，非重定向响应就是它产生的</td>
+</tr>
+</tbody></table>
+<p>以下代码演示了返回 200、302、404 和 500 状态码的 URL 对应的响应：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;//foo.com&#x27;</span>).<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"><span class="comment">// Response &#123;</span></span><br><span class="line"><span class="comment">// 		body: (...)</span></span><br><span class="line"><span class="comment">// 		bodyUsed: false</span></span><br><span class="line"><span class="comment">// 		headers: Headers &#123;&#125;</span></span><br><span class="line"><span class="comment">// 		ok: true</span></span><br><span class="line"><span class="comment">// 		redirected: false</span></span><br><span class="line"><span class="comment">// 		status: 200</span></span><br><span class="line"><span class="comment">// 		statusText: &quot;OK&quot;</span></span><br><span class="line"><span class="comment">// 		type: &quot;basic&quot;</span></span><br><span class="line"><span class="comment">// 		url: &quot;https://foo.com/&quot;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;//foo.com/redirect-me&#x27;</span>).<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"><span class="comment">// Response &#123;</span></span><br><span class="line"><span class="comment">// 		body: (...)</span></span><br><span class="line"><span class="comment">// 		bodyUsed: false</span></span><br><span class="line"><span class="comment">// 		headers: Headers &#123;&#125;</span></span><br><span class="line"><span class="comment">// 		ok: true</span></span><br><span class="line"><span class="comment">// 		redirected: true</span></span><br><span class="line"><span class="comment">// 		status: 200</span></span><br><span class="line"><span class="comment">// 		statusText: &quot;OK&quot;</span></span><br><span class="line"><span class="comment">// 		type: &quot;basic&quot;</span></span><br><span class="line"><span class="comment">// 		url: &quot;https://foo.com/redirected-url/&quot;</span></span><br><span class="line"><span class="comment">// &#125; </span></span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;//foo.com/does-not-exist&#x27;</span>).<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"><span class="comment">// Response &#123;</span></span><br><span class="line"><span class="comment">// 		body: (...)</span></span><br><span class="line"><span class="comment">// 		bodyUsed: false</span></span><br><span class="line"><span class="comment">// 		headers: Headers &#123;&#125;</span></span><br><span class="line"><span class="comment">// 		ok: false</span></span><br><span class="line"><span class="comment">// 		redirected: true</span></span><br><span class="line"><span class="comment">// 		status: 404</span></span><br><span class="line"><span class="comment">// 		statusText: &quot;Not Found&quot;</span></span><br><span class="line"><span class="comment">// 		type: &quot;basic&quot;</span></span><br><span class="line"><span class="comment">// 		url: &quot;https://foo.com/does-not-exist/&quot;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;//foo.com/throws-error&#x27;</span>).<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"><span class="comment">// Response &#123;</span></span><br><span class="line"><span class="comment">// 		body: (...)</span></span><br><span class="line"><span class="comment">// 		bodyUsed: false</span></span><br><span class="line"><span class="comment">// 		headers: Headers &#123;&#125;</span></span><br><span class="line"><span class="comment">// 		ok: false</span></span><br><span class="line"><span class="comment">// 		redirected: true</span></span><br><span class="line"><span class="comment">// 		status: 500</span></span><br><span class="line"><span class="comment">// 		statusText: &quot;Internal Server Error&quot;</span></span><br><span class="line"><span class="comment">// 		type: &quot;basic&quot;</span></span><br><span class="line"><span class="comment">// 		url: &quot;https://foo.com/throws-error/&quot;</span></span><br><span class="line"><span class="comment">// &#125; </span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>克隆Response对象</p>
+<p>克隆 Response 对象的主要方式是使用 clone()方法，这个方法会创建一个一模一样的副本，不会覆盖任何值。这样不会将任何请求的请求体标记为已使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r1 = <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">&#x27;foobar&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> r2 = r1.<span class="title function_">clone</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r1.<span class="property">bodyUsed</span>); <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r2.<span class="property">bodyUsed</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>如果响应对象的 bodyUsed 属性为 true（即响应体已被读取），则不能再创建这个对象的副本。在响应体被读取之后再克隆会导致抛出 TypeError。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">&#x27;foobar&#x27;</span>);</span><br><span class="line">r.<span class="title function_">clone</span>();</span><br><span class="line"><span class="comment">// 没有错误</span></span><br><span class="line"></span><br><span class="line">r.<span class="title function_">text</span>(); <span class="comment">// 设置 bodyUsed 为 true</span></span><br><span class="line"></span><br><span class="line">r.<span class="title function_">clone</span>();</span><br><span class="line"><span class="comment">// TypeError: Failed to execute &#x27;clone&#x27; on &#x27;Response&#x27;: Response body is already used </span></span><br></pre></td></tr></table></figure>
+
+<p>有响应体的 Response 对象只能读取一次。（不包含响应体的 Response 对象不受此限制。）比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">&#x27;foobar&#x27;</span>);</span><br><span class="line"></span><br><span class="line">r.<span class="title function_">text</span>().<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>); <span class="comment">// foobar</span></span><br><span class="line"></span><br><span class="line">r.<span class="title function_">text</span>().<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"><span class="comment">// TypeError: Failed to execute &#x27;text&#x27; on &#x27;Response&#x27;: body stream is locked</span></span><br></pre></td></tr></table></figure>
+
+<p>要多次读取包含响应体的同一个 Response 对象，必须在第一次读取前调用 clone()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">&#x27;foobar&#x27;</span>);</span><br><span class="line"></span><br><span class="line">r.<span class="title function_">clone</span>().<span class="title function_">text</span>().<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>); <span class="comment">// foobar</span></span><br><span class="line">r.<span class="title function_">clone</span>().<span class="title function_">text</span>().<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>); <span class="comment">// foobar</span></span><br><span class="line">r.<span class="title function_">text</span>().<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>); <span class="comment">// foobar </span></span><br></pre></td></tr></table></figure>
+
+<p>此外，通过创建带有原始响应体的 Response 实例，可以执行伪克隆操作。关键是这样不会把第一 个 Response 实例标记为已读，而是会在两个响应之间共享：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r1 = <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">&#x27;foobar&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> r2 = <span class="keyword">new</span> <span class="title class_">Response</span>(r1.<span class="property">body</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r1.<span class="property">bodyUsed</span>); <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(r2.<span class="property">bodyUsed</span>); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">r2.<span class="title function_">text</span>().<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>); <span class="comment">// foobar</span></span><br><span class="line">r1.<span class="title function_">text</span>().<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"><span class="comment">// TypeError: Failed to execute &#x27;text&#x27; on &#x27;Response&#x27;: body stream is locked </span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Request、Response-及-Body-混入"><a href="#Request、Response-及-Body-混入" class="headerlink" title="Request、Response 及 Body 混入"></a>Request、Response 及 Body 混入</h2><p>Request 和 Response 都使用了 Fetch API 的 Body 混入，以实现两者承担有效载荷的能力。这个 混入为两个类型提供了只读的 body 属性（实现为 ReadableStream）、只读的 bodyUsed 布尔值（表 示 body 流是否已读）和一组方法，用于从流中读取内容并将结果转换为某种 JavaScript 对象类型。</p>
+<p>通常，将 Request 和 Response 主体作为流来使用主要有两个原因。一个原因是有效载荷的大小 可能会导致网络延迟，另一个原因是流 API 本身在处理有效载荷方面是有优势的。除此之外，最好是一次性获取资源主体。</p>
+<p>Body 混入提供了 5 个方法，用于将 ReadableStream 转存到缓冲区的内存里，将缓冲区转换为某 种 JavaScript 对象类型，以及通过期约来产生结果。在解决之前，期约会等待主体流报告完成及缓冲被 解析。这意味着客户端必须等待响应的资源完全加载才能访问其内容。</p>
+<ol>
+<li><p>Body.text()</p>
+<p>Body.text()方法返回期约，解决为将缓冲区转存得到的 UTF-8 格式字符串。下面的代码展示了 在 Response 对象上使用 Body.text()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://foo.com&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line"> .<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// &lt;!doctype html&gt;&lt;html lang=&quot;en&quot;&gt;</span></span><br><span class="line"><span class="comment">// &lt;head&gt;</span></span><br><span class="line"><span class="comment">// &lt;meta charset=&quot;utf-8&quot;&gt;</span></span><br><span class="line"><span class="comment">// ... </span></span><br></pre></td></tr></table></figure>
+
+<p>以下代码展示了在 Request 对象上使用 Body.text()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> request = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line"> &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;barbazqux&#x27;</span> &#125;);</span><br><span class="line"> </span><br><span class="line">request.<span class="title function_">text</span>()</span><br><span class="line"> 	.<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// barbazqux</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Body.json()</p>
+<p>Body.json()方法返回期约，解决为将缓冲区转存得到的 JSON。下面的代码展示了在 Response 对象上使用 Body.json()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://foo.com/foo.json&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> response.<span class="title function_">json</span>())</span><br><span class="line"> .<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// &#123;&quot;foo&quot;: &quot;bar&quot;&#125; </span></span><br></pre></td></tr></table></figure>
+
+<p>以下代码展示了在 Request 对象上使用 Body.json()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> request = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line"> 		&#123; <span class="attr">method</span>:<span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; <span class="attr">bar</span>: <span class="string">&#x27;baz&#x27;</span> &#125;) &#125;);</span><br><span class="line"></span><br><span class="line">request.<span class="title function_">json</span>()</span><br><span class="line"> .<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;bar: &#x27;baz&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Body.formData()</p>
+<p>浏览器可以将 FormData 对象序列化&#x2F;反序列化为主体。例如，下面这个 FormData 实例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myFormData = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line">myFormData.<span class="title function_">append</span>(<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>); </span><br></pre></td></tr></table></figure>
+
+<p>在通过 HTTP 传送时，WebKit 浏览器会将其序列化为下列内容：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">------WebKitFormBoundarydR9Q2kOzE6nbN7eR</span><br><span class="line"><span class="attribute">Content-Disposition</span><span class="punctuation">: </span>form-data; name=&quot;foo&quot; </span><br><span class="line">bar</span><br><span class="line">------WebKitFormBoundarydR9Q2kOzE6nbN7eR--</span><br></pre></td></tr></table></figure>
+
+<p>Body.formData()方法返回期约，解决为将缓冲区转存得到的 FormData 实例。下面的代码展示 了在 Response 对象上使用 Body.formData()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://foo.com/form-data&#x27;</span>)</span><br><span class="line"> 	.<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> response.<span class="title function_">formData</span>())</span><br><span class="line"> 	.<span class="title function_">then</span>(<span class="function">(<span class="params">formData</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(formData.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>));</span><br><span class="line">       </span><br><span class="line"><span class="comment">// bar</span></span><br></pre></td></tr></table></figure>
+
+<p>以下代码展示了在 Request 对象上使用 Body.formData()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myFormData = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line">myFormData.<span class="title function_">append</span>(<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> request = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line"> &#123; <span class="attr">method</span>:<span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: myFormData &#125;);</span><br><span class="line"></span><br><span class="line">request.<span class="title function_">formData</span>()</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">formData</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(formData.<span class="title function_">get</span>(<span class="string">&#x27;foo&#x27;</span>));</span><br><span class="line"><span class="comment">// bar </span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Body.arrayBuffer()</p>
+<p>有时候，可能需要以原始二进制格式查看和修改主体。为此，可以使用 Body.arrayBuffer()将 主体内容转换为 ArrayBuffer 实例。Body.arrayBuffer()方法返回期约，解决为将缓冲区转存得到 的 ArrayBuffer 实例。下面的代码展示了在 Response 对象上使用 Body.arrayBuffer()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://foo.com&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> response.<span class="title function_">arrayBuffer</span>())</span><br><span class="line"> .<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// ArrayBuffer(...) &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>以下代码展示了在 Request 对象上使用 Body.arrayBuffer()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> request = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line"> &#123; <span class="attr">method</span>:<span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;abcdefg&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以整数形式打印二进制编码的字符串</span></span><br><span class="line">request.<span class="title function_">arrayBuffer</span>()</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">buf</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">new</span> <span class="title class_">Int8Array</span>(buf)));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Int8Array(7) [97, 98, 99, 100, 101, 102, 103] </span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Body.blob()</p>
+<p>有时候，可能需要以原始二进制格式使用主体，不用查看和修改。为此，可以使用 Body.blob() 将主体内容转换为 Blob 实例。Body.blob()方法返回期约，解决为将缓冲区转存得到的 Blob 实例。 下面的代码展示了在 Response 对象上使用 Body.blob()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://foo.com&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> response.<span class="title function_">blob</span>())</span><br><span class="line"> .<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Blob(...) &#123;size:..., type: &quot;...&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>以下代码展示了在 Request 对象上使用 Body.blob()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> request = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line"> &#123; <span class="attr">method</span>:<span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;abcdefg&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line">request.<span class="title function_">blob</span>()</span><br><span class="line"> .<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Blob(7) &#123;size: 7, type: &quot;text/plain;charset=utf-8&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>一次性流</p>
+<p>因为 Body 混入是构建在 ReadableStream 之上的，所以主体流只能使用一次。这意味着所有主体混入方法都只能调用一次，再次调用就会抛出错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://foo.com&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> response.<span class="title function_">blob</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> response.<span class="title function_">blob</span>()));</span><br><span class="line"><span class="comment">// TypeError: Failed to execute &#x27;blob&#x27; on &#x27;Response&#x27;: body stream is locked</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> request = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line"> &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;foobar&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line">request.<span class="title function_">blob</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> request.<span class="title function_">blob</span>());</span><br><span class="line"><span class="comment">// TypeError: Failed to execute &#x27;blob&#x27; on &#x27;Request&#x27;: body stream is locked</span></span><br></pre></td></tr></table></figure>
+
+<p>即使是在读取流的过程中，所有这些方法也会在它们被调用时给 ReadableStream 加锁，以阻止其他读取器访问：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://foo.com&#x27;</span>)</span><br><span class="line"> .<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line"> 	response.<span class="title function_">blob</span>(); <span class="comment">// 第一次调用给流加锁</span></span><br><span class="line"> 	response.<span class="title function_">blob</span>(); <span class="comment">// 第二次调用再次加锁会失败</span></span><br><span class="line"> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// TypeError: Failed to execute &#x27;blob&#x27; on &#x27;Response&#x27;: body stream is locked</span></span><br><span class="line"><span class="keyword">let</span> request = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line">	 &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;foobar&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line">request.<span class="title function_">blob</span>(); <span class="comment">// 第一次调用给流加锁</span></span><br><span class="line">request.<span class="title function_">blob</span>(); <span class="comment">// 第二次调用再次加锁会失败</span></span><br><span class="line"><span class="comment">// TypeError: Failed to execute &#x27;blob&#x27; on &#x27;Request&#x27;: body stream is locked</span></span><br></pre></td></tr></table></figure>
+
+<p>作为 Body 混入的一部分，bodyUsed 布尔值属性表示 ReadableStream 是否已摄受（disturbed）， 意思是读取器是否已经在流上加了锁。这不一定表示流已经被完全读取。下面的代码演示了这个属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> request = <span class="keyword">new</span> <span class="title class_">Request</span>(<span class="string">&#x27;https://foo.com&#x27;</span>,</span><br><span class="line">	 &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;foobar&#x27;</span> &#125;);</span><br><span class="line"><span class="keyword">let</span> response = <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">&#x27;foobar&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(request.<span class="property">bodyUsed</span>); <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">bodyUsed</span>); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">request.<span class="title function_">text</span>().<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>); <span class="comment">// foobar</span></span><br><span class="line">response.<span class="title function_">text</span>().<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>); <span class="comment">// foobar</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(request.<span class="property">bodyUsed</span>); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">bodyUsed</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="Web-Socket"><a href="#Web-Socket" class="headerlink" title="Web Socket"></a>Web Socket</h1><p>Web Socket（套接字）的目标是通过一个长时连接实现与服务器全双工、双向的通信。在 JavaScript 中创建 Web Socket 时，一个 HTTP 请求会发送到服务器以初始化连接。服务器响应后，连接使用 HTTP 的 Upgrade 头部从 HTTP 协议切换到 Web Socket 协议。这意味着 Web Socket 不能通过标准 HTTP 服务 器实现，而必须使用支持该协议的专有服务器。</p>
+<p>因为 Web Socket使用了自定义协议，所以 URL方案（scheme）稍有变化：不能再使用 http:&#x2F;&#x2F;或 https:&#x2F;&#x2F;， 而要使用 ws:&#x2F;&#x2F;和 wss:&#x2F;&#x2F;。前者是不安全的连接，后者是安全连接。在指定 Web Socket URL 时，必须包 含 URL 方案，因为将来有可能再支持其他方案。</p>
+<p>使用自定义协议而非 HTTP 协议的好处是，客户端与服务器之间可以发送非常少的数据，不会对 HTTP 造成任何负担。使用更小的数据包让 Web Socket 非常适合带宽和延迟问题比较明显的移动应用。 使用自定义协议的缺点是，定义协议的时间比定义 JavaScript API 要长。Web Socket 得到了所有主流浏 览器支持。</p>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p>要创建一个新的 Web Socket，就要实例化一个 WebSocket 对象并传入提供连接的 URL：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> socket = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://www.example.com/server.php&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>注意，必须给 WebSocket 构造函数传入一个绝对 URL。同<strong>源策略不适用于 Web Socket，因此可以打开到任意站点的连接。至于是否与来自特定源的页面通信，则完全取决于服务器。（在握手阶段就可以确定请求来自哪里。）</strong></p>
+<p>浏览器会在初始化 WebSocket 对象之后立即创建连接。与 XHR 类似，WebSocket 也有一个 readyState 属性表示当前状态。不过，这个值与 XHR 中相应的值不一样。</p>
+<ul>
+<li>WebSocket.OPENING（0）：连接正在建立。</li>
+<li>WebSocket.OPEN（1）：连接已经建立。</li>
+<li>WebSocket.CLOSING（2）：连接正在关闭。</li>
+<li>WebSocket.CLOSE（3）：连接已经关闭。</li>
+</ul>
+<p>WebSocket 对象没有 readystatechange 事件，而是有与上述不同状态对应的其他事件。 readyState 值从 0 开始。</p>
+<p>任何时候都可以调用 close()方法关闭 Web Socket 连接：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.<span class="title function_">close</span>();</span><br></pre></td></tr></table></figure>
+
+<p>调用 close()之后，readyState 立即变为 2（连接正在关闭），并会在关闭后变为 3（连接已经关闭）。</p>
+<h2 id="发送和接收数据"><a href="#发送和接收数据" class="headerlink" title="发送和接收数据"></a>发送和接收数据</h2><p>打开 Web Socket 之后，可以通过连接发送和接收数据。要向服务器发送数据，使用 send()方法并 传入一个字符串、ArrayBuffer 或 Blob，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> socket = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://www.example.com/server.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stringData = <span class="string">&quot;Hello world!&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> arrayBufferData = <span class="title class_">Uint8Array</span>.<span class="title function_">from</span>([<span class="string">&#x27;f&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;o&#x27;</span>]);</span><br><span class="line"><span class="keyword">let</span> blobData = <span class="keyword">new</span> <span class="title class_">Blob</span>([<span class="string">&#x27;f&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;o&#x27;</span>]);</span><br><span class="line"></span><br><span class="line">socket.<span class="title function_">send</span>(stringData);</span><br><span class="line">socket.<span class="title function_">send</span>(arrayBufferData.<span class="property">buffer</span>);</span><br><span class="line">socket.<span class="title function_">send</span>(blobData); </span><br></pre></td></tr></table></figure>
+
+<p>服务器向客户端发送消息时，WebSocket 对象上会触发 message 事件。这个 message 事件与其 他消息协议类似，可以通过 event.data 属性访问到有效载荷：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">socket.<span class="property">onmessage</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line"> <span class="keyword">let</span> data = event.<span class="property">data</span>;</span><br><span class="line"> <span class="comment">// 对数据执行某些操作</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>与通过 send()方法发送的数据类似，event.data 返回的数据也可能是 ArrayBuffer 或 Blob。 这由 WebSocket 对象的 binaryType 属性决定，该属性可能是”blob”或”arraybuffer”。</p>
+<h2 id="其他事件"><a href="#其他事件" class="headerlink" title="其他事件"></a>其他事件</h2><p>WebSocket 对象在连接生命周期中有可能触发 3 个其他事件。</p>
+<ul>
+<li>open：在连接成功建立时触发。</li>
+<li>error：在发生错误时触发。连接无法存续。</li>
+<li>close：在连接关闭时触发。</li>
+</ul>
+<p>WebSocket 对象不支持 DOM Level 2 事件监听器，因此需要使用 DOM Level 0 风格的事件处理程 序来监听这些事件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> socket = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://www.example.com/server.php&quot;</span>);</span><br><span class="line">socket.<span class="property">onopen</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="title function_">alert</span>(<span class="string">&quot;Connection established.&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">socket.<span class="property">onerror</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="title function_">alert</span>(<span class="string">&quot;Connection error.&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">socket.<span class="property">onclose</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="title function_">alert</span>(<span class="string">&quot;Connection closed.&quot;</span>);</span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
+
+<p>在这些事件中，只有 close 事件的 event 对象上有额外信息。这个对象上有 3 个额外属性： wasClean、code 和 reason。其中，wasClean 是一个布尔值，表示连接是否干净地关闭；code 是一 个来自服务器的数值状态码；reason 是一个字符串，包含服务器发来的消息。可以将这些信息显示给用户或记录到日志：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">socket.<span class="property">onclose</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`as clean? <span class="subst">$&#123;event.wasClean&#125;</span> Code=<span class="subst">$&#123;event.code&#125;</span> Reason=<span class="subst">$&#123;event.reason&#125;</span>`</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://pvnk1u.github.io/2023/05/15/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(14)%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C/" title="JS高级程序设计读书笔记(14)——网络" target="_blank" rel="external">http://pvnk1u.github.io/2023/05/15/JS高级程序设计读书笔记(14)——网络/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/pvnk1u" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/dog.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/pvnk1u" target="_blank"><span class="text-dark">Yolo</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>Everything happens for the best</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/05/22/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(1)%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="精通CSS读书笔记(1)——基础知识"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/05/13/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(13)%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6/" title="JS高级程序设计读书笔记(13)——事件"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2024 pvnk1u
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://pvnk1u.github.io/2023/05/15/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(14)%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C/';
+        
+        this.page.identifier = 'JS高级程序设计读书笔记(14)——网络';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + '' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

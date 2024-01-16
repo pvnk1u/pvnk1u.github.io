@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>JS高级程序设计读书笔记(12)——DOM扩展 | Yolo</title>
+  <meta name="description" content="Selectors API2008 年以前，大部分浏览器对 DOM 的扩展是专有的。此后，W3C 开始着手将这些已成为事实标准的专有扩展编制成正式规范。诞生了描述 DOM 扩展的两个标准：Selectors API 与 HTML5。这两个标准体现了社 区需求和标准化某些手段及 API 的愿景。另外还有较小的 Element Traversal 规范，增加了一些 DOM 属性。 JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS高级程序设计读书笔记(12)——DOM扩展">
+<meta property="og:url" content="http://pvnk1u.github.io/2023/05/11/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(12)%E2%80%94%E2%80%94DOM%E6%89%A9%E5%B1%95/index.html">
+<meta property="og:site_name" content="YOLO">
+<meta property="og:description" content="Selectors API2008 年以前，大部分浏览器对 DOM 的扩展是专有的。此后，W3C 开始着手将这些已成为事实标准的专有扩展编制成正式规范。诞生了描述 DOM 扩展的两个标准：Selectors API 与 HTML5。这两个标准体现了社 区需求和标准化某些手段及 API 的愿景。另外还有较小的 Element Traversal 规范，增加了一些 DOM 属性。 JavaScript">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-10T21:26:39.000Z">
+<meta property="article:modified_time" content="2023-11-27T15:34:23.879Z">
+<meta property="article:author" content="pvnk1u">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://pvnk1u.github.io/2023/05/11/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(12)%E2%80%94%E2%80%94DOM%E6%89%A9%E5%B1%95/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YOLO" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-white" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/pvnk1u" target="_blank">
+          <img class="img-circle img-rotate" src="/images/dog.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Yolo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/css/">css</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/">html</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/css/">css</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/javascript/">javascript</a><span class="category-list-count">14</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/html/">html</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81%E4%B8%8E%E8%AE%BE%E8%AE%A1/" class="title">UdemyHtmlCss学习笔记——代码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-21T07:32:39.000Z" itemprop="datePublished">2023-11-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/01/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(7)%E2%80%94%E2%80%94%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80%E4%B8%8E%E7%BD%91%E6%A0%BC/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-01T07:28:39.000Z" itemprop="datePublished">2023-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-05T07:28:39.000Z" itemprop="datePublished">2023-06-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/04/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(5)%E2%80%94%E2%80%94%E6%BC%82%E4%BA%AE%E7%9A%84%E7%9B%92%E5%AD%90/" class="title">精通CSS读书笔记(5)——漂亮的盒子</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-04T01:28:39.000Z" itemprop="datePublished">2023-06-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/03/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(4)%E2%80%94%E2%80%94%E7%BD%91%E9%A1%B5%E6%8E%92%E7%89%88/" class="title">精通CSS读书笔记(4)——网页排版</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-03T01:28:39.000Z" itemprop="datePublished">2023-06-03</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Selectors-API"><span class="toc-number">1.</span> <span class="toc-text">Selectors API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#querySelector"><span class="toc-number">1.1.</span> <span class="toc-text">querySelector()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#querySelectorAll"><span class="toc-number">1.2.</span> <span class="toc-text">querySelectorAll()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#matchs"><span class="toc-number">1.3.</span> <span class="toc-text">matchs()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E9%81%8D%E5%8E%86"><span class="toc-number">2.</span> <span class="toc-text">元素遍历</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTML5"><span class="toc-number">3.</span> <span class="toc-text">HTML5</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS%E7%B1%BB%E6%89%A9%E5%B1%95"><span class="toc-number">3.1.</span> <span class="toc-text">CSS类扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%84%A6%E7%82%B9%E7%AE%A1%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">焦点管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTMLDocument%E6%89%A9%E5%B1%95"><span class="toc-number">3.3.</span> <span class="toc-text">HTMLDocument扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86%E5%B1%9E%E6%80%A7"><span class="toc-number">3.4.</span> <span class="toc-text">字符集属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E5%B1%9E%E6%80%A7"><span class="toc-number">3.5.</span> <span class="toc-text">自定义数据属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%A0%87%E8%AE%B0"><span class="toc-number">3.6.</span> <span class="toc-text">插入标记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scrollIntoView"><span class="toc-number">3.7.</span> <span class="toc-text">scrollIntoView()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%93%E6%9C%89%E6%89%A9%E5%B1%95"><span class="toc-number">4.</span> <span class="toc-text">专有扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#children%E5%B1%9E%E6%80%A7"><span class="toc-number">4.1.</span> <span class="toc-text">children属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#contains-%E6%96%B9%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">contains()方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%A0%87%E8%AE%B0-1"><span class="toc-number">4.3.</span> <span class="toc-text">插入标记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BB%9A%E5%8A%A8"><span class="toc-number">4.4.</span> <span class="toc-text">滚动</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-JS高级程序设计读书笔记(12)——DOM扩展" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS高级程序设计读书笔记(12)——DOM扩展
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/05/11/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(12)%E2%80%94%E2%80%94DOM%E6%89%A9%E5%B1%95/" class="article-date">
+	  <time datetime="2023-05-10T21:26:39.000Z" itemprop="datePublished">2023-05-11</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/web/">web</a>►<a class="article-category-link" href="/categories/web/javascript/">javascript</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>, <a class="article-tag-link-link" href="/tags/web/" rel="tag">web</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/05/11/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(12)%E2%80%94%E2%80%94DOM%E6%89%A9%E5%B1%95/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 7.3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 29(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="Selectors-API"><a href="#Selectors-API" class="headerlink" title="Selectors API"></a>Selectors API</h1><p>2008 年以前，大部分浏览器对 <code>DOM</code> 的扩展是专有的。此后，<code>W3C</code> 开始着手将这些已成为事实标准的专有扩展编制成正式规范。诞生了描述 <code>DOM</code> 扩展的两个标准：<code>Selectors API</code> 与 <code>HTML5</code>。这两个标准体现了社 区需求和标准化某些手段及 <code>API</code> 的愿景。另外还有较小的 <code>Element Traversal</code> 规范，增加了一些 <code>DOM </code>属性。</p>
+<p><code>JavaScript</code> 库中最流行的一种能力就是根据 <code>CSS</code> 选择符的模式匹配 <code>DOM</code> 元素。比如，<code>jQuery</code> 就完全以 <code>CSS</code> 选择符查询 <code>DOM</code> 获取元素引用，而不是使用 <code>getElementById()</code>和 <code>getElementsByTagName()</code>。</p>
+<p><code>Selectors API</code>（参见 <code>W3C</code> 网站上的 <code>Selectors API Level 1</code>）是 <code>W3C</code> 推荐标准，规定了浏览器原生支持的 <code>CSS</code> 查询 <code>API</code>。支持这一特性的所有 <code>JavaScript</code> 库都会实现一个基本的 <code>CSS</code> 解析器，然后使用已有 的 <code>DOM</code> 方法搜索文档并匹配目标节点。虽然库开发者在不断改进其性能，但 <code>JavaScript</code> 代码能做到的毕竟有限。通过浏览器原生支持这个 <code>API</code>，解析和遍历 <code>DOM</code> 树可以通过底层编译语言实现，性能也有了数量级的提升。</p>
+<p><code>Selectors API Level 1</code> 的核心是两个方法：<code>querySelector()</code>和 <code>querySelectorAll()</code>。在兼容浏览器中，<code>Document</code> 类型和 <code>Element </code>类型的实例上都会暴露这两个方法。</p>
+<p><code>Selectors API Level 2</code> 规范在 <code>Element</code> 类型上新增了更多方法，比如 <code>matches()</code>、<code>find()</code>和 <code>findAll()</code>。不过，目前还没有浏览器实现或宣称实现 <code>find()</code>和 <code>findAll()</code>。</p>
+<h2 id="querySelector"><a href="#querySelector" class="headerlink" title="querySelector()"></a>querySelector()</h2><p><code>querySelector()</code>方法接收 <code>CSS </code>选择符参数，返回匹配该模式的第一个后代元素，如果没有匹配项则返回 <code>null</code>。下面是一些例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得&lt;body&gt;元素</span></span><br><span class="line"><span class="keyword">let</span> body = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;body&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得 ID 为&quot;myDiv&quot;的元素</span></span><br><span class="line"><span class="keyword">let</span> myDiv = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#myDiv&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得类名为&quot;selected&quot;的第一个元素</span></span><br><span class="line"><span class="keyword">let</span> selected = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.selected&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得类名为&quot;button&quot;的图片</span></span><br><span class="line"><span class="keyword">let</span> img = <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;img.button&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>在 <code>Document</code> 上使用 <code>querySelector()</code>方法时，会从文档元素开始搜索；在 <code>Element</code> 上使用 <code>querySelector()</code>方法时，则只会从当前元素的后代中查询。</strong></p>
+<p>用于查询模式的 <code>CSS</code>选择符可繁可简，依需求而定。如果选择符有语法错误或碰到不支持的选择符， 则 <code>querySelector()</code>方法会抛出错误。</p>
+<h2 id="querySelectorAll"><a href="#querySelectorAll" class="headerlink" title="querySelectorAll()"></a>querySelectorAll()</h2><p><code>querySelectorAll()</code>方法跟 <code>querySelector()</code>一样，也接收一个用于查询的参数，但它会返回所有匹配的节点，而不止一个。这个方法返回的是一个 <code>NodeList</code> 的静态实例。</p>
+<p>再强调一次，<code>querySelectorAll()</code>返回的 <code>NodeList</code> 实例一个属性和方法都不缺，但它是一 个静态的“快照”，而非“实时”的查询。这样的底层实现避免了使用 <code>NodeList </code>对象可能造成的性能问题。</p>
+<p>以有效 <code>CSS</code> 选择符调用 <code>querySelectorAll()</code>都会返回 <code>NodeList</code>，无论匹配多少个元素都可以。 如果没有匹配项，则返回空的 <code>NodeList</code> 实例。</p>
+<p>与 <code>querySelector()</code>一样，<code>querySelectorAll()</code>也可以在 <code>Document</code>、<code>DocumentFragment</code> 和 <code>Element</code> 类型上使用。下面是几个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得 ID 为&quot;myDiv&quot;的&lt;div&gt;元素中的所有&lt;em&gt;元素</span></span><br><span class="line"><span class="keyword">let</span> ems = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myDiv&quot;</span>).<span class="title function_">querySelectorAll</span>(<span class="string">&quot;em&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得所有类名中包含&quot;selected&quot;的元素</span></span><br><span class="line"><span class="keyword">let</span> selecteds = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;.selected&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得所有是&lt;p&gt;元素子元素的&lt;strong&gt;元素</span></span><br><span class="line"><span class="keyword">let</span> strongs = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;p strong&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>返回的 <code>NodeList</code> 对象可以通过 <code>for-of</code> 循环、<code>item()</code>方法或中括号语法取得个别元素。比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> strongElements = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;p strong&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下 3 个循环的效果一样</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> strong <span class="keyword">of</span> strongElements) &#123;</span><br><span class="line"> 	strong.<span class="property">className</span> = <span class="string">&quot;important&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; strongElements.<span class="property">length</span>; ++i) &#123;</span><br><span class="line"> 	strongElements.<span class="title function_">item</span>(i).<span class="property">className</span> = <span class="string">&quot;important&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; strongElements.<span class="property">length</span>; ++i) &#123;</span><br><span class="line"> 	strongElements[i].<span class="property">className</span> = <span class="string">&quot;important&quot;</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>与 <code>querySelector()</code>方法一样，如果选择符有语法错误或碰到不支持的选择符，则 <code>querySelectorAll()</code>方法会抛出错误。</p>
+<h2 id="matchs"><a href="#matchs" class="headerlink" title="matchs()"></a>matchs()</h2><p><code>matches()</code>方法（在规范草案中称为 <code>matchesSelector()</code>）接收一个 <code>CSS</code> 选择符参数，如果元素匹配则该选择符返回 true，否则返回 false。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">matches</span>(<span class="string">&quot;body.page1&quot;</span>))&#123;</span><br><span class="line"> <span class="comment">// true</span></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>使用这个方法可以方便地检测某个元素会不会被 <code>querySelector()</code>或 <code>querySelectorAll()</code>方法返回。</p>
+<h1 id="元素遍历"><a href="#元素遍历" class="headerlink" title="元素遍历"></a>元素遍历</h1><p><code>IE9</code> 之前的版本不会把元素间的空格当成空白节点，而其他浏览器则会。这样就导致了 <code>childNodes</code> 和 <code>firstChild</code> 等属性上的差异。为了弥补这个差异，同时不影响 <code>DOM</code> 规范，<code>W3C </code>通过新的 <code>Element Traversal </code>规范定义了一组新属性。</p>
+<p><code>Element Traversal API</code> 为 <code>DOM</code> 元素添加了 5 个属性：</p>
+<ol>
+<li><p>childElementCount</p>
+<p>返回子元素数量（不包含文本节点和注释）；</p>
+</li>
+<li><p>firstElementChild</p>
+<p>指向第一个 Element 类型的子元素（Element 版 firstChild）；</p>
+</li>
+<li><p>lastElementChild</p>
+<p>指向最后一个 Element 类型的子元素（Element 版 lastChild）；</p>
+</li>
+<li><p>previousElementSibling</p>
+<p>指向前一个 Element 类型的同胞元素（ Element 版 previousSibling）；</p>
+</li>
+<li><p>nextElementSibling</p>
+<p>指向后一个 Element 类型的同胞元素（Element 版 nextSibling）。</p>
+</li>
+</ol>
+<p>在支持的浏览器中，所有 <code>DOM</code> 元素都会有这些属性，为遍历 <code>DOM</code> 元素提供便利。这样开发者就 不用担心空白文本节点的问题了。</p>
+<p>过去要以跨浏览器方式遍历特定元素的所有子元素，代码大致是这样写的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> parentElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;parent&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> currentChildNode = parentElement.<span class="property">firstChild</span>;</span><br><span class="line"><span class="comment">// 没有子元素，firstChild 返回 null，跳过循环</span></span><br><span class="line"><span class="keyword">while</span> (currentChildNode) &#123;</span><br><span class="line"> <span class="keyword">if</span> (currentChildNode.<span class="property">nodeType</span> === <span class="number">1</span>) &#123;</span><br><span class="line">     <span class="comment">// 如果有元素节点，则做相应处理</span></span><br><span class="line">     <span class="title function_">processChild</span>(currentChildNode);</span><br><span class="line"> &#125;</span><br><span class="line">    </span><br><span class="line"> <span class="keyword">if</span> (currentChildNode === parentElement.<span class="property">lastChild</span>) &#123;</span><br><span class="line"> 	<span class="keyword">break</span>;</span><br><span class="line"> &#125;</span><br><span class="line">    </span><br><span class="line"> currentChildNode = currentChildNode.<span class="property">nextSibling</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>Element Traversal</code> 属性之后，以上代码可以简化如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> parentElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;parent&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> currentChildElement = parentElement.<span class="property">firstElementChild</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 没有子元素，firstElementChild 返回 null，跳过循环</span></span><br><span class="line"><span class="keyword">while</span> (currentChildElement) &#123;</span><br><span class="line"> <span class="comment">// 这就是元素节点，做相应处理</span></span><br><span class="line"> <span class="title function_">processChild</span>(currentChildElement);</span><br><span class="line"> <span class="keyword">if</span> (currentChildElement === parentElement.<span class="property">lastElementChild</span>) &#123;</span><br><span class="line"> 	<span class="keyword">break</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> currentChildElement = currentChildElement.<span class="property">nextElementSibling</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><p><code>HTML5</code> 代表着与以前的 <code>HTML</code> 截然不同的方向。在所有以前的 <code>HTML</code> 规范中，从未出现过描述 <code>JavaScript</code> 接口的情形，<code>HTML</code> 就是一个纯标记语言。<code>JavaScript</code> 绑定的事，一概交给 <code>DOM</code> 规范去定义。 然而，<code>HTML5</code> 规范却包含了与标记相关的大量 <code>JavaScript</code> API 定义。其中有的 <code>API</code> 与 <code>DOM</code> 重合， 定义了浏览器应该提供的 <code>DOM</code> 扩展。</p>
+<h2 id="CSS类扩展"><a href="#CSS类扩展" class="headerlink" title="CSS类扩展"></a>CSS类扩展</h2><p>自 <code>HTML4</code> 被广泛采用以来，<code>Web</code> 开发中一个主要的变化是 <code>class</code> 属性用得越来越多，其用处是为 元素添加样式以及语义信息。自然地，<code>JavaScript</code> 与 <code>CSS</code> 类的交互就增多了，包括动态修改类名，以及 根据给定的一个或一组类名查询元素，等等。为了适应开发者和他们对 class 属性的认可，<code>HTML5</code> 增 加了一些特性以方便使用 <code>CSS</code> 类。</p>
+<ol>
+<li><p>getElementsByClassName()</p>
+<p><code>getElementsByClassName()</code>是 <code>HTML5</code> 新增的最受欢迎的一个方法，暴露在 <code>document</code> 对象和 所有 <code>HTML</code> 元素上。这个方法脱胎于基于原有 <code>DOM</code> 特性实现该功能的 <code>JavaScript</code>库，提供了性能高好的原生实现。</p>
+<p><code>getElementsByClassName()</code>方法接收一个参数，即包含一个或多个类名的字符串，返回类名中 包含相应类的元素的 <code>NodeList</code>。如果提供了多个类名，则顺序无关紧要。下面是几个示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得所有类名中包含&quot;username&quot;和&quot;current&quot;元素</span></span><br><span class="line"><span class="comment">// 这两个类名的顺序无关紧要</span></span><br><span class="line"><span class="keyword">let</span> allCurrentUsernames = <span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(<span class="string">&quot;username current&quot;</span>);</span><br><span class="line"><span class="comment">// 取得 ID 为&quot;myDiv&quot;的元素子树中所有包含&quot;selected&quot;类的元素</span></span><br><span class="line"><span class="keyword">let</span> selected = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myDiv&quot;</span>).<span class="title function_">getElementsByClassName</span>(<span class="string">&quot;selected&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这个方法只会返回以调用它的对象为根元素的子树中所有匹配的元素。在 <code>document</code> 上调用 <code>getElementsByClassName()</code>返回文档中所有匹配的元素，而在特定元素上调用 <code>getElementsByClassName()</code>则返回该元素后代中匹配的元素。</p>
+</li>
+<li><p>classList 属性</p>
+<p>要操作类名，可以通过 <code>className</code> 属性实现添加、删除和替换。但 <code>className</code> 是一个字符串， 所以每次操作之后都需要重新设置这个值才能生效，即使只改动了部分字符串也一样。以下面的 <code>HTML</code> 代码为例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bd user disabled&quot;</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>这个<code>&lt;div&gt;</code>元素有 3 个类名。要想删除其中一个，就得先把 <code>className</code> 拆开，删除不想要的那个， 再把包含剩余类的字符串设置回去。比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 要删除&quot;user&quot;类</span></span><br><span class="line"><span class="keyword">let</span> targetClass = <span class="string">&quot;user&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把类名拆成数组</span></span><br><span class="line"><span class="keyword">let</span> classNames = div.<span class="property">className</span>.<span class="title function_">split</span>(<span class="regexp">/\s+/</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 找到要删除类名的索引</span></span><br><span class="line"><span class="keyword">let</span> idx = classNames.<span class="title function_">indexOf</span>(targetClass);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果有则删除</span></span><br><span class="line"><span class="keyword">if</span> (idx &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">    classNames.<span class="title function_">splice</span>(i,<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重新设置类名</span></span><br><span class="line">div.<span class="property">className</span> = classNames.<span class="title function_">join</span>(<span class="string">&quot; &quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这就是从<code>&lt;div&gt;</code>元素的类名中删除”user”类要写的代码。替换类名和检测类名也要涉及同样的算 法。添加类名只涉及字符串拼接，但必须先检查一下以确保不会重复添加相同的类名。很多 <code>JavaScript</code> 库为这些操作实现了便利方法。</p>
+<p><code>HTML5</code> 通过给所有元素增加 <code>classList</code> 属性为这些操作提供了更简单也更安全的实现方式。 <code>classList</code> 是一个新的集合类型 <code>DOMTokenList</code>的实例。与其他 <code>DOM</code>集合类型一样，<code>DOMTokenList</code> 也有 <code>length</code> 属性表示自己包含多少项，也可以通过 <code>item()</code>或中括号取得个别的元素。此外， <code>DOMTokenList</code> 还增加了以下方法。</p>
+<ol>
+<li><p>add(value)</p>
+<p>向类名列表中添加指定的字符串值 value。如果这个值已经存在，则什么也不做。</p>
+</li>
+<li><p>contains(value)</p>
+<p>返回布尔值，表示给定的 value 是否存在。</p>
+</li>
+<li><p>remove(value)</p>
+<p>从类名列表中删除指定的字符串值 value。</p>
+</li>
+<li><p>toggle(value)</p>
+<p>如果类名列表中已经存在指定的 value，则删除；如果不存在，则添加。</p>
+</li>
+</ol>
+<p>这样以来，前面的例子中那么多行代码就可以简化成下面的一行：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&quot;user&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这行代码可以在不影响其他类名的情况下完成删除。其他方法同样极大地简化了操作类名的复杂性，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除&quot;disabled&quot;类</span></span><br><span class="line">div.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&quot;disabled&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加&quot;current&quot;类</span></span><br><span class="line">div.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&quot;current&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 切换&quot;user&quot;类</span></span><br><span class="line">div.<span class="property">classList</span>.<span class="title function_">toggle</span>(<span class="string">&quot;user&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检测类名</span></span><br><span class="line"><span class="keyword">if</span> (div.<span class="property">classList</span>.<span class="title function_">contains</span>(<span class="string">&quot;bd&quot;</span>) &amp;&amp; !div.<span class="property">classList</span>.<span class="title function_">contains</span>(<span class="string">&quot;disabled&quot;</span>))&#123;</span><br><span class="line"> 	<span class="comment">// 执行操作</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 迭代类名</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> <span class="keyword">class</span> <span class="title class_">of</span> div.<span class="property">classList</span>)&#123;</span><br><span class="line"> <span class="title function_">doStuff</span>(<span class="keyword">class</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>添加了 <code>classList</code> 属性之后，除非是完全删除或完全重写元素的 <code>class</code> 属性，否则 <code>className</code> 属性就用不到了。</p>
+</li>
+</ol>
+<h2 id="焦点管理"><a href="#焦点管理" class="headerlink" title="焦点管理"></a>焦点管理</h2><p><code>HTML5</code> 增加了辅助 <code>DOM</code> 焦点管理的功能。首先是 <code>document.activeElement</code>，始终包含当前拥有焦点的 <code>DOM</code> 元素。页面加载时，可以通过用户输入（按 Tab 键或代码中使用 <code>focus()</code>方法）让某个元素自动获得焦点。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> button = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myButton&quot;</span>);</span><br><span class="line">button.<span class="title function_">focus</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">document</span>.<span class="property">activeElement</span> === button); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，<code>document.activeElement</code> 在页面刚加载完之后会设置为 <code>document.body</code>。而在页面完全加载之前，<code>document.activeElement</code> 的值为 <code>null</code>。</p>
+<p>其次是 <code>document.hasFocus()</code>方法，该方法返回布尔值，表示文档是否拥有焦点：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> button = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myButton&quot;</span>);</span><br><span class="line">button.<span class="title function_">focus</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">document</span>.<span class="title function_">hasFocus</span>()); <span class="comment">// true </span></span><br></pre></td></tr></table></figure>
+
+<p>确定文档是否获得了焦点，就可以帮助确定用户是否在操作页面。 </p>
+<p>第一个方法可以用来查询文档，确定哪个元素拥有焦点，第二个方法可以查询文档是否获得了焦点， 而这对于保证 Web 应用程序的无障碍使用是非常重要的。无障碍 Web 应用程序的一个重要方面就是焦点管理，而能够确定哪个元素当前拥有焦点（相比于之前的猜测）是一个很大的进步。</p>
+<h2 id="HTMLDocument扩展"><a href="#HTMLDocument扩展" class="headerlink" title="HTMLDocument扩展"></a>HTMLDocument扩展</h2><p><code>HTML5</code> 扩展了 <code>HTMLDocument</code> 类型，增加了更多功能。与其他 <code>HTML5</code> 定义的 <code>DOM</code> 扩展一样， 这些变化同样基于所有浏览器事实上都已经支持的专有扩展。为此，即使这些扩展的标准化相对较晚， 很多浏览器也早就实现了相应的功能。</p>
+<ol>
+<li><p>readyState属性</p>
+<p><code>readyState</code> 是 IE4 最早添加到 <code>document</code> 对象上的属性，后来其他浏览器也都依葫芦画瓢地支持 这个属性。最终，<code>HTML5</code> 将这个属性写进了标准。<code>document.readyState</code> 属性有两个可能的值：</p>
+<ul>
+<li><p>loading</p>
+<p>表示文档正在加载</p>
+</li>
+<li><p>complete</p>
+<p>表示文档加载完成</p>
+</li>
+</ul>
+<p>实际开发中，最好是把 <code>document.readState</code> 当成一个指示器，以判断文档是否加载完毕。在这 个属性得到广泛支持以前，通常要依赖 <code>onload</code> 事件处理程序设置一个标记，表示文档加载完了。这个 属性的基本用法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">readyState</span> == <span class="string">&quot;complete&quot;</span>)&#123;</span><br><span class="line"> <span class="comment">// 执行操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>compatMode属性</p>
+<p>自从 <code>IE6</code> 提供了以标准或混杂模式渲染页面的能力之后，检测页面渲染模式成为一个必要的需求。 IE 为 <code>document</code> 添加了 <code>compatMode</code> 属性，这个属性唯一的任务是指示浏览器当前处于什么渲染模式。 如下面的例子所示，标准模式下 <code>document.compatMode</code> 的值是”CSS1Compat”，而在混杂模式下， <code>document.compatMode</code> 的值是”BackCompat”：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">compatMode</span> == <span class="string">&quot;CSS1Compat&quot;</span>)&#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Standards mode&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"> 	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Quirks mode&quot;</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p><code>HTML5</code> 最终也把 <code>compatMode</code> 属性的实现标准化了。</p>
+</li>
+<li><p>head属性</p>
+<p>作为对 <code>document.body</code>（指向文档的元素）的补充，<code>HTML5</code> 增加了 <code>document.head</code> 属 性，指向文档的元素。可以像下面这样直接取得元素：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> head = <span class="variable language_">document</span>.<span class="property">head</span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="字符集属性"><a href="#字符集属性" class="headerlink" title="字符集属性"></a>字符集属性</h2><p><code>HTML5</code> 增加了几个与文档字符集有关的新属性。其中，<code>characterSet</code> 属性表示文档实际使用的字符集，也可以用来指定新字符集。这个属性的默认值是”UTF-16”，但可以通过元素或响应头， 以及新增的 <code>characterSeet</code> 属性来修改。下面是一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">document</span>.<span class="property">characterSet</span>); <span class="comment">// &quot;UTF-16&quot;</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">characterSet</span> = <span class="string">&quot;UTF-8&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="自定义数据属性"><a href="#自定义数据属性" class="headerlink" title="自定义数据属性"></a>自定义数据属性</h2><p><code>HTML5</code> 允许给元素指定非标准的属性，但要使用前缀 <code>data-</code>以便告诉浏览器，这些属性既不包含与渲染有关的信息，也不包含元素的语义信息。除了前缀，自定义属性对命名是没有限制的，<code>data-</code>后 面跟什么都可以。下面是一个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;myDiv&quot;</span> <span class="attr">data-appId</span>=<span class="string">&quot;12345&quot;</span> <span class="attr">data-myname</span>=<span class="string">&quot;Nicholas&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>定义了自定义数据属性后，可以通过元素的 <code>dataset</code> 属性来访问。<code>dataset</code> 属性是一个 <code>DOMStringMap</code> 的实例，包含一组键&#x2F;值对映射。元素的每个 <code>data-name</code> 属性在 <code>dataset</code> 中都可以通过 <code>data-</code>后面的字符串作为键来访问（例如，属性 <code>data-myname</code>、<code>data-myName</code> 可以通过 <code>myname</code> 访 问，但要注意 <code>data-my-name</code>、<code>data-My-Name</code> 要通过 <code>myName</code> 来访问）。下面是一个使用自定义数据 属性的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本例中使用的方法仅用于示范</span></span><br><span class="line"><span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myDiv&quot;</span>);</span><br><span class="line"><span class="comment">// 取得自定义数据属性的值</span></span><br><span class="line"><span class="keyword">let</span> appId = div.<span class="property">dataset</span>.<span class="property">appId</span>;</span><br><span class="line"><span class="keyword">let</span> myName = div.<span class="property">dataset</span>.<span class="property">myname</span>;</span><br><span class="line"><span class="comment">// 设置自定义数据属性的值</span></span><br><span class="line">div.<span class="property">dataset</span>.<span class="property">appId</span> = <span class="number">23456</span>;</span><br><span class="line">div.<span class="property">dataset</span>.<span class="property">myname</span> = <span class="string">&quot;Michael&quot;</span>;</span><br><span class="line"><span class="comment">// 有&quot;myname&quot;吗？</span></span><br><span class="line"><span class="keyword">if</span> (div.<span class="property">dataset</span>.<span class="property">myname</span>)&#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Hello, <span class="subst">$&#123;div.dataset.myname&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义数据属性非常适合需要给元素附加某些数据的场景，比如链接追踪和在聚合应用程序中标识 页面的不同部分。另外，单页应用程序框架也非常多地使用了自定义数据属性。</p>
+<h2 id="插入标记"><a href="#插入标记" class="headerlink" title="插入标记"></a>插入标记</h2><p><code>DOM</code> 虽然已经为操纵节点提供了很多 <code>API</code>，但向文档中一次性插入大量 <code>HTML</code> 时还是比较麻烦。 相比先创建一堆节点，再把它们以正确的顺序连接起来，直接插入一个 <code>HTML</code> 字符串要简单（快速） 得多。<code>HTML5</code> 已经通过以下 <code>DOM</code> 扩展将这种能力标准化了。</p>
+<ol>
+<li><p>innerHTML属性</p>
+<p>在读取 <code>innerHTML</code> 属性时，会返回元素所有后代的 <code>HTML</code> 字符串，包括元素、注释和文本节点。 而在写入 <code>innerHTML</code> 时，则会根据提供的字符串值以新的 <code>DOM</code> 子树替代元素中原来包含的所有节点。 比如下面的 <code>HTML</code> 代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a <span class="tag">&lt;<span class="name">strong</span>&gt;</span>paragraph<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> with a list following it.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>对于这里的<code>&lt;div&gt;</code>元素而言，其 <code>innerHTML</code> 属性会返回以下字符串：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a <span class="tag">&lt;<span class="name">strong</span>&gt;</span>paragraph<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> with a list following it.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>在写入模式下，赋给 <code>innerHTML</code> 属性的值会被解析为 <code>DOM</code> 子树，并替代元素之前的所有节点。 因为所赋的值默认为 <code>HTML</code>，所以其中的所有标签都会以浏览器处理 <code>HTML</code> 的方式转换为元素。如果赋值中不包含任何 <code>HTML</code> 标签，则直接生成一个文本节点， 如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">innerHTML</span> = <span class="string">&quot;Hello world!&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>因为浏览器会解析设置的值，所以给 <code>innerHTML</code> 设置包含 <code>HTML</code> 的字符串时，结果会大不一样。 来看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">innerHTML</span> = <span class="string">&quot;Hello &amp; welcome, &lt;b&gt;\&quot;reader\&quot;!&lt;/b&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这个操作的结果相当于：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span>Hello <span class="symbol">&amp;amp;</span> welcome, <span class="tag">&lt;<span class="name">b</span>&gt;</span><span class="symbol">&amp;quot;</span>reader<span class="symbol">&amp;quot;</span>!<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>设置完<code>innerHTML</code>，马上就可以像访问其他节点一样访问这些新节点。</p>
+</li>
+<li><p>outerHTML 属性</p>
+<p>读取 <code>outerHTML</code> 属性时，会返回调用它的元素（及所有后代元素）的 <code>HTML</code> 字符串。在写入 <code>outerHTML</code> 属性时，调用它的元素会被传入的 <code>HTML</code> 字符串经解释之后生成的 <code>DOM</code> 子树取代。比如 下面的 <code>HTML</code> 代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a <span class="tag">&lt;<span class="name">strong</span>&gt;</span>paragraph<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> with a list following it.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个<code>&lt;div&gt;</code>元素上调用 <code>outerHTML</code> 会返回相同的字符串，包括<code>&lt;div&gt;</code>本身。</p>
+<p>如果使用 <code>outerHTML</code> 设置 <code>HTML</code>，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">outerHTML</span> = <span class="string">&quot;&lt;p&gt;This is a paragraph.&lt;/p&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>则会得到与执行以下脚本相同的结果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;p&quot;</span>);</span><br><span class="line">p.<span class="title function_">appendChild</span>(<span class="variable language_">document</span>.<span class="title function_">createTextNode</span>(<span class="string">&quot;This is a paragraph.&quot;</span>));</span><br><span class="line">div.<span class="property">parentNode</span>.<span class="title function_">replaceChild</span>(p, div);</span><br></pre></td></tr></table></figure>
+
+<p>新的<code>&lt;p&gt;</code>元素会取代 DOM 树中原来的<code>&lt;div&gt;</code>元素。</p>
+</li>
+<li><p>insertAdjacentHTML()与 insertAdjacentText()</p>
+<p>关于插入标签的最后两个新增方法是 <code>insertAdjacentHTML()</code>和 <code>insertAdjacentText()</code>。这两 个方法最早源自 IE，它们都接收两个参数：要插入标记的位置和要插入的 <code>HTML</code> 或文本。第一个参数 必须是下列值中的一个：</p>
+<ul>
+<li><p>beforebegin</p>
+<p>插入当前元素前面，作为前一个同胞节点；</p>
+</li>
+<li><p>afterbegin</p>
+<p>插入当前元素内部，作为新的子节点或放在第一个子节点前面；</p>
+</li>
+<li><p>beforeend</p>
+<p>插入当前元素内部，作为新的子节点或放在最后一个子节点后面；</p>
+</li>
+<li><p>afterend</p>
+<p>插入当前元素后面，作为下一个同胞节点。</p>
+</li>
+</ul>
+<p>注意这几个值是不区分大小写的。第二个参数会作为 <code>HTML</code> 字符串解析（与 <code>innerHTML</code> 和 <code>outerHTML</code> 相同）或者作为纯文本解析（与 <code>innerText</code> 和 <code>outerText</code> 相同）。如果是 <code>HTML</code>，则会在解析出错时抛出错误。下面展示了基本用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 作为前一个同胞节点插入</span></span><br><span class="line">element.<span class="title function_">insertAdjacentHTML</span>(<span class="string">&quot;beforebegin&quot;</span>, <span class="string">&quot;&lt;p&gt;Hello world!&lt;/p&gt;&quot;</span>);</span><br><span class="line">element.<span class="title function_">insertAdjacentText</span>(<span class="string">&quot;beforebegin&quot;</span>, <span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 作为第一个子节点插入</span></span><br><span class="line">element.<span class="title function_">insertAdjacentHTML</span>(<span class="string">&quot;afterbegin&quot;</span>, <span class="string">&quot;&lt;p&gt;Hello world!&lt;/p&gt;&quot;</span>);</span><br><span class="line">element.<span class="title function_">insertAdjacentText</span>(<span class="string">&quot;afterbegin&quot;</span>, <span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 作为最后一个子节点插入</span></span><br><span class="line">element.<span class="title function_">insertAdjacentHTML</span>(<span class="string">&quot;beforeend&quot;</span>, <span class="string">&quot;&lt;p&gt;Hello world!&lt;/p&gt;&quot;</span>);</span><br><span class="line">element.<span class="title function_">insertAdjacentText</span>(<span class="string">&quot;beforeend&quot;</span>, <span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 作为下一个同胞节点插入</span></span><br><span class="line">element.<span class="title function_">insertAdjacentHTML</span>(<span class="string">&quot;afterend&quot;</span>, <span class="string">&quot;&lt;p&gt;Hello world!&lt;/p&gt;&quot;</span>); element.</span><br><span class="line"><span class="title function_">insertAdjacentText</span>(<span class="string">&quot;afterend&quot;</span>, <span class="string">&quot;Hello world!&quot;</span>); </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>内存与性能问题</p>
+<p>使用本节介绍的方法替换子节点可能在浏览器（特别是 IE）中导致内存问题。比如，如果被移除的子树元素中之前有关联的事件处理程序或其他 <code>JavaScript</code> 对象（作为元素的属性），那它们之间的绑定关 系会滞留在内存中。如果这种替换操作频繁发生，页面的内存占用就会持续攀升。在使用 <code>innerHTML、 outerHTML</code> 和 <code>insertAdjacentHTML()</code>之前，最好手动删除要被替换的元素上关联的事件处理程序和 <code>JavaScript</code> 对象。</p>
+<p>使用这些属性当然有其方便之处，特别是<code>innerHTML</code>。一般来讲，插入大量的新 <code>HTML</code> 使用 <code>innerHTML</code> 比使用多次 <code>DOM</code> 操作创建节点再插入来得更便捷。这是因为 <code>HTML</code> 解析器会解析设置给 <code>innerHTML</code>（或 <code>outerHTML</code>）的值。解析器在浏览器中是底层代码（通常是 <code>C++</code>代码），比 <code>JavaScript</code> 快得多。不过，<code>HTML</code> 解析器的构建与解构也不是没有代价，因此最好限制使用 <code>innerHTML</code> 和 <code>outerHTML</code> 的次数。比如，下面的代码使用 <code>innerHTML</code> 创建了一些列表项：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> value <span class="keyword">of</span> values)&#123;</span><br><span class="line"> 	ul.<span class="property">innerHTML</span> += <span class="string">&#x27;&lt;li&gt;$&#123;value&#125;&lt;/li&gt;&#x27;</span>; <span class="comment">// 别这样做！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码效率低，因为每次迭代都要设置一次 <code>innerHTML</code>。不仅如此，每次循环还要先读取 <code>innerHTML</code>，也就是说循环一次要访问两次 <code>innerHTML</code>。为此，最好通过循环先构建一个独立的字符串，最后再一次性把生成的字符串赋值给 <code>innerHTML</code>，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> itemsHtml = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> value <span class="keyword">of</span> values)&#123;</span><br><span class="line"> 	itemsHtml += <span class="string">&#x27;&lt;li&gt;$&#123;value&#125;&lt;/li&gt;&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">ul.<span class="property">innerHTML</span> = itemsHtml;</span><br></pre></td></tr></table></figure>
+
+<p>这样修改之后效率就高多了，因为只有对 <code>innerHTML</code> 的一次赋值。当然，像下面这样一行代码也可以搞定：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ul.<span class="property">innerHTML</span> = values.<span class="title function_">map</span>(<span class="function"><span class="params">value</span> =&gt;</span> <span class="string">&#x27;&lt;li&gt;$&#123;value&#125;&lt;/li&gt;&#x27;</span>).<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>跨站点脚本</p>
+<p>尽管 <code>innerHTML</code> 不会执行自己创建的<code>&lt;script&gt;</code>标签，但仍然向恶意用户暴露了很大的攻击面，因 为通过它可以毫不费力地创建元素并执行 <code>onclick</code> 之类的属性。</p>
+<p>如果页面中要使用用户提供的信息，则不建议使用 <code>innerHTML</code>。与使用 <code>innerHTML</code> 获得的方便相 比，防止 <code>XSS</code> 攻击更让人头疼。此时一定要隔离要插入的数据，在插入页面前必须毫不犹豫地使用相关的库对它们进行转义。</p>
+</li>
+</ol>
+<h2 id="scrollIntoView"><a href="#scrollIntoView" class="headerlink" title="scrollIntoView()"></a>scrollIntoView()</h2><p><code>DOM</code> 规范中没有涉及的一个问题是如何滚动页面中的某个区域。为填充这方面的缺失，不同浏览器实现了不同的控制滚动的方式。在所有这些专有方法中，<code>HTML5</code> 选择了标准化 <code>scrollIntoView()</code>。</p>
+<p><code>scrollIntoView()</code>方法存在于所有 <code>HTML</code> 元素上，可以滚动浏览器窗口或容器元素以便包含元素进入视口。这个方法的参数如下：</p>
+<ol>
+<li><p>alignToTop是一个布尔值</p>
+<ul>
+<li><p>true</p>
+<p>窗口滚动后元素的顶部与视口顶部对齐。</p>
+</li>
+<li><p>false</p>
+<p>窗口滚动后元素的底部与视口底部对齐。</p>
+</li>
+</ul>
+</li>
+<li><p>scrollIntoViewOptions是一个选项对象。</p>
+<ul>
+<li><p>behavior</p>
+<p>定义过渡动画，可取的值为”smooth”和”auto”，默认为”auto”。</p>
+</li>
+<li><p>block</p>
+<p>定义垂直方向的对齐，可取的值为”start”、”center”、”end”和”nearest”，默 认为 “start”。</p>
+</li>
+<li><p>inline</p>
+<p>定义水平方向的对齐，可取的值为”start”、”center”、”end”和”nearest”，默 认为 “nearest”。</p>
+</li>
+</ul>
+</li>
+<li><p>不传参数等同于 alignToTop 为 true。</p>
+</li>
+</ol>
+<p>来看几个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 确保元素可见</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">forms</span>[<span class="number">0</span>].<span class="title function_">scrollIntoView</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同上</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">forms</span>[<span class="number">0</span>].<span class="title function_">scrollIntoView</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">forms</span>[<span class="number">0</span>].<span class="title function_">scrollIntoView</span>(&#123;<span class="attr">block</span>: <span class="string">&#x27;start&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 尝试将元素平滑地滚入视口</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">forms</span>[<span class="number">0</span>].<span class="title function_">scrollIntoView</span>(&#123;<span class="attr">behavior</span>: <span class="string">&#x27;smooth&#x27;</span>, <span class="attr">block</span>: <span class="string">&#x27;start&#x27;</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这个方法可以用来在页面上发生某个事件时引起用户关注。把焦点设置到一个元素上也会导致浏览器将元素滚动到可见位置。</p>
+<h1 id="专有扩展"><a href="#专有扩展" class="headerlink" title="专有扩展"></a>专有扩展</h1><p>除了已经标准化的，各家浏览器还有很多未被标准化的专有扩展。而这些功能后来则有可能被标准化，比如进入 <code>HTML5</code>。</p>
+<h2 id="children属性"><a href="#children属性" class="headerlink" title="children属性"></a>children属性</h2><p><code>IE9</code> 之前的版本与其他浏览器在处理空白文本节点上的差异导致了 <code>children</code> 属性的出现。 <code>children</code> 属性是一个 <code>HTMLCollection</code>，只包含元素的 <code>Element </code>类型的子节点。如果元素的子节点类型全部是元素类型，那 <code>children</code> 和 <code>childNodes</code> 中包含的节点应该是一样的。可以像下面这样使 用 <code>children</code> 属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> childCount = element.<span class="property">children</span>.<span class="property">length</span>;</span><br><span class="line"><span class="keyword">let</span> firstChild = element.<span class="property">children</span>[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="contains-方法"><a href="#contains-方法" class="headerlink" title="contains()方法"></a>contains()方法</h2><p><code>DOM</code> 编程中经常需要确定一个元素是不是另一个元素的后代。IE 首先引入了 <code>contains()</code>方法， 让开发者可以在不遍历 <code>DOM</code> 的情况下获取这个信息。<code>contains()</code>方法应该在要搜索的祖先元素上调用，参数是待确定的目标节点。</p>
+<p>如果目标节点是被搜索节点的后代，<code>contains()</code>返回 true，否则返回 false。下面看一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="title function_">contains</span>(<span class="variable language_">document</span>.<span class="property">body</span>)); <span class="comment">// true </span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子测试元素中是否包含元素，在格式正确的 <code>HTML</code> 中会返回 true。</p>
+<h2 id="插入标记-1"><a href="#插入标记-1" class="headerlink" title="插入标记"></a>插入标记</h2><p><code>HTML5</code> 将 IE 发明的 <code>innerHTML</code> 和 <code>outerHTML</code> 纳入了标准，但还有两个属性没有入选。这两个剩 下的属性是 <code>innerText</code> 和 <code>outerText</code>。</p>
+<ol>
+<li><p>innerText属性</p>
+<p><code>innerText</code> 属性对应元素中包含的所有文本内容，无论文本在子树中哪个层级。在用于读取值时， <code>innerText</code> 会按照深度优先的顺序将子树中所有文本节点的值拼接起来。在用于写入值时，<code>innerText</code> 会移除元素的所有后代并插入一个包含该值的文本节点。来看下面的 <code>HTML</code> 代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a <span class="tag">&lt;<span class="name">strong</span>&gt;</span>paragraph<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> with a list following it.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>对这个例子中的<code>&lt;div&gt;</code>而言，<code>innerText</code> 属性会返回以下字符串：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">This is a paragraph with a list following it.</span><br><span class="line">Item 1</span><br><span class="line">Item 2</span><br><span class="line">Item 3 </span><br></pre></td></tr></table></figure>
+
+<p>下面再看一个使用 <code>innerText</code> 设置<code>&lt;div&gt;</code>元素内容的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">innerText</span> = <span class="string">&quot;Hello world!&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>执行这行代码后，<code>HTML</code> 页面中的这个<code>&lt;div&gt;</code>元素实际上会变成这个样子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span>Hello world!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>设置 <code>innerText</code> 会移除元素之前所有的后代节点，完全改变 <code>DOM</code> 子树。此外，设置 <code>innerText</code> 也会编码出现在字符串中的 <code>HTML</code> 语法字符（小于号、大于号、引号及和号）。下面是一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">innerText</span> = <span class="string">&quot;Hello &amp; welcome, &lt;b&gt;\&quot;reader\&quot;!&lt;/b&gt;&quot;</span>; </span><br></pre></td></tr></table></figure>
+
+<p>执行之后的结果如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span>Hello <span class="symbol">&amp;amp;</span> welcome, <span class="symbol">&amp;lt;</span>b<span class="symbol">&amp;gt;</span><span class="symbol">&amp;quot;</span>reader<span class="symbol">&amp;quot;</span>!<span class="symbol">&amp;lt;</span>/b<span class="symbol">&amp;gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过将 <code>innerText</code> 设置为等于 <code>innerText</code>，可以去除所有 <code>HTML</code> 标签而只剩文本，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">innerText</span> = div.<span class="property">innerText</span>; </span><br></pre></td></tr></table></figure>
+
+<p>执行以上代码后，容器元素的内容只会包含原先的文本内容。</p>
+</li>
+<li><p>outerText属性</p>
+<p><code>outerText</code> 与 <code>innerText</code> 是类似的，只不过作用范围包含调用它的节点。要读取文本值时， <code>outerText</code> 与 <code>innerText</code> 实际上会返回同样的内容。但在写入文本值时，<code>outerText</code> 就大不相同了。 写入文本值时，<code>outerText</code> 不止会移除所有后代节点，而是会替换整个元素。比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">outerText</span> = <span class="string">&quot;Hello world!&quot;</span>; </span><br></pre></td></tr></table></figure>
+
+<p>这行代码的执行效果就相当于以下两行代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> text = <span class="variable language_">document</span>.<span class="title function_">createTextNode</span>(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">div.<span class="property">parentNode</span>.<span class="title function_">replaceChild</span>(text, div);</span><br></pre></td></tr></table></figure>
+
+<p>本质上，这相当于用新的文本节点替代 <code>outerText</code> 所在的元素。此时，原来的元素会与文档脱离关系，因此也无法访问。</p>
+<p><code>outerText</code> 是一个非标准的属性，而且也没有被标准化的前景。因此，不推荐依赖这个属性实现重要的操作。</p>
+</li>
+</ol>
+<h2 id="滚动"><a href="#滚动" class="headerlink" title="滚动"></a>滚动</h2><p>如前所述，滚动是 <code>HTML5</code> 之前 <code>DOM</code> 标准没有涉及的领域。虽然 <code>HTML5</code> 把 <code>scrollIntoView()</code> 标准化了，但不同浏览器中仍然有其他专有方法。比如，<code>scrollIntoViewIfNeeded()</code>作为 <code>HTMLElement</code> 类型的扩展可以在所有元素上调用。<code>scrollIntoViewIfNeeded(alingCenter)</code>会在 元素不可见的情况下，将其滚动到窗口或包含窗口中，使其可见；如果已经在视口中可见，则这个方法 什么也不做。如果将可选的参数 <code>alingCenter</code> 设置为 true，则浏览器会尝试将其放在视口中央。<code>Safari</code>、 <code>Chrome </code>和 <code>Opera</code> 实现了这个方法。</p>
+<p>考虑到 <code>scrollIntoView()</code>是唯一一个所有浏览器都支持的方法，所以只用它就可以了。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://pvnk1u.github.io/2023/05/11/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(12)%E2%80%94%E2%80%94DOM%E6%89%A9%E5%B1%95/" title="JS高级程序设计读书笔记(12)——DOM扩展" target="_blank" rel="external">http://pvnk1u.github.io/2023/05/11/JS高级程序设计读书笔记(12)——DOM扩展/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/pvnk1u" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/dog.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/pvnk1u" target="_blank"><span class="text-dark">Yolo</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>Everything happens for the best</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/05/13/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(13)%E2%80%94%E2%80%94%E4%BA%8B%E4%BB%B6/" title="JS高级程序设计读书笔记(13)——事件"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/04/17/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(11)%E2%80%94%E2%80%94DOM/" title="JS高级程序设计读书笔记(11)——DOM"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2024 pvnk1u
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://pvnk1u.github.io/2023/05/11/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(12)%E2%80%94%E2%80%94DOM%E6%89%A9%E5%B1%95/';
+        
+        this.page.identifier = 'JS高级程序设计读书笔记(12)——DOM扩展';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + '' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

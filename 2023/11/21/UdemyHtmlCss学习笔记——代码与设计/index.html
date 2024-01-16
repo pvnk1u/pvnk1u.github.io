@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.britannica.com/89/234589-050-0E6E9D4B/color-wheel-additive.jpg?w=400&h=300&c=crop">
 <meta property="article:published_time" content="2023-11-21T07:32:39.000Z">
-<meta property="article:modified_time" content="2024-01-16T15:33:22.952Z">
+<meta property="article:modified_time" content="2024-01-16T15:37:46.233Z">
 <meta property="article:author" content="pvnk1u">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="html">
@@ -328,7 +328,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/11/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81%E4%B8%8E%E8%AE%BE%E8%AE%A1/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 7.1k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 7.2k(字)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 25(分)</span>
@@ -592,12 +592,19 @@
 <p>要使用 flexbox，首先要创建弹性容器，可以通过在容器上添加 <code>display: flex</code>实现。这样弹性容器的所有直接子元素都将变为弹性元素。这些弹性元素的布局方向称为主轴。另外一个轴称为辅轴。主轴和辅轴可以通过设置属性调换。</p>
 <p>对于弹性容器，有以下几个需要记住的属性：</p>
 <ol>
-<li>gap 可以在不使用 margin 外边距的情况下在各元素之间创建间隔。</li>
-<li>justify-content 沿主轴对齐项目（默认情况下水平对齐）的方式 可选值有：flex-start | flex-end | center | space-between | space-around | space-evenly space-between 可以实现均分排满主轴的效果</li>
-<li>align-items 沿辅轴对齐项目（默认情况下垂直对齐）的方式 stretch | flex-start | flex-end | center | baseline</li>
-<li>flex-direction 定义哪个是主轴 row | row-reverse | column | column-reverse</li>
-<li>flex-wrap 设置在项目太大的时候是否可以换行 nowrap | wrap | wrap-reverse</li>
-<li>align-content 在元素有多行时适用 stretch | flex-start | flex-end | center | space-between | space-around</li>
+<li><p>gap 可以在不使用 margin 外边距的情况下在各元素之间创建间隔。</p>
+</li>
+<li><p>justify-content 沿主轴对齐项目（默认情况下水平对齐）的方式 可选值有：flex-start | flex-end | center | space-between | space-around | space-evenly </p>
+<p><strong>space-between 可以实现均分排满主轴的效果，经常拿来实现分别在最左侧和最右侧展示两个元素的效果。</strong></p>
+</li>
+<li><p>align-items 沿辅轴对齐项目（默认情况下垂直对齐）的方式 stretch | flex-start | flex-end | center | baseline</p>
+</li>
+<li><p>flex-direction 定义哪个是主轴 row | row-reverse | column | column-reverse</p>
+</li>
+<li><p>flex-wrap 设置在项目太大的时候是否可以换行 nowrap | wrap | wrap-reverse</p>
+</li>
+<li><p>align-content 在元素有多行时适用 stretch | flex-start | flex-end | center | space-between | space-around</p>
+</li>
 </ol>
 <p>对于弹性容器内部的容器元素，也有几个需要记住的属性：</p>
 <ol>

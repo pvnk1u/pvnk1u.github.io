@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.britannica.com/89/234589-050-0E6E9D4B/color-wheel-additive.jpg?w=400&h=300&c=crop">
 <meta property="article:published_time" content="2023-11-21T07:32:39.000Z">
-<meta property="article:modified_time" content="2024-01-16T15:37:46.233Z">
+<meta property="article:modified_time" content="2024-01-17T16:01:20.226Z">
 <meta property="article:author" content="pvnk1u">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="html">
@@ -328,10 +328,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/11/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81%E4%B8%8E%E8%AE%BE%E8%AE%A1/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 7.2k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 8.4k(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 25(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 30(分)</span>
 	
 
       </div>
@@ -626,7 +626,29 @@
 <p>可以使用<code>flex: flex-grow flex-shrink flex-basis</code>的速记表示法一次性表示<code>flex-grow</code>、<code>flex-shrink</code>、<code>flex-basis</code>三个属性。</p>
 <p><strong>对于需要明确指定宽度的弹性元素，需要通过<code>flex-basis</code>指定最佳宽度，对于其他的没有那么需要明确指定宽度的弹性元素，可以将其<code>flex-grow</code>设置为1（根据其他弹性元素的宽度自动调节自身宽度），这样就只需要在个别的弹性元素上指定宽度及指定弹性容器的<code>gap</code>间隙值即可实现弹性元素宽度自动计算的效果。省去了手动计算元素宽度并逐个指定的步骤。</strong></p>
 <p>使用 flexbox 的一个很明显的好处在于，对弹性容器素中的多个弹性元素，只需要设置好其中的部分元素，并且设置好其他元素的 flex 值后（比如 flex: 1 代表这个弹性元素将尽可能地占据剩余的空间），浏览器会自动计算出所有元素应该占据地空间。</p>
-<h3 id="Grid"><a href="#Grid" class="headerlink" title="Grid"></a>Grid</h3><p><code>Grid</code>可以实现构建完整的二维布局，这使得它非常适合实现页面整体布局。</p>
+<h3 id="Grid"><a href="#Grid" class="headerlink" title="Grid"></a>Grid</h3><p><code>Grid</code>可以实现构建完整的二维布局，这使得它非常适合实现页面整体布局。<code>CSS Grid</code> 使用方式： 通过设置容器 <code>display: grid</code> 来实现 <code>grid</code>。</p>
+<p>对于 <code>CSS Grid</code> 容器有如下重要属性：</p>
+<ol>
+<li>容器内部的多个元素将按照指定的列数来挨个排列，比如总共有 8 个元素，通过 <code>grid-template-columns: 200px  200px 100px 100px;</code>设置了 <code>grid</code> 具有四列元素，且前两列的宽度是 200 像素，后两列的宽度是 100 像素。那么这 8  个元素将通过第一行 4 个，第二行 4 个的排列方式展现在页面上。</li>
+<li><strong>除了可以通过在 <code>CSS Grid</code> 容器上 <code>grid-template-columns</code> 设置列的宽度，也可以通过  <code>grid-template-rows</code>  以同样的方式设置行的高度。如果设置的高度过高，那么实际高度没有达到这个高度的元素将会以其实际高度展示而不是被拉长。</strong></li>
+<li>可以通过 <code>gap</code> 属性设置 <code>grid</code> 容器中的间距，<code>gap</code> 属性设置的间距不仅适用于列之间，也适用于行之间，如果想单独设置列间距和行间距，可以通过 <code>column-gap</code> 和 <code>row-gap</code>来分别设置。</li>
+<li>与 <code>flexbox</code> 相似，<code>CSS Grid</code>容器 也具有 <code>justify-items</code> 和 <code>align-items</code> 属性，分别代表行排列方式和列排列方式。<code> justify-items: stretch</code> | <code>start</code> | <code>center</code> | <code>end</code> <code>align-items: stretch</code> | <code>start</code> | <code>center</code> | <code>end</code> 这两个属性和在 <code>flexbox</code> 中的用法及作用一致，是用来指定实际内容在其对应的单元格内的排列方式的</li>
+<li>在 <code>CSS Grid</code> 容器 上还有两个属性是 <code>justify-content</code> 和 <code>align-content</code>。 <code>justify-content: stretch</code> | <code>start</code> | <code>center</code> | <code>end</code> <code>align-content: stretch</code> | <code>start</code> | <code>center</code> | <code>end</code> 需要与 <code>justify-items</code> 和 <code>align-items</code> 注意区分的是，这两个内容对齐属性指定的是网格的行、列两个轨道在其父 Grid 容器中的排列方式（因为网格容器的大小肯定大于等于网格的大小）。</li>
+</ol>
+<p>对于这两组属性的区分，只需要记住 <code>justify-items</code> 和 <code>align-items</code>指定的是实际内容在其所在的 <code>grid</code> 内的单元格中的排列方式，而 <code>justify-content</code> 和 <code>align-content</code> 指定的则是 <code>grid</code> 中的单元格在  <code>grid</code> 容器中的排列方式。</p>
+<p>对于 <code>CSS Grid</code> 容器中的网格项目，有如下属性：</p>
+<ol>
+<li><p>网格列、网格行 <code>grid-column</code>:  &#x2F;  | span  <code>grid-row</code>:  &#x2F;  | span  </p>
+<p>网格列和网格行对于放置网格项目进入特定的单元格（而不是按照默认的顺序放入对应的单元格）非常重要。</p>
+<p><strong>例如<code>grid-column: 2 / 3</code>就是将指定的单元格放入第2列，同理，<code>grid-row: 2 / 3</code>就是将指定的单元格放入第2行，像这种只占据一行&#x2F;列的（第二个值只比第一个值大1的）可以只写第一个值，例如<code>grid-column: 2</code>。当然，这个属性也可以指定网格跨越多列&#x2F;多行显示，例如<code>grid-column: 2 / 4</code>就是设置网格占据第二列~第三列的两列位置显示。为了不用进行计算，也可以使用<code>grid-column: 2 / span 2</code>设置跨越两列显示，不需要再进行计算。也可以设置<code>grid-column: 1 / -1</code>直接使元素占据整行。（因为grid分割线里最右边和最下方的值都是-1）</strong></p>
+</li>
+<li><p><code>justify-self: stretch</code> | <code>start</code> | <code>center</code> | <code>end</code> <code>align-self: stretch</code> | <code>start</code> | <code>center</code> | <code>end</code> 用于覆盖对齐项，当其所在的 <code>grid</code> 容器被指定了 <code>justify-items</code> 和 <code>align-items</code>  属性，但是又想让特殊项使用个性化项目对齐样式替代 <code>grid</code> 容器的元素对齐样式时，就可以使用 <code>justify-self</code> 和 <code>align-self</code> 来代替父 <code>grid</code> 容器中的 <code>justify-items</code> 和 <code>align-items</code> 设置的样式。</p>
+</li>
+</ol>
+<p><strong>在 <code>CSS grid</code> 中，可以在 <code>grid-template-columns</code> 和  <code>grid-template-rows</code> 中使用 fr(比如 1fr) 单位替代 px 单位指定大小。这样可以使对应的列或行填满 <code>CSS Grid</code>  容器中在指定方向上的所有剩余空间。如果对所有网格都使用了 fr 单位来指定大小，则这些网格将根据 fr 单位的大小按照 fr  单位的比例瓜分占满容器在这个方向上的空间。如果各网格的值都相同（1fr），则将均分容器在这个方向上的空间。</strong></p>
+<p><strong>如果在 <code>grid-template-colums</code> 和 <code>grid-template-rows</code>  中的某一列或某一行上使用了 <code>auto</code>，则这一列（行）将只占据其实际需要占据的空间，除去这个 <code>auto</code> 大小元素之后的空间再被其他的设置了相应  px 像素或者 fr 单位的列（行）瓜分。</strong></p>
+<p><strong>如果想快速均匀设置四列元素的 <code>grid</code> 布局，只需要简写为 <code>grid-template-columns: repeat(4,1fr)</code>，而不用写上四遍 1fr。</strong></p>
+<p><strong>如果没有手动设置容器的高度，则每一行网格的实际高度由这一行中高度最高的一个网格的高度确定。如果通过 <code>grid-template-rows</code> 设置了每一行的高度相同，则所有行的高度都由其中高度最高的一个网格确定。</strong></p>
 
       
     </div>

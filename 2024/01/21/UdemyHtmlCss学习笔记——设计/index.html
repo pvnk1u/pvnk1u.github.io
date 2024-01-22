@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>UdemyHtmlCss学习笔记——设计 | Yolo</title>
+  <meta name="description" content="网页设计要素：排版排版可以使文本美观且易于阅读的技术。 字体字体是实现良好页面排版的重要方式，使用字体时应该尽量遵守的：  只使用优秀的流行的字体  尽量不要在同一个页面中使用多个字体，尽量只使用一到两个字体。  根据页面个性选中适合的字体  当选择字体大小时，应该尽可能地限制可选择项，可以使用”类型比例“工具或其他预定义地字体大小范围， 这样就不用频繁考虑字体大小值。  对于普通文本，应该使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UdemyHtmlCss学习笔记——设计">
+<meta property="og:url" content="http://pvnk1u.github.io/2024/01/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="YOLO">
+<meta property="og:description" content="网页设计要素：排版排版可以使文本美观且易于阅读的技术。 字体字体是实现良好页面排版的重要方式，使用字体时应该尽量遵守的：  只使用优秀的流行的字体  尽量不要在同一个页面中使用多个字体，尽量只使用一到两个字体。  根据页面个性选中适合的字体  当选择字体大小时，应该尽可能地限制可选择项，可以使用”类型比例“工具或其他预定义地字体大小范围， 这样就不用频繁考虑字体大小值。  对于普通文本，应该使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-21T07:32:39.000Z">
+<meta property="article:modified_time" content="2024-01-22T15:35:21.134Z">
+<meta property="article:author" content="pvnk1u">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="design">
+<meta property="article:tag" content="设计">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://pvnk1u.github.io/2024/01/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%AE%BE%E8%AE%A1/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="YOLO" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-white" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/pvnk1u" target="_blank">
+          <img class="img-circle img-rotate" src="/images/dog.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Yolo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/css/">css</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/design/">design</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/design/%E8%AE%BE%E8%AE%A1/">设计</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/">html</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/html/css/">css</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/javascript/">javascript</a><span class="category-list-count">14</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/design/">design</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/01/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%AE%BE%E8%AE%A1/" class="title">UdemyHtmlCss学习笔记——设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-01-21T07:32:39.000Z" itemprop="datePublished">2024-01-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/html/">html</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81/" class="title">UdemyHtmlCss学习笔记——代码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-21T07:32:39.000Z" itemprop="datePublished">2023-11-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/01/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(7)%E2%80%94%E2%80%94%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80%E4%B8%8E%E7%BD%91%E6%A0%BC/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-01T07:28:39.000Z" itemprop="datePublished">2023-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/05/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(6)%E2%80%94%E2%80%94%E5%86%85%E5%AE%B9%E5%B8%83%E5%B1%80/" class="title">精通CSS读书笔记(6)——内容布局</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-05T07:28:39.000Z" itemprop="datePublished">2023-06-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/web/">web</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/web/css/">css</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/04/%E7%B2%BE%E9%80%9ACSS%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0(5)%E2%80%94%E2%80%94%E6%BC%82%E4%BA%AE%E7%9A%84%E7%9B%92%E5%AD%90/" class="title">精通CSS读书笔记(5)——漂亮的盒子</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-04T01:28:39.000Z" itemprop="datePublished">2023-06-04</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%B4%A0%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">网页设计要素：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E7%89%88"><span class="toc-number">1.2.</span> <span class="toc-text">排版</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#-1"><span class="toc-number">1.2.1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E4%BD%93"><span class="toc-number">1.2.2.</span> <span class="toc-text">字体</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-2"><span class="toc-number">1.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2"><span class="toc-number">1.4.</span> <span class="toc-text">颜色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-3"><span class="toc-number">1.5.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87"><span class="toc-number">1.6.</span> <span class="toc-text">图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-4"><span class="toc-number">1.7.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E6%A0%87"><span class="toc-number">1.8.</span> <span class="toc-text">图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-5"><span class="toc-number">1.9.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%B4%E5%BD%B1-Shadows"><span class="toc-number">1.10.</span> <span class="toc-text">阴影(Shadows)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-6"><span class="toc-number">1.11.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E7%95%8C%E5%8D%8A%E5%BE%84-border-radius"><span class="toc-number">1.12.</span> <span class="toc-text">边界半径(border-radius)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-7"><span class="toc-number">1.13.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A9%BA%E7%99%BD"><span class="toc-number">1.14.</span> <span class="toc-text">空白</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-8"><span class="toc-number">1.15.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E8%A7%89%E5%B1%82%E6%AC%A1"><span class="toc-number">1.16.</span> <span class="toc-text">视觉层次</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-9"><span class="toc-number">1.17.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C"><span class="toc-number">1.18.</span> <span class="toc-text">用户体验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-10"><span class="toc-number">1.19.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%92%8C%E5%B8%83%E5%B1%80"><span class="toc-number">1.20.</span> <span class="toc-text">组件和布局</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#-11"><span class="toc-number">2.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E4%B8%AA%E6%80%A7%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">网站个性及其实现方式：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#-12"><span class="toc-number">3.1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A5%E8%82%83%E6%88%96%E4%BC%98%E9%9B%85%E7%9A%84%E4%B8%AA%E6%80%A7"><span class="toc-number">3.2.</span> <span class="toc-text">严肃或优雅的个性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-13"><span class="toc-number">3.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E7%AE%80%E4%B8%BB%E4%B9%89%E3%80%81%E7%AE%80%E5%8D%95"><span class="toc-number">3.4.</span> <span class="toc-text">极简主义、简单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-14"><span class="toc-number">3.5.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E5%AE%9E%E6%88%96%E4%B8%AD%E6%80%A7%E7%9A%84%E6%80%A7%E6%A0%BC"><span class="toc-number">3.6.</span> <span class="toc-text">平实或中性的性格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-15"><span class="toc-number">3.7.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E8%83%86%E3%80%81%E8%87%AA%E4%BF%A1%E7%9A%84%E6%80%A7%E6%A0%BC"><span class="toc-number">3.8.</span> <span class="toc-text">大胆、自信的性格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-16"><span class="toc-number">3.9.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E9%9D%99%E7%A5%A5%E5%92%8C"><span class="toc-number">3.10.</span> <span class="toc-text">平静祥和</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-17"><span class="toc-number">3.11.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%88%9B%E3%80%81%E4%B9%90%E8%A7%82"><span class="toc-number">3.12.</span> <span class="toc-text">初创、乐观</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-18"><span class="toc-number">3.13.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%8F%E7%9A%AE%E3%80%81%E6%9C%89%E8%B6%A3"><span class="toc-number">3.14.</span> <span class="toc-text">俏皮、有趣</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#-19"><span class="toc-number">4.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E5%8F%82%E8%80%83%E7%9A%84%E8%AE%BE%E8%AE%A1%E8%81%9A%E5%90%88%E7%BD%91%E7%AB%99"><span class="toc-number">5.</span> <span class="toc-text">可以参考的设计聚合网站</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#-20"><span class="toc-number">6.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E5%92%8C%E7%BB%84%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text">元素和组件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#-21"><span class="toc-number">7.1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%B4%A0"><span class="toc-number">7.2.</span> <span class="toc-text">元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-22"><span class="toc-number">7.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6"><span class="toc-number">7.4.</span> <span class="toc-text">组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-23"><span class="toc-number">7.5.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E7%BB%84%E4%BB%B6"><span class="toc-number">7.6.</span> <span class="toc-text">局部组件</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-UdemyHtmlCss学习笔记——设计" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UdemyHtmlCss学习笔记——设计
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2024/01/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%AE%BE%E8%AE%A1/" class="article-date">
+	  <time datetime="2024-01-21T07:32:39.000Z" itemprop="datePublished">2024-01-21</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/web/">web</a>►<a class="article-category-link" href="/categories/web/design/">design</a>►<a class="article-category-link" href="/categories/web/design/%E8%AE%BE%E8%AE%A1/">设计</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/design/" rel="tag">design</a>, <a class="article-tag-link-link" href="/tags/web/" rel="tag">web</a>, <a class="article-tag-link-link" href="/tags/%E8%AE%BE%E8%AE%A1/" rel="tag">设计</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2024/01/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%AE%BE%E8%AE%A1/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 5.5k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 18(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="网页设计要素："><a href="#网页设计要素：" class="headerlink" title="网页设计要素："></a>网页设计要素：</h1><h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="排版"><a href="#排版" class="headerlink" title="排版"></a>排版</h2><p>排版可以使文本美观且易于阅读的技术。</p>
+<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><h3 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h3><p>字体是实现良好页面排版的重要方式，使用字体时应该尽量遵守的：</p>
+<ol>
+<li>只使用优秀的流行的字体 </li>
+<li>尽量不要在同一个页面中使用多个字体，尽量只使用一到两个字体。 </li>
+<li>根据页面个性选中适合的字体 </li>
+<li>当选择字体大小时，应该尽可能地限制可选择项，可以使用”类型比例“工具或其他预定义地字体大小范围， 这样就不用频繁考虑字体大小值。 </li>
+<li>对于普通文本，应该使用 16~32 像素地字体大小。 </li>
+<li>对于长文本，可以尝试适用 20 像素甚至更大的字体大小，这样用户阅读时会更容易。 </li>
+<li>对于需要醒目显示地大头条元素，可以使用更大的（50px+）及更粗的（600+） </li>
+<li>正常情况下，对于任何文本，都不要使用一个 <code>font-weight</code> 低于 400 的值，那样会很难阅读。 </li>
+<li>每行都不要超过 75 个字符，太长的文本会使阅读变的困难。 </li>
+<li>对于正常大小的文本，优先尝试使用 1.5~~2 之间的行高。如果文本像标题一样大，可降低到 1.5 以下。 </li>
+<li>如果标题看起来不自然，可以尝试减小字体间距。 </li>
+<li>对短标题全部使用大写并且使其非常小而且粗体显示并增加字体间距。 </li>
+<li>通常不应该水平居中对齐文本，这会使阅读变得困难。</li>
+</ol>
+<p><strong>两种字体： 衬线字体（serif）指的是在字的笔画开始、结束的地方有额外的装饰，并且笔画的粗细会有所不同。衬线字体是传统字体，可以用它们来创造更传统的或经典外观的界面。它们还使设计传达了可信赖性。它也适合文章或在线杂志等长文本。</strong></p>
+<p><strong>无衬线字体（sans-serif）则没有这些额外的装饰，而且笔画的粗细差不多，所以其通常看起来非常干净和简单。可以用来实现一个具有非常现代的外观的界面。</strong></p>
+<p>比较推荐的六种衬线字体： </p>
+<ol>
+<li>Merriweather </li>
+<li>Aleo </li>
+<li>Playfair Display </li>
+<li>Cormorant </li>
+<li>Cardo </li>
+<li>Lora</li>
+</ol>
+<p>比较推荐的六种无衬线字体： </p>
+<ol>
+<li>Inter </li>
+<li>Open Sans </li>
+<li>Roboto </li>
+<li>Montserrat </li>
+<li>Work Sans </li>
+<li>Lato</li>
+</ol>
+<p>使用 <code>font-family</code> 选择页面使用的字体时，可以用逗号指定多个字体，优先使用前面的字体，前面的字体不可用，再依次使用后面的字体。</p>
+<p>使用的字体可以在 <code>google-fonts</code> 上定制选择，并把字体链接在 <code>head</code> 头中引入。</p>
+<p><strong>字体大小可以事先在 <code>type-scale</code>（类型比例）这种网站上定义好，然后只使用定义好的一组字体大小中的值。这样会使得页面字体大小更加统一美观。</strong></p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><h2 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h2><p>选择要使用的颜色时可以根据页面上比较醒目的颜色（图片颜色、主题色）来选择。 对于颜色的细分种类，可以在 yeun.github.io&#x2F;open-color 查找。</p>
+<p>颜色属性可以被继承，所以可以在 body 选择器中指定所有字体的颜色。</p>
+<h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>页面上使用的图片类型大概可以分为四种：</p>
+<ol>
+<li>产品照片 </li>
+<li>讲故事的照片 </li>
+<li>插图 </li>
+<li>图案</li>
+</ol>
+<p>使用图片时应该尽可能遵循以下准则: </p>
+<ol>
+<li>使用图片更好地展示页面的信息和内容，所以应该只使用与页面内容相关的图片。 </li>
+<li>尽可能只使用原始图片，如果做不到的话，也可以使用一些图库的相关图片，比如 unsplash。 </li>
+<li>使用图片时非常重要的一点是在图像中显示真实的（而不是一些假的、过度生产的模型）以触动用户的情绪。 </li>
+<li>可以为了更贴合网页内容裁剪相应的图片内容。 </li>
+<li>可以尝试组合照片、插图和图案以创造有趣的细节。 </li>
+<li>当使用图像时，可以使图像变暗或变亮以使得图像上的文字更加容易阅读。 </li>
+<li>也可以将文字位置定位到图像中的中性的图像区域中，这样也可以使文字更加容易阅读。 </li>
+<li>也可以将文本放在图像里的一个不透明的框中，这样可以在不调整图像亮度的前提下也实现易于阅读的效果。</li>
+<li>为了支持在高分辨率显示器上的显示，通常在指定图像宽高时可以将宽高设置图像真实宽高的 2 倍，这样就可以使图像在高分辨率显示设备上也正常显示。 </li>
+<li>压缩图像到一个较小的文件大小以使图像加载的体验更加好。可以使用 squoosh 等工具实现。 </li>
+<li>当并排使用多个图像时，需要确保它们具有完全相同的尺寸，否则不同的图像可能会因为宽高更小而在其四周留下空白，看起来体验非常不好。</li>
+</ol>
+<h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><h2 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h2><p>图标可以增加很多细节，并且可以完全改变外观以及整个页面或应用程序的感觉。</p>
+<p>使用图标时的一些不错的可以参考的准则： </p>
+<ol>
+<li>使用一个不错的图标库（而不是在网上找到的一些随机图标）。有很多免费的图标库也基本上也可以满足要求（例如 Phosphor、Ionicons 和 Icons8）。 </li>
+<li>只使用一个图标库，不要使用多个图标库的图标，这样会导致页面样式不统一。 </li>
+<li>只使用 SVG 格式的图标或图标字体（icon  fonts），因为这些图标是基于向量的（vector-based），这意味着可以无限扩展它们而不用担心它们会变得不清晰。不要使用像 JPEG 或 PNG 的传统图像，当放大这些格式的图标时，它们会变得不清晰。 </li>
+<li>选择的网站图标需要可以与网站个性相符。 </li>
+<li>使用图标给文本提供视觉帮助。 </li>
+<li>使用图标创建功能块。功能块经常体现为：在顶部有一个图标，然后是一些较小的标题，然后是描述。在这样的功能块中，其中的图标非常有用。 </li>
+<li>可以将图标与操作动作联系起来。比如很多知名网站的导航菜单本身的图标都与菜单描述本身相符合。 </li>
+<li>将图标作为要点（比如对号、错号等）。 </li>
+<li>可以将图标设置为与文本相同的颜色，或者如果在想引起用户注意的时候使用与文本不同的颜色。 </li>
+<li>不要通过图标来混淆用户，选择的图标应该有意义并且适合要传达的文本或动作。 </li>
+<li>不要让图标的大小比它们被设计地更大。</li>
+</ol>
+<p>在 HTML 中有多种使用 SVG 图标的方法，其中之一是下载实际的 SVG 文件，然后将它们合并到 HTML 中，就像普通图像一样，但是这有一些限制。所以最简单方法就是复制 SVG 代码，<strong>因为 SVG 实际上只是代码。</strong></p>
+<h2 id="-5"><a href="#-5" class="headerlink" title=""></a></h2><h2 id="阴影-Shadows"><a href="#阴影-Shadows" class="headerlink" title="阴影(Shadows)"></a>阴影(Shadows)</h2><p>阴影可以起到帮用户弄清楚页面各部分关系的重要作用以显示真正重要的页面元素。或者可以使用它们来添加有趣的视觉细节。 阴影可以为设计添加第三个维度（即内容深度）的效果。给元素添加的阴影越重，从用户的角度看起来，这个元素就显得越深越远。</p>
+<p>使用阴影时的一些可以参考的准则： </p>
+<ol>
+<li>并不是必须要用阴影，如果其与页面个性不符时，便没有必要使用。越是严肃与优雅，需要使用阴影的必须要越少。 </li>
+<li>使用阴影时应尽量从小范围开始，不要一开始就给太多元素设置阴影，那样只会让人感到迷惑。因为当太多元素都有阴影时，意味着页面上不同元素之间根本没有层次结构，也就完全丧失了使用阴影的作用。 </li>
+<li>一定要照片阴影元素，不要让它们太暗。阴影部分太暗时会让阴影部分看起来很怪。 </li>
+<li>对于较小的需要突出显示的元素使用小阴影。 </li>
+<li>对于较大的需要突出显示的区域应该使用中等大小的阴影。 </li>
+<li>对于需要漂浮在其他所有元素之上的元素（例如导航）应该使用更大的阴影以实现其突出显示的效果。 </li>
+<li>可以针对鼠标事件（点击、悬浮）等改变元素对应的阴影以实现动态变化的阴影突出显示效果 </li>
+<li>阴影不一定总是黑色的，可以通过阴影实现元素发光的效果</li>
+</ol>
+<p>可以通过 box-shadow 属性指定块级元素的阴影,这个属性可以有 4~5 个值, 第一个基本上是水平偏移的影子,在这个值中,可以指定一个长度,代表盒子和阴影之间的水平偏移量。当这个值为正数时,代表阴影将在盒子右侧,反之为负值时代表阴影将在盒子左侧,为 0 时代表左右两侧均匀分布. 第二个值也是一样,只是方向变成了盒子和阴影之间的垂直方向偏移量。与代表水平偏移量的第一个值类似,当为正数时,阴影将在盒子下方,当为负数时,阴影将在盒子上方,为 0 时,上下均匀分布. 第三个值是阴影的模糊度,如果使用一个较小的值,它几乎不会模糊。这个值一般是必须要有一定大小的,否则体现不出阴影效果. 第四个值是可选的,它允许把阴影放大,如果不指定,则它默认为 0。多数情况下用不到这个值. 最后一个值是阴影的颜色。也可以使用 RGBA 表示法以设置其透明度。</p>
+<p>阴影同样可以用在文本上,只是对应的属性需要换成 <code>text-shadow</code>,且与 <code>box-shadow</code> 不同的是,其没有第四个值.</p>
+<h2 id="-6"><a href="#-6" class="headerlink" title=""></a></h2><h2 id="边界半径-border-radius"><a href="#边界半径-border-radius" class="headerlink" title="边界半径(border-radius)"></a>边界半径(border-radius)</h2><p>border-radius  是用来设置页面元素的圆度的，看起来可能并不起眼，但是实际上对于开发美观的网页非常重要。使用 border-radius  可以增加设计的趣味性并使其不那么严肃.边界半径(border-radius)值越小,可以感知到的设计越严肃越优雅.相反的如果值较大,则看起来更有趣.</p>
+<p>选择边界半径(border-radius)值大小的时候,字体会是一个很好的参考指标.字体本身就有了一定的圆度,所以可以让边界半径匹配字体的圆度,</p>
+<p>比较适合使用边界半径(border-radius)的元素是按钮,在按钮上设置合理的 border-radius  可以使按钮看起来不那么有棱有角,更加圆滑.另外一个适合使用 border-radius 的元素是图片以及图标.也可以在比较大的元素容器上使用  border-radius,这样可以使其显得脱颖而出.</p>
+<p>使用 border-radius 设置元素的边界半径非常简单,只需要在后边设置其半径大小即可,例如: border-radius: 12px; 但是其实也可以设置元素各个角落的边界半径,例如在设置了上面的属性使元素四个角的边界半径为 12px 后,再次使用  border-bottom-left-radius 和 border-bottom-right-radius 设置其下方左右两个角落的边界半径.</p>
+<p>当元素是正方形时,设置 border-radius: 50%可以使其变成圆形.如果元素不是正方形时,这个值将使其变成椭圆形.</p>
+<h2 id="-7"><a href="#-7" class="headerlink" title=""></a></h2><h2 id="空白"><a href="#空白" class="headerlink" title="空白"></a>空白</h2><p>空白基本上只是元素之间的空间，但是适量的空白可以使设计看起来干净、现代、优雅，更重要的是更便于用户理解。</p>
+<p>适合使用空白的地方： </p>
+<ol>
+<li>页面不同部分（section）之间 </li>
+<li>元素组之间 </li>
+<li>较小元素之间</li>
+</ol>
+<p>空白的大小需要根据距离原则选择： </p>
+<ol>
+<li>属于一起的元素，应该更接近，所以它们之间的空白更小以让用户感觉到它们是相关的。 </li>
+<li>如果元素之间没有密切相关，那么它们之间的空白应该更大一些以显得不相关。 </li>
+<li>另外，应该尽可能与相关元素大小匹配，比如相关的元素中有一个较大的图标，那么空白也应该更大一些。</li>
+</ol>
+<p>可以参考的一个调整空白（margin、padding）的原则是尽量选择 16 的倍数（更小的 2、4、8 也可以）。</p>
+<h2 id="-8"><a href="#-8" class="headerlink" title=""></a></h2><h2 id="视觉层次"><a href="#视觉层次" class="headerlink" title="视觉层次"></a>视觉层次</h2><p>本质上，视觉层次就是那些在设计中最重要的元素和没那么重要的元素的区分。这种区分是为了达到吸引用户优先看到最重要的元素的效果。视觉层次也可以给用户提供一条显而易见的指引它们的路径。</p>
+<p>建立有意义的视觉层次可以通过使用位置、大小、颜色、边框、空白和阴影的合理组合实现。</p>
+<p>建立合理视觉层次的一些指导方针： </p>
+<ol>
+<li>把重要的元素放在页面顶部，因为那是最容易引起用户关注的地方，因为注意力从上往下流动。 </li>
+<li>谨慎使用图像，因为它们非常容易吸引关注，而且越大的图像引起越多的关注。 </li>
+<li>强调元素或元素组的另一种方式是使用空白，空白在元素之间创建分隔。 </li>
+<li>对于文本元素，可以使用字体大小、字体粗细、颜色（文本颜色和背景颜色）和空白的组合来创建视觉层次。 </li>
+<li>应该强调的文本元素包括：标题、子标题、链接、按钮、关键数据和图标。可以降低层次优先级的文本元素有标签、简单的辅助信息等。 </li>
+<li>对于组件，可以使用背景颜色、阴影和边框的组合来创建视觉层次。 </li>
+<li>如果想要强调相邻的两个组件中的 A 组件，可以通过降低组件 B 吸引力的方式来反衬组件 A 的重要性（例如删除组件 B 的背景颜色、边框、阴影等）。 </li>
+<li>应该强调的组件有：推荐内容、号召性用语、亮点内容、预览内容、表单、定价、表格中重要的行、列等。</li>
+</ol>
+<h2 id="-9"><a href="#-9" class="headerlink" title=""></a></h2><h2 id="用户体验"><a href="#用户体验" class="headerlink" title="用户体验"></a>用户体验</h2><p>设计不仅仅是它的外观和给人的感觉，设计就是它的运作方式。在用户体验中，外观和给人的干净就是用户界面的全部内容，运作方式就是指用户体验，简而言之，用户体验就是体验用户在与产品交互时所拥有的。</p>
+<p>实用的用户体验指南： </p>
+<ol>
+<li>不应创建过于复杂的布局，应该尽量使用用户已经熟悉的完善布局模式。 </li>
+<li>确保关键事件元素（通常是按钮）显著显示，还要确保其描述准确。 </li>
+<li>只应该对链接使用蓝色字体和下划线，在普通文本上使用蓝色字体和下划线会使其看起来非常像是链接，造成误导效果。 </li>
+<li>如果想要使用动画，确保它们确实需要并且速度够快（200ms~500ms）。 </li>
+<li>在表单中应该对齐标签和一个垂直线上的字段。 </li>
+<li>为所有操作提供良好的反馈。 </li>
+<li>把操作按钮放在点击按钮后真的会产生效果的地方。 </li>
+<li>在主页上添加一个描述性很强的足以描述业务内容的标题。 </li>
+<li>确保只包含业务相关的信息并以有效的方式呈现它，确保没有不相干的内容。 </li>
+<li>对实际文本使用简单的单词，避免复杂的词语，非必要时尽量避免使用用户不知道的专业词汇。 </li>
+<li>不要使用超长的句子，将其拆分成多个较短的句子或使用副标题、图像、引用等格式显示。</li>
+</ol>
+<h2 id="-10"><a href="#-10" class="headerlink" title=""></a></h2><h2 id="组件和布局"><a href="#组件和布局" class="headerlink" title="组件和布局"></a>组件和布局</h2><h1 id="-11"><a href="#-11" class="headerlink" title=""></a></h1><h1 id="网站个性及其实现方式："><a href="#网站个性及其实现方式：" class="headerlink" title="网站个性及其实现方式："></a>网站个性及其实现方式：</h1><h2 id="-12"><a href="#-12" class="headerlink" title=""></a></h2><h2 id="严肃或优雅的个性"><a href="#严肃或优雅的个性" class="headerlink" title="严肃或优雅的个性"></a>严肃或优雅的个性</h2><p>用途：可以用来传达奢华和优雅 实现方式： 使用细衬线字体、调低标题的 font-weight，使用金色或柔和的颜色或黑色、深蓝、灰色等颜色，使用较小的正文字体以及高品质的大图像。基本上不使用图标或使用细图标和线条。阴影(shadow)和边距半径(border-radius)通常都不会使用。</p>
+<h2 id="-13"><a href="#-13" class="headerlink" title=""></a></h2><h2 id="极简主义、简单"><a href="#极简主义、简单" class="headerlink" title="极简主义、简单"></a>极简主义、简单</h2><p>用途：通常用于时尚或任何类型的投资组合或极简主义公司。 实现方式： 使用方正的排版，简单的布局。使用无衬线字体，通常只是白色背景上的黑色文本。通常只使用一种中小型黑色文本或者线条，较少使用图像和图标（使用时也会非常小），也没有阴影及边界半径。</p>
+<h2 id="-14"><a href="#-14" class="headerlink" title=""></a></h2><h2 id="平实或中性的性格"><a href="#平实或中性的性格" class="headerlink" title="平实或中性的性格"></a>平实或中性的性格</h2><p>用途：较多使用在大型和完善的公司网站中，不会产生大的视觉影响力 实现方式：使用中性和小字体、使用无衬线字体，非常结构化的布局，通常使用蓝色和黑色，因为蓝色和黑色可以传递可信任的印象。网站中的图片会较小且不会独占中心位置。有时会使用图标，但是通常没有阴影和边界半径。这类网站通常都有一个非常结构化和简洁的布局，有很多盒子和行。</p>
+<h2 id="-15"><a href="#-15" class="headerlink" title=""></a></h2><h2 id="大胆、自信的性格"><a href="#大胆、自信的性格" class="headerlink" title="大胆、自信的性格"></a>大胆、自信的性格</h2><p>用途：在数字机构、软件初创公司、旅游公司中被大量使用，因为它们想传递更强烈的印象 实现方式：采用大面积而大胆的排版搭配亮色大色块，通常不使用阴影和边界半径。</p>
+<h2 id="-16"><a href="#-16" class="headerlink" title=""></a></h2><h2 id="平静祥和"><a href="#平静祥和" class="headerlink" title="平静祥和"></a>平静祥和</h2><p>用途：用于产品和服务，向消费者传达关心客户的产品理念，通常大量用于医疗保健网页中 实现方式：通过使用平静柔和的颜色（浅色的背景颜色）、柔和的衬线字体，软衬线标题以及图像和插图实现与字体或颜色相匹配，会使用一些边界半径。</p>
+<h2 id="-17"><a href="#-17" class="headerlink" title=""></a></h2><h2 id="初创、乐观"><a href="#初创、乐观" class="headerlink" title="初创、乐观"></a>初创、乐观</h2><p>用途：在初创公司、技术公司中被大量使用 实现方式：使用中等大小的标题，通常只使用一种现代外观的无衬线字体、浅灰色文字和背景、圆形元素结合在一起，大量使用绿色、蓝色和紫色，背景颜色通常使用浅灰色背景。也会使用渐变、图片和插图。图标、阴影和边界半径也会频繁使用。</p>
+<h2 id="-18"><a href="#-18" class="headerlink" title=""></a></h2><h2 id="俏皮、有趣"><a href="#俏皮、有趣" class="headerlink" title="俏皮、有趣"></a>俏皮、有趣</h2><p>用途：通常用于宠物、食物、儿童相关的网站。 实现方式：由色彩缤纷的圆形设计组成，基本上由手绘图标或插图、动画等创意元素创建，内容本身的语言也有助于传达俏皮或有趣的个性。排版通常非常圆润且富有创意。很多时候会使用手写字体的变体和无衬线字体。在文本、背景、图片等内容中非常频繁的使用颜色以显得有趣。图标、阴影和边界半径也会频繁使用。</p>
+<h1 id="-19"><a href="#-19" class="headerlink" title=""></a></h1><h1 id="可以参考的设计聚合网站"><a href="#可以参考的设计聚合网站" class="headerlink" title="可以参考的设计聚合网站"></a>可以参考的设计聚合网站</h1><ol>
+<li>land-book.com </li>
+<li>awwwards.com </li>
+<li>onepagelove.com </li>
+<li>screenlane.com</li>
+</ol>
+<h1 id="-20"><a href="#-20" class="headerlink" title=""></a></h1><h1 id="元素和组件"><a href="#元素和组件" class="headerlink" title="元素和组件"></a>元素和组件</h1><p>网页开发中最常见的元素是元素、组件、局部组件和布局模式。</p>
+<h2 id="-21"><a href="#-21" class="headerlink" title=""></a></h2><h2 id="元素"><a href="#元素" class="headerlink" title="元素"></a>元素</h2><p>最常见的元素有 Text（文本）、按钮、图像、输入元素和标签。然后可以把上面这些常用元素组合成这些很多组件。</p>
+<p>有关文本的特殊用法是作为页面上不同部分的起步项，即以文本开始页面上的某个部分（比如通过一个小而短的描述性标题）。</p>
+<h2 id="-22"><a href="#-22" class="headerlink" title=""></a></h2><h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><p>面包屑(breadcrumbs)：这是一种常用的组件类型，通常用来帮助用户导航一个非常复杂的网站。通常只会出现在具有深层页面组织的网站上。</p>
+<p>分页（page）：当列表中有很多结果时，会把它们放在许多不同的页面中，并添加一些页面按钮进行导航。</p>
+<p>警告、状态栏：通常带有某种公告，或者有时也有小警报，用于向用户展示新事物正在发生。</p>
+<p>统计数据：基本上是一些想向用户展示的数字。通常关于产品或服务，可以有效说服用户。</p>
+<p>功能框：基本上是一个组合在一起的和电子，一堆关于某事、关于产品的信息。功能框通常使用某种图标或图像，会使用更大的文本显示标题及描述。</p>
+<p>手风琴：手风琴是一种隐藏部分信息，显示部分信息的方式，可以实现在用户点击时展示对应信息，隐藏不相干信息的效果。</p>
+<p>推荐：可以用来展示一些客户、品牌。</p>
+<p>客户标志：可以展示最大、最知名的客户及客户评价以增加可信度。</p>
+<p>表格：这是大多数网站的重要组成部分，用于用户输入、及向用户展示对应的数据结果。</p>
+<h2 id="-23"><a href="#-23" class="headerlink" title=""></a></h2><h2 id="局部组件"><a href="#局部组件" class="headerlink" title="局部组件"></a>局部组件</h2><p>包括导航、页脚、号召性用语部分或功能行。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://pvnk1u.github.io/2024/01/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%AE%BE%E8%AE%A1/" title="UdemyHtmlCss学习笔记——设计" target="_blank" rel="external">http://pvnk1u.github.io/2024/01/21/UdemyHtmlCss学习笔记——设计/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/pvnk1u" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/dog.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/pvnk1u" target="_blank"><span class="text-dark">Yolo</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>Everything happens for the best</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2023/11/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81/" title="UdemyHtmlCss学习笔记——代码"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/pvnk1u" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2024 pvnk1u
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://pvnk1u.github.io/2024/01/21/UdemyHtmlCss%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%AE%BE%E8%AE%A1/';
+        
+        this.page.identifier = 'UdemyHtmlCss学习笔记——设计';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + '' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

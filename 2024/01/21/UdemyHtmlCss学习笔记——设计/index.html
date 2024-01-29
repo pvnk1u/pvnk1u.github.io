@@ -26,7 +26,7 @@
 <meta property="og:description" content="网页设计要素：排版排版可以使文本美观且易于阅读的技术。 字体字体是实现良好页面排版的重要方式，使用字体时应该尽量遵守的：  只使用优秀的流行的字体  尽量不要在同一个页面中使用多个字体，尽量只使用一到两个字体。  根据页面个性选中适合的字体  当选择字体大小时，应该尽可能地限制可选择项，可以使用”类型比例“工具或其他预定义地字体大小范围， 这样就不用频繁考虑字体大小值。  对于普通文本，应该使用">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-21T07:32:39.000Z">
-<meta property="article:modified_time" content="2024-01-25T15:57:27.239Z">
+<meta property="article:modified_time" content="2024-01-29T15:38:15.796Z">
 <meta property="article:author" content="pvnk1u">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="design">
@@ -495,11 +495,11 @@
 </ul>
 <p>可以通过 box-shadow 属性指定块级元素的阴影,这个属性可以有 4~5 个值, 第一个基本上是水平偏移的影子,在这个值中,可以指定一个长度,代表盒子和阴影之间的水平偏移量。当这个值为正数时,代表阴影将在盒子右侧,反之为负值时代表阴影将在盒子左侧,为 0 时代表左右两侧均匀分布. 第二个值也是一样,只是方向变成了盒子和阴影之间的垂直方向偏移量。与代表水平偏移量的第一个值类似,当为正数时,阴影将在盒子下方,当为负数时,阴影将在盒子上方,为 0 时,上下均匀分布. 第三个值是阴影的模糊度,如果使用一个较小的值,它几乎不会模糊。这个值一般是必须要有一定大小的,否则体现不出阴影效果. 第四个值是可选的,它允许把阴影放大,如果不指定,则它默认为 0。多数情况下用不到这个值. 最后一个值是阴影的颜色。也可以使用 RGBA 表示法以设置其透明度。</p>
 <p>阴影同样可以用在文本上,只是对应的属性需要换成 <code>text-shadow</code>,且与 <code>box-shadow</code> 不同的是,其没有第四个值.</p>
-<h2 id="边界半径-border-radius"><a href="#边界半径-border-radius" class="headerlink" title="边界半径(border-radius)"></a>边界半径(border-radius)</h2><p>border-radius  是用来设置页面元素的圆度的，看起来可能并不起眼，但是实际上对于开发美观的网页非常重要。使用 border-radius  可以增加设计的趣味性并使其不那么严肃.边界半径(border-radius)值越小,可以感知到的设计越严肃越优雅.相反的如果值较大,则看起来更有趣.</p>
-<p>选择边界半径(border-radius)值大小的时候,字体会是一个很好的参考指标.字体本身就有了一定的圆度,所以可以让边界半径匹配字体的圆度,</p>
-<p>比较适合使用边界半径(border-radius)的元素是按钮,在按钮上设置合理的 border-radius  可以使按钮看起来不那么有棱有角,更加圆滑.另外一个适合使用 border-radius 的元素是图片以及图标.也可以在比较大的元素容器上使用  border-radius,这样可以使其显得脱颖而出.</p>
-<p>使用 border-radius 设置元素的边界半径非常简单,只需要在后边设置其半径大小即可,例如: border-radius: 12px; 但是其实也可以设置元素各个角落的边界半径,例如在设置了上面的属性使元素四个角的边界半径为 12px 后,再次使用  border-bottom-left-radius 和 border-bottom-right-radius 设置其下方左右两个角落的边界半径.</p>
-<p>当元素是正方形时,设置 border-radius: 50%可以使其变成圆形.如果元素不是正方形时,这个值将使其变成椭圆形.</p>
+<h2 id="边界半径-border-radius"><a href="#边界半径-border-radius" class="headerlink" title="边界半径(border-radius)"></a>边界半径(border-radius)</h2><p><code>border-radius</code>  是用来设置页面元素的圆度的，看起来可能并不起眼，但是实际上对于开发美观的网页非常重要。使用 <code>border-radius</code>  可以增加设计的趣味性并使其不那么严肃。边界半径(<code>border-radius</code>)值越小,可以感知到的设计越严肃越优雅。相反的如果值较大,则看起来更有趣。</p>
+<p><strong>选择边界半径(border-radius)值大小的时候,字体会是一个很好的参考指标。字体本身就有了一定的圆度,所以可以让边界半径匹配字体的圆度。</strong></p>
+<p>比较适合使用边界半径(border-radius)的元素是按钮,在按钮上设置合理的 <code>border-radius</code>  可以使按钮看起来不那么有棱有角,更加圆滑。另外一个适合使用 <code>border-radius</code> 的元素是图片以及图标.也可以在比较大的元素容器上使用  <code>border-radius</code>,这样可以使其显得脱颖而出.</p>
+<p>使用 <code>border-radius</code> 设置元素的边界半径非常简单,只需要在后边设置其半径大小即可,例如: <code>border-radius: 12px;</code> 但是其实也可以设置元素各个角落的边界半径,例如在设置了上面的属性使元素四个角的边界半径为 12px 后,再次使用  <code>border-bottom-left-radius</code> 和 <code>border-bottom-right-radius</code> 设置其下方左右两个角落的边界半径。<strong>实际上，单独设置元素某个角的边界半径有时候是非常有需要的，比如图片在盒子的最上方，但是只想要图片的上面两个角有边界半径时。</strong></p>
+<p>当元素是正方形时,设置 <code>border-radius: 50%</code>可以使其变成圆形。如果元素不是正方形时，这个值将使其变成椭圆形。</p>
 <h2 id="空白"><a href="#空白" class="headerlink" title="空白"></a>空白</h2><p>空白基本上只是元素之间的空间，但是适量的空白可以使设计看起来干净、现代、优雅，更重要的是更便于用户理解。</p>
 <p>适合使用空白的地方： </p>
 <ul>
